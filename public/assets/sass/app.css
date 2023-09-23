@@ -205,6 +205,8 @@ body {
       font-size: 1.1rem; }
   #presentation .illustration {
     margin-top: 50px; }
+  #presentation .resume {
+    text-align: justify; }
 
 #activite {
   margin-bottom: 100px;
