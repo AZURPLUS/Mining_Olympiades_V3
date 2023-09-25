@@ -1,9 +1,10 @@
 {
-  "build/app.css": "/build/app.e7372525.css",
-  "build/app.js": "/build/app.28805f55.js",
-  "build/runtime.js": "/build/runtime.9a71ee5d.js",
-  "build/309.4e008e94.js": "/build/309.4e008e94.js",
-  "build/images/bg.png": "/build/images/bg.ec6d0a47.png",
-  "build/images/orange.png": "/build/images/orange.8cd916fc.png",
-  "build/images/vert.png": "/build/images/vert.7e714318.png"
+  "build/app.css": "http://localhost:8080/build/app.css",
+  "build/app.js": "http://localhost:8080/build/app.js",
+  "build/runtime.js": "http://localhost:8080/build/runtime.js",
+  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-cda01d.css": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-cda01d.css",
+  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-cda01d.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-cda01d.js",
+  "build/images/bg.png": "http://localhost:8080/build/images/bg.ec6d0a47.png",
+  "build/images/orange.png": "http://localhost:8080/build/images/orange.8cd916fc.png",
+  "build/images/vert.png": "http://localhost:8080/build/images/vert.7e714318.png"
 }
