@@ -52,20 +52,20 @@
                 .bg-img{
                     position: relative;
 
-                    &::after{
-                        content: '';
-                        position: absolute;
-                        right: -20px;
-                        bottom: -20px;
-                        height: 20%;
-                        width: 20%;
-                        background: $couleur-verte;
-                    }
-
-                     > * {
-                        z-index: 1;
-                        position: relative;
-                      }
+                    //&::after{
+                    //    content: '';
+                    //    position: absolute;
+                    //    right: -20px;
+                    //    bottom: -20px;
+                    //    height: 20%;
+                    //    width: 20%;
+                    //    background: $couleur-verte;
+                    //}
+                    //
+                    // > * {
+                    //    z-index: 1;
+                    //    position: relative;
+                    //  }
 
                 }
             }

@@ -21,7 +21,7 @@ class HomeController extends AbstractController
     {
         return match ($slug){
             'presentation' => $this->render('frontend/presentation.html.twig'),
-            'programme' => $this->render('maquette/programme.html.twig'),
+            'programme' => $this->render('frontend/programme.html.twig'),
             'photos' => $this->render('maquette/photo.html.twig'),
             'contact' => $this->render('maquette/contact.html.twig'),
             'webtv' => $this->render('maquette/webtv.html.twig'),

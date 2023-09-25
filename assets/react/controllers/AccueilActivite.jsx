@@ -37,7 +37,7 @@ export default function () {
                                     <img src={`/assets/images/icon/${activite.icon}`} alt={activite.titre} className="icon"/>
                                 </div>
                                 <h5 className="card-title">
-                                    <a href="#">{activite.titre}</a>
+                                    <a href="#" dangerouslySetInnerHTML={{ __html: activite.titre}}></a>
                                 </h5>
                                 <p
                                     className="card-text"

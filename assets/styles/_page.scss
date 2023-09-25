@@ -14,11 +14,19 @@
         h1{
             font-weight: 600;
             font-size: 1.8rem;
-            margin-bottom: 30px;
+            //margin-bottom: 30px;
 
             span{
                 color: $couleur-orange;
             }
+        }
+
+        h3{
+            font-weight: 600;
+            font-size: 1rem;
+            color: $couleur-verte;
+            font-style: italic;
+            margin-bottom: 30px;
         }
 
         .illustration{
@@ -52,20 +60,20 @@
                 .bg-img{
                     position: relative;
 
-                    &::after{
-                        content: '';
-                        position: absolute;
-                        right: -20px;
-                        bottom: -20px;
-                        height: 20%;
-                        width: 20%;
-                        background: $couleur-verte;
-                    }
-
-                     > * {
-                        z-index: 1;
-                        position: relative;
-                      }
+                    //&::after{
+                    //    content: '';
+                    //    position: absolute;
+                    //    right: -20px;
+                    //    bottom: -20px;
+                    //    height: 20%;
+                    //    width: 20%;
+                    //    background: $couleur-verte;
+                    //}
+                    //
+                    // > * {
+                    //    z-index: 1;
+                    //    position: relative;
+                    //  }
 
                 }
             }
