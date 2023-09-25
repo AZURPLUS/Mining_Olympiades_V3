@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compagnie{% endblock %}
+
+{% block body %}
+    <h1>Compagnie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ compagnie.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ compagnie.titre }}</td>
+            </tr>
+            <tr>
+                <th>Dg</th>
+                <td>{{ compagnie.dg }}</td>
+            </tr>
+            <tr>
+                <th>Representant</th>
+                <td>{{ compagnie.representant }}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{ compagnie.contact }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ compagnie.slug }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_backend_compagnie_index') }}">back to list</a>
+
+    <a href="{{ path('app_backend_compagnie_edit', {'id': compagnie.id}) }}">edit</a>
+
+    {{ include('backend_compagnie/_delete_form.html.twig') }}
+{% endblock %}
