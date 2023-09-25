@@ -14,4 +14,6 @@ return [
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
     Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
     Symfony\UX\React\ReactBundle::class => ['all' => true],
+    Flasher\Symfony\FlasherSymfonyBundle::class => ['all' => true],
+    Flasher\SweetAlert\Symfony\FlasherSweetAlertSymfonyBundle::class => ['all' => true],
 ];
