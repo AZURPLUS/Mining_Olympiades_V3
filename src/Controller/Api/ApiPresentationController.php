@@ -17,9 +17,10 @@ class ApiPresentationController extends AbstractController
                             Organisée en marge du traditionnel weekend de la Sainte Barbe (la fête mondiale des Mineurs), les Mining Olympiades se tiennent, chaque année, durant la première quinzaine du mois de décembre, depuis 2016 à Yamoussoukro. Concept créé par le Groupement Professionnel des Miniers de Côte d’Ivoire (GPMCI), principale faitière des entreprises minières privées en Côte d’Ivoire, les Mining Olympiades sont un moment de réjouissances en vue de créer et renforcer l’appartenance à la communauté minière présente en Côte d’ivoire.
                         </p>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, molestias dicta officia voluptatem dolorum laboriosam dolorem aperiam modi, necessitatibus, odit facere quibusdam ad incidunt est maiores? Perspiciatis, natus! Esse, deserunt?
+                            La 7ème édition aura lieu les 15 et 16 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.
                         </p>",
-            'media' => 'illustration2.png'
+            'media' => 'illustration2.png',
+            'media2' => 'sportifs.png'
         ];
 
         return $this->json($content);

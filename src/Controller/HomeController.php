@@ -15,4 +15,19 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/{slug}', name:'app_frontend_page', methods: ['GET'])]
+    public function page($slug)
+    {
+        return match ($slug){
+            'presentation' => $this->render('frontend/presentation.html.twig'),
+            'programme' => $this->render('maquette/programme.html.twig'),
+            'photos' => $this->render('maquette/photo.html.twig'),
+            'contact' => $this->render('maquette/contact.html.twig'),
+            'webtv' => $this->render('maquette/webtv.html.twig'),
+            'participation' => $this->render('maquette/participation.html.twig'),
+            'participant' => $this->render('maquette/participant.html.twig'),
+            default => $this->redirectToRoute('app_maquette_accueil')
+        };
+    }
 }

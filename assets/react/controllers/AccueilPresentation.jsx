@@ -62,7 +62,7 @@ export default function () {
                             dangerouslySetInnerHTML={{ __html: trimmedContent}}
                         ></div>
 
-                        {data.contenu && data.contenu.length > 500 && <a href="#" className="lirePlus">Lire plus</a>}
+                        {data.contenu && data.contenu.length > 500 && <a href="/presentation" className="lirePlus">Lire plus</a>}
                     </div>
                 </div>
                 <div className="illustration justify-content-center" data-aos="zoom-in" data-aos-duration="3000" data-aos-delay="100">

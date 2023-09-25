@@ -31,7 +31,7 @@
                 <section id="navbar">
                     <nav class="navbar navbar-expand-lg bg-body-ligth sticky-top">
                         <div class="container-fluid">
-                            <a class="navbar-brand" href="{{ absolute_url(path('app_maquette_accueil')) }}">
+                            <a class="navbar-brand" href="{{ absolute_url(path('app_home')) }}">
                                 <img src="{{ absolute_url(asset('assets/images/logo.png')) }}" alt="" width="100">
                             </a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -41,32 +41,32 @@
                             <div class="collapse navbar-collapse d-flex justify-content-evenly d-none d-lg-block" id="navbarNavDropdown">
                                 <ul class="navbar-nav ">
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="{{ absolute_url(path('app_maquette_accueil')) }}">Accueil</a>
+                                        <a class="nav-link active" aria-current="page" href="{{ absolute_url(path('app_home')) }}">Accueil</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ absolute_url(path('app_maquette_page',{slug: 'presentation'})) }}">Présentation</a>
+                                        <a class="nav-link" href="{{ absolute_url(path('app_frontend_page',{slug: 'presentation'})) }}">Présentation</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ path('app_maquette_page', {'slug': 'programme'}) }}">Programme</a>
+                                        <a class="nav-link" href="{{ absolute_url(path('app_frontend_page', {'slug': 'programme'})) }}">Programme</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="actualite.html">Actualités</a>
+                                        <a class="nav-link" href="{{ absolute_url(path('app_frontend_page', {'slug': 'actualites'})) }}">Actualités</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Médiathèque
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ path('app_maquette_page', {'slug': 'photos'}) }}">Photos</a></li>
+                                            <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_page', {'slug': 'photos'})) }}">Photos</a></li>
                                             <li><a class="dropdown-item" href="#">Presse</a></li>
                                             <li><a class="dropdown-item" href="#">Documents</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ path('app_maquette_page', {'slug': 'webtv'}) }}">WebTV</a>
+                                        <a class="nav-link" href="{{ absolute_url(path('app_frontend_page', {'slug': 'webtv'})) }}">WebTV</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ path('app_maquette_page', {'slug': 'contact'}) }}">Contact</a>
+                                        <a class="nav-link" href="{{ absolute_url(path('app_frontend_page', {'slug': 'contact'})) }}">Contact</a>
                                     </li>
                                 </ul>
                             </div>
@@ -74,7 +74,7 @@
                             <!-- Menu mobile-->
                             <div class="offcanvas offcanvas-start d-block d-lg-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                                 <div class="offcanvas-header">
-                                    <a class="navbar-brand" href="{{ absolute_url(path('app_maquette_accueil')) }}">
+                                    <a class="navbar-brand" href="{{ absolute_url(path('app_home')) }}">
                                         <img src="{{ absolute_url(asset('assets/images/logo.png')) }}" alt="" width="75">
                                     </a>
                                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -82,33 +82,32 @@
                                 <div class="offcanvas-body">
                                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                         <li class="nav-item">
-                                            <a class="nav-link active" aria-current="page" href="{{ absolute_url(path('app_maquette_accueil')) }}">Accueil</a>
+                                            <a class="nav-link active" aria-current="page" href="{{ absolute_url(path('app_home')) }}">Accueil</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ path('app_maquette_page', {'slug': 'presentation'}) }}">Présentation</a>
+                                            <a class="nav-link" href="{{ absolute_url(path('app_frontend_page', {'slug': 'presentation'})) }}">Présentation</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ path('app_maquette_page', {'slug': 'programme'}) }}">Programme</a>
+                                            <a class="nav-link" href="{{ absolute_url(path('app_frontend_page', {'slug': 'programme'})) }}">Programme</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="actualites.html">Actualités</a>
+                                            <a class="nav-link" href="{{ absolute_url(path('app_frontend_page', {'slug': 'actualites'})) }}">Actualités</a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Médiathèque
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="{{ path('app_maquette_page', {'slug': 'photos'}) }}">Photos</a></li>
-                                                <li><a class="dropdown-item" href="#">Vidéo</a></li>
+                                                <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_page', {'slug': 'photos'})) }}">Photos</a></li>
                                                 <li><a class="dropdown-item" href="#">Presse</a></li>
                                                 <li><a class="dropdown-item" href="#">Documents</a></li>
                                             </ul>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ path('app_maquette_page', {'slug': 'webtv'}) }}">WebTV</a>
+                                            <a class="nav-link" href="{{ absolute_url(path('app_frontend_page', {'slug': 'webtv'})) }}">WebTV</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ path('app_maquette_page', {'slug': 'contact'}) }}">Contact</a>
+                                            <a class="nav-link" href="{{ absolute_url(path('app_frontend_page', {'slug': 'contact'})) }}">Contact</a>
                                         </li>
                                     </ul>
 
@@ -120,7 +119,7 @@
                                             <a href="mailto:olympiades@chambredesmines.org"><i class="bi bi-envelope"></i> olympiades@chambredesmines.org</a>
                                         </div>
                                         <div class="col-12 participation">
-                                            <a href="{{ path('app_maquette_page', {'slug': 'participation'}) }}" class="bouton"><i class="bi bi-pencil-square"></i> Participer</a>
+                                            <a href="{{ absolute_url(path('app_frontend_page', {'slug': 'participation'})) }}" class="bouton"><i class="bi bi-pencil-square"></i> Participer</a>
                                         </div>
 
                                     </div>
@@ -140,9 +139,6 @@
                     <div class="row justify-content-center contact">
                         <div class="col-lg-9 col-xl-7 text-center">
                             <h2>Besoin d'aide ?</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed laudantium veniam rem assumenda sequi debitis, earum quis officia, temporibus saepe ex repellat tenetur unde animi, ab aut impedit alias ipsum.
-                            </p>
                             <div class="row">
                                 <div class="col-md-4 text-end">Appelez-nous :</div>
                                 <div class="col-md-8 text-start">

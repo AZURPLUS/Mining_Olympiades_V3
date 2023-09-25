@@ -34,7 +34,7 @@ export default function () {
                         >
                             <div className="card-body">
                                 <div className="text-center">
-                                    <img src={`/assets/images/icon/${activite.media}`} alt={activite.titre} className="icon"/>
+                                    <img src={`/assets/images/icon/${activite.icon}`} alt={activite.titre} className="icon"/>
                                 </div>
                                 <h5 className="card-title">
                                     <a href="#">{activite.titre}</a>
