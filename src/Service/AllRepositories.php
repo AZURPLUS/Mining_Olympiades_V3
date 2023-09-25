@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Repository\UserRepository;
 use http\Exception\InvalidArgumentException;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class AllRepositories
 {
@@ -44,5 +45,10 @@ class AllRepositories
             ];
         }, $getUsers);
 
+    }
+
+    public function slug($entity): void
+    {
+        $entity->setSlug((new AsciiSlugger())->slug(strtolower($entity->getTitre())));
     }
 }
