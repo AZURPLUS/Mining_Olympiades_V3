@@ -6,27 +6,27 @@ export default function Carousel() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const carouselItems = [
         {
-            title: "Mining Olympiades 2023",
-            subtitle: "Thème: Valorisons nos régions",
-            date: "Les 15 et 16 décembre 2023 à Yamoussoukro",
+            title: "Les Mining Olympiades 2023",
+            subtitle: "sous le thème: <span>Valorisons nos régions</span>",
+            date: "auront lieu les 15 et 16 décembre 2023 à Yamoussoukro",
             link: "/participation"
         },
         {
-            title: "Mining Olympiades 2023",
-            subtitle: "C'est une Journée scientifique",
-            theme: "sous le thème: Le teme",
+            title: "Les Mining Olympiades 2023",
+            subtitle: "représentent <span>une journée scientifique</span> ",
+            theme: "axée sur le thème \"le thème\"",
             link: "/participation"
         },
         {
-            title: "Mining Olympiades 2023",
-            subtitle: "Ce sont des compétitions sportives",
-            date: "dans plus de 20 disciplines",
+            title: "Les Mining Olympiades 2023",
+            subtitle: "englobent <span>une série de compétitions sportives</span>,",
+            date: "couvrant plus de 20 disciplines.",
             link: "/participation"
         },
         {
-            title: "Mining Olympiades 2023",
-            subtitle: "C'est une soirée gala",
-            artists: "Avec des artistes de renoms",
+            title: "Les Mining Olympiades 2023",
+            subtitle: "se concluent par <span>une soirée de récompenses</span>",
+            artists: "rendant hommage aux personnalités",
             link: "/participation"
         }
     ];
@@ -63,7 +63,7 @@ export default function Carousel() {
 
         const slide = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselItemsElements.length);
-        }, 3000);
+        }, 5000);
 
         return () => {
             clearInterval(slide);
@@ -81,8 +81,8 @@ export default function Carousel() {
                                 key={index}
                                 className={`carousel-elt ${index === currentIndex ? 'active' : ''}`}
                             >
-                                <h1>{item.title}</h1>
-                                {item.subtitle && <h2>{item.subtitle}</h2>}
+                                <h1 dangerouslySetInnerHTML={{ __html: item.title}}/>
+                                {item.subtitle && <h2 dangerouslySetInnerHTML={{ __html: item.subtitle}}/>}
                                 {item.theme && <h3>sous le thème: <span className="theme">{item.theme}</span></h3>}
                                 {item.date && <h3>{item.date}</h3>}
                                 {item.artists && <h3>{item.artists}</h3>}

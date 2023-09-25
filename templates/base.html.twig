@@ -21,7 +21,7 @@
                             <a href="mailto:olympiades@chambredesmines.org" class="lien"><i class="bi bi-envelope"></i> olympiades@chambredesmines.org</a>
                         </div>
                         <div class="col-4 text-center">
-                            <a href="{{ path('app_maquette_page', {'slug': 'participation'}) }}" class="bouton"><span></span><i class="bi bi-person-add"></i> Participer</a>
+                            <a href="{{ absolute_url(path('app_frontend_participation_add')) }}" class="bouton"><span></span><i class="bi bi-person-add"></i> Participer</a>
                         </div>
                     </div>
                 </section>
@@ -58,15 +58,15 @@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="#">Photos</a></li>
-                                            <li><a class="dropdown-item" href="#">Presse</a></li>
-                                            <li><a class="dropdown-item" href="#">Documents</a></li>
+{#                                            <li><a class="dropdown-item" href="#">Presse</a></li>#}
+{#                                            <li><a class="dropdown-item" href="#">Documents</a></li>#}
                                         </ul>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ absolute_url(path('app_frontendwebtv_list')) }}">WebTV</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Contact</a>
+                                        <a class="nav-link" href="{{ absolute_url(path('app_frontend_contact_index')) }}">Contact</a>
                                     </li>
                                 </ul>
                             </div>
@@ -90,24 +90,24 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ absolute_url(path('app_frontend_programme_index')) }}">Programme</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Actualités</a>
-                                        </li>
+{#                                        <li class="nav-item">#}
+{#                                            <a class="nav-link" href="#">Actualités</a>#}
+{#                                        </li>#}
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Médiathèque
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="#">Photos</a></li>
-                                                <li><a class="dropdown-item" href="#">Presse</a></li>
-                                                <li><a class="dropdown-item" href="#">Documents</a></li>
+{#                                                <li><a class="dropdown-item" href="#">Presse</a></li>#}
+{#                                                <li><a class="dropdown-item" href="#">Documents</a></li>#}
                                             </ul>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ absolute_url(path('app_frontendwebtv_list')) }}">WebTV</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">Contact</a>
+                                            <a class="nav-link" href="{{ absolute_url(path('app_frontend_contact_index')) }}">Contact</a>
                                         </li>
                                     </ul>
 
@@ -119,7 +119,7 @@
                                             <a href="mailto:olympiades@chambredesmines.org"><i class="bi bi-envelope"></i> olympiades@chambredesmines.org</a>
                                         </div>
                                         <div class="col-12 participation">
-                                            <a href="#" class="bouton"><i class="bi bi-pencil-square"></i> Participer</a>
+                                            <a href="{{ absolute_url(path('app_frontend_participation_add')) }}" class="bouton"><i class="bi bi-person-add"></i> Participer</a>
                                         </div>
 
                                     </div>
