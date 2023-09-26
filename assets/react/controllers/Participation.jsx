@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import AOS from 'aos';
+import ReactLoading from 'react-loading';
 
 export default function () {
+    const [isLoading, setIsLoading] = useState(false);
     const [disciplines, setDisciplines] = useState([]);
     const [selectedDiscipline, setSelectedDiscipline] = useState('');
     const [compagnies, setCompagnies] = useState([]);
@@ -60,6 +62,8 @@ export default function () {
     const handleSubmit = async (e) => {
        e.preventDefault();
 
+       setIsLoading(true);
+
         // Construisez les données du formulaire
         const formData = new FormData();
         formData.append('compagnie', selectedCompagnie);
@@ -90,10 +94,12 @@ export default function () {
             console.log(participant.slug)
             window.location.href = '/participation/' + participant.slug;
 
+            setIsLoading(false);
+
             // Gérez la réponse de l'API ici (par exemple, affichez un message de succès)
         } catch (error) {
             console.error("Erreur lors de l'envoi du formulaire à l'API : ", error);
-            // Gérez les erreurs ici (par exemple, affichez un message d'erreur)
+            setIsLoading(false)
         }
     };
 
@@ -303,6 +309,11 @@ export default function () {
                     </div>
                 </div>
             </section>
+            {isLoading ? (
+                <div className="loading-animation">
+                    <ReactLoading type="spin" color="#007BFF" />
+                </div>
+            ) : null}
         </div>
     )
 }
