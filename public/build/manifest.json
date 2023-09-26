@@ -6,5 +6,7 @@
   "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-cda01d.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-cda01d.js",
   "build/images/bg.png": "http://localhost:8080/build/images/bg.ec6d0a47.png",
   "build/images/orange.png": "http://localhost:8080/build/images/orange.8cd916fc.png",
-  "build/images/vert.png": "http://localhost:8080/build/images/vert.7e714318.png"
+  "build/images/vert.png": "http://localhost:8080/build/images/vert.7e714318.png",
+  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-5b8eaa.css": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-5b8eaa.css",
+  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-5b8eaa.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-5b8eaa.js"
 }

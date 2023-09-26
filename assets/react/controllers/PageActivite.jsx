@@ -55,7 +55,7 @@ export default function () {
                                         </div>
                                         <div className="col-lg-6 image" data-aos="fade-left" data-aos-duration="1500">
                                             <div className="bg-img">
-                                                <img src={`/assets/images/${activite.media}`} alt={activite.titre} className="img-fluid" loading="lazy" />
+                                                <img src={`/assets/images/programme/${activite.media}`} alt={activite.titre} className="img-fluid" loading="lazy" />
                                             </div>
                                         </div>
                                     </>
@@ -63,7 +63,7 @@ export default function () {
                                     <>
                                         <div className="col-lg-6 image" data-aos="fade-right" data-aos-duration="1500">
                                             <div className="bg-img">
-                                                <img src={`/assets/images/${activite.media}`} alt={activite.titre} className="img-fluid" loading="lazy" />
+                                                <img src={`/assets/images/programme/${activite.media}`} alt={activite.titre} className="img-fluid" loading="lazy" />
                                             </div>
                                         </div>
                                         <div className="col-lg-6 content">

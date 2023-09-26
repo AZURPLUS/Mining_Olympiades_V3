@@ -29,3 +29,4 @@ yarn-error.log
 .idea
 /assets/styles/.sass-cache
 /public/assets/sass/.sass-cache
+/public/upload
