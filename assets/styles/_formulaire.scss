@@ -96,5 +96,29 @@
             font-weight: 700;
             color: $couleur-verte;
         }
+
+        .form-check-label{
+            span{
+                font-size: .9rem;
+                &.bloc{
+                    padding-left: 7px;
+                }
+
+                &.valeur{
+                    color: $couleur-orange;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        h4{
+            font-size: 1.3rem;
+
+            span{
+                font-weight: 700;
+                font-size: 1.5rem;
+                color: $couleur-orange;
+            }
+        }
     }
 }

@@ -49,6 +49,7 @@
                                     <tr>
                                         <th class="text-center text-uppercase">#</th>
                                         <th class="text-center text-uppercase">Titre</th>
+                                        <th class="text-center text-uppercase">Joueurs</th>
                                         <th class="text-center text-uppercase">actions</th>
                                     </tr>
                                     </thead>
@@ -57,6 +58,7 @@
                                         <tr>
                                             <td>{{ loop.index }}</td>
                                             <td>{{ discipline.titre }}</td>
+                                            <td class="text-center">{{ discipline.joueur }}</td>
                                             <td class="text-center">
                                                 <a href="{{ path('app_backend_discipline_edit', {'id': discipline.id}) }}"><i class="ti-pencil-alt"></i></a>
                                             </td>

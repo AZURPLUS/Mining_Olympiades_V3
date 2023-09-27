@@ -101,6 +101,7 @@ class Discipline implements \JsonSerializable
         return [
             'id' => $this->id,
             'titre' => $this->titre,
+            'joueur' => $this->joueur,
             'slug' => $this->slug,
         ];
     }

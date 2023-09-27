@@ -32,6 +32,7 @@
         "react-loading": "^2.0.3",
         "react-loading-overlay": "^1.0.1",
         "react-spinner-overlay": "^0.1.33",
+        "sweetalert2": "^11.7.31",
         "sweetalert2-react-content": "^5.0.7"
     }
 }

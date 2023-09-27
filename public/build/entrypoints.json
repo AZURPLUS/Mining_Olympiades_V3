@@ -3,11 +3,11 @@
     "app": {
       "js": [
         "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-e2afba.js",
+        "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-d5e82e.js",
         "http://localhost:8080/build/app.js"
       ],
       "css": [
-        "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-e2afba.css",
+        "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-d5e82e.css",
         "http://localhost:8080/build/app.css"
       ]
     }

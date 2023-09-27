@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Discipline;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,6 +16,9 @@ class DisciplineType extends AbstractType
         $builder
             ->add('titre', TextType::class,[
                 'attr'=>['class'=>'form-control', 'autocomplete'=>"off", 'placeholder'=>"Titre"]
+            ])
+            ->add('joueur', IntegerType::class,[
+                'attr'=>['class'=>'form-control', 'autocomplete'=>"off", 'placeholder'=>"Nombre de joueurs"]
             ])
 //            ->add('slug')
         ;

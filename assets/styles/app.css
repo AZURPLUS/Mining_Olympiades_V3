@@ -409,6 +409,19 @@ body {
     padding-bottom: 50px;
     font-weight: 700;
     color: #014b17; }
+  #inscription .inscription .form-check-label span {
+    font-size: .9rem; }
+    #inscription .inscription .form-check-label span.bloc {
+      padding-left: 7px; }
+    #inscription .inscription .form-check-label span.valeur {
+      color: #b16105;
+      font-weight: 600; }
+  #inscription .inscription h4 {
+    font-size: 1.3rem; }
+    #inscription .inscription h4 span {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #b16105; }
 
 #page {
   margin-top: 100px; }
