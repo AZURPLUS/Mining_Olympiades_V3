@@ -15,11 +15,9 @@ class FrontendParticipationController extends AbstractController
         return $this->render('frontend/participation.html.twig');
     }
 
-    #[Route('/{slug}', name: 'app_frontend_participation_show', methods: ['GET'])]
-    public function show(Participant $participant)
+    #[Route('/non-membre', name: 'app_frontend_participation_non_membre', methods: ['GET'])]
+    public function nonmemebre()
     {
-        return $this->render('frontend/participant.html.twig',[
-            'participant' => $participant
-        ]);
+        return $this->render('frontend/nonmembre.html.twig');
     }
 }

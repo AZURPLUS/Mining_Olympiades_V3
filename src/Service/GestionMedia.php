@@ -9,12 +9,14 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 class GestionMedia
 {
     private $mediaProfile;
+    private mixed $mediAdhesion;
 
     public function __construct(
-        $participantDirectory
+        $participantDirectory, $adhesionDirectory
     )
     {
         $this->mediaProfile = $participantDirectory;
+        $this->mediAdhesion = $adhesionDirectory;
     }
 
     /**
@@ -56,6 +58,7 @@ class GestionMedia
         // Deplacement du fichier dans le repertoire dedié
         try {
             if ($media === 'participant') $file->move($this->mediaProfile, $newFilename);
+            elseif ($media === 'adhesion') $file->move($this->mediAdhesion, $newFilename);
             else $file->move($this->mediaProfile, $newFilename);
         }catch (FileException $e){
 
@@ -74,6 +77,7 @@ class GestionMedia
     public function removeUpload($ancienMedia, $media = null): bool
     {
         if ($media === 'participant') unlink($this->mediaProfile.'/'.$ancienMedia);
+        elseif ($media === 'adhesion') unlink($this->mediAdhesion.'/'.$ancienMedia);
         else return false;
 
         return true;

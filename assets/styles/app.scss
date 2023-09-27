@@ -74,6 +74,22 @@ body{
   z-index: 9999; /* Un z-index élevé assure que l'élément apparaît au-dessus du contenu */
 }
 
+._loading_overlay_overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  zIndex: 1000;
+}
+
+._loading_overlay_content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 
 @keyframes flash {
   0%{ opacity: 0;}

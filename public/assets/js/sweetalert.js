@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 result.dismiss === Swal.DismissReason.cancel
             ){
                 // L'utilisateur n'est pas membre, redirigez-le vers le formulaire des non-membres
-                window.location.href = urlRoot + "/participation";
+                window.location.href = urlRoot + "/participation/non-membre";
             }
         });
     });
