@@ -79,12 +79,45 @@ export default function () {
         setSelectedDisciplines(newSelectedDisciplines);
     };
 
+    const saveAbonnementData = async () => {
+        try {
+            const response = await fetch('/api/discipline/abonnement', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    disciplines: selectedDisciplines,
+                    // Autres données à envoyer si nécessaire
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error("La requête a échoué");
+            }
+
+            //console.log(response);
+            // if(response.statut)
+
+            const responseData = await response.json();
+
+            if (responseData.statut === 'Echec'){
+                window.location.href = '/membre/';
+            }
+            console.log(responseData.statut);
+            window.location.href = '/';
+        } catch (error) {
+            console.error('Erreur lors de la sauvegarde des données :', error);
+        }
+    };
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Utilisez selectedDisciplines comme nécessaire
-        console.log('Disciplines sélectionnées :', selectedDisciplines);
+        saveAbonnementData();
+
     };
 
 

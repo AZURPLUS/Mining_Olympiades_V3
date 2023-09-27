@@ -32,9 +32,13 @@ class Discipline implements \JsonSerializable
     #[ORM\Column(nullable: true)]
     private ?int $joueur = null;
 
+    #[ORM\ManyToMany(targetEntity: Abonnement::class, mappedBy: 'disciplines')]
+    private Collection $abonnements;
+
     public function __construct()
     {
         $this->competirs = new ArrayCollection();
+        $this->abonnements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,6 +118,33 @@ class Discipline implements \JsonSerializable
     public function setJoueur(?int $joueur): static
     {
         $this->joueur = $joueur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Abonnement>
+     */
+    public function getAbonnements(): Collection
+    {
+        return $this->abonnements;
+    }
+
+    public function addAbonnement(Abonnement $abonnement): static
+    {
+        if (!$this->abonnements->contains($abonnement)) {
+            $this->abonnements->add($abonnement);
+            $abonnement->addDiscipline($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbonnement(Abonnement $abonnement): static
+    {
+        if ($this->abonnements->removeElement($abonnement)) {
+            $abonnement->removeDiscipline($this);
+        }
 
         return $this;
     }

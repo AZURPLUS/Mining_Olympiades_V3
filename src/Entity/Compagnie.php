@@ -48,10 +48,14 @@ class Compagnie implements \JsonSerializable
     #[ORM\OneToMany(mappedBy: 'compagnie', targetEntity: Membre::class)]
     private Collection $membres;
 
+    #[ORM\OneToMany(mappedBy: 'compagnie', targetEntity: Abonnement::class)]
+    private Collection $abonnements;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
         $this->membres = new ArrayCollection();
+        $this->abonnements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,6 +201,36 @@ class Compagnie implements \JsonSerializable
             // set the owning side to null (unless already changed)
             if ($membre->getCompagnie() === $this) {
                 $membre->setCompagnie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Abonnement>
+     */
+    public function getAbonnements(): Collection
+    {
+        return $this->abonnements;
+    }
+
+    public function addAbonnement(Abonnement $abonnement): static
+    {
+        if (!$this->abonnements->contains($abonnement)) {
+            $this->abonnements->add($abonnement);
+            $abonnement->setCompagnie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbonnement(Abonnement $abonnement): static
+    {
+        if ($this->abonnements->removeElement($abonnement)) {
+            // set the owning side to null (unless already changed)
+            if ($abonnement->getCompagnie() === $this) {
+                $abonnement->setCompagnie(null);
             }
         }
 
