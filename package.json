@@ -28,6 +28,7 @@
     "dependencies": {
         "aos": "^2.3.4",
         "jquery": "^3.7.1",
-        "react-loading": "^2.0.3"
+        "react-loading": "^2.0.3",
+        "sweetalert2-react-content": "^5.0.7"
     }
 }

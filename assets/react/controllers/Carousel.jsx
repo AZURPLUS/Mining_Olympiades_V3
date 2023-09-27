@@ -71,6 +71,7 @@ export default function Carousel() {
 
     }, [currentIndex]);
 
+
     return (
         <div>
             <section id="carousel">
@@ -86,7 +87,7 @@ export default function Carousel() {
                                 {item.theme && <h3>sous le thème: <span className="theme">{item.theme}</span></h3>}
                                 {item.date && <h3>{item.date}</h3>}
                                 {item.artists && <h3>{item.artists}</h3>}
-                                <a href={item.link} className="bouton">Participer</a>
+                                {/*<a className="bouton" onClick={handleClick}>Participer</a>*/}
                             </div>
                         ))}
                     </div>
