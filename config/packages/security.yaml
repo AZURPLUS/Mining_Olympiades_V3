@@ -44,6 +44,9 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/dashboard/, roles: ROLE_ADMIN }
          - { path: ^/backend/, roles: ROLE_ADMIN }
+         - { path: ^/backend/, roles: ROLE_ADMIN }
+         - { path: ^/participation/, roles: PUBLIC_ACCESS }
+         - { path: ^/membre/, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

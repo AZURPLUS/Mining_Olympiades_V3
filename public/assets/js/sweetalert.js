@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
             cancelButtonText: "Non, je ne suis pas membre",
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = urlRoot + '/dashboard';
+                window.location.href = urlRoot + '/membre/';
             } else if(
                 /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
             ){
                 // L'utilisateur n'est pas membre, redirigez-le vers le formulaire des non-membres
-                window.location.href = urlRoot + "/participation/non-membre";
+                window.location.href = urlRoot + "/participation/";
             }
         });
     });

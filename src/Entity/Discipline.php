@@ -29,6 +29,9 @@ class Discipline implements \JsonSerializable
     #[Groups(['participation'])]
     private Collection $competirs;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $joueur = null;
+
     public function __construct()
     {
         $this->competirs = new ArrayCollection();
@@ -100,5 +103,17 @@ class Discipline implements \JsonSerializable
             'titre' => $this->titre,
             'slug' => $this->slug,
         ];
+    }
+
+    public function getJoueur(): ?int
+    {
+        return $this->joueur;
+    }
+
+    public function setJoueur(?int $joueur): static
+    {
+        $this->joueur = $joueur;
+
+        return $this;
     }
 }

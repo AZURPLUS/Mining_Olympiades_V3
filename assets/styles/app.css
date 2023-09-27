@@ -405,6 +405,7 @@ body {
     font-weight: bold;
     color: #b16105; }
   #inscription .inscription h3 {
+    padding-top: 50px;
     padding-bottom: 50px;
     font-weight: 700;
     color: #014b17; }
