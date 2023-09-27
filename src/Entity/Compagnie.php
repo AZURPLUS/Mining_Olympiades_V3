@@ -45,9 +45,13 @@ class Compagnie implements \JsonSerializable
     #[Groups(['participation'])]
     private Collection $participants;
 
+    #[ORM\OneToMany(mappedBy: 'compagnie', targetEntity: Membre::class)]
+    private Collection $membres;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
+        $this->membres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,5 +171,35 @@ class Compagnie implements \JsonSerializable
             'contact' => $this->contact,
             'email' => $this->email
         ];
+    }
+
+    /**
+     * @return Collection<int, Membre>
+     */
+    public function getMembres(): Collection
+    {
+        return $this->membres;
+    }
+
+    public function addMembre(Membre $membre): static
+    {
+        if (!$this->membres->contains($membre)) {
+            $this->membres->add($membre);
+            $membre->setCompagnie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMembre(Membre $membre): static
+    {
+        if ($this->membres->removeElement($membre)) {
+            // set the owning side to null (unless already changed)
+            if ($membre->getCompagnie() === $this) {
+                $membre->setCompagnie(null);
+            }
+        }
+
+        return $this;
     }
 }
