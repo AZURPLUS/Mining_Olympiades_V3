@@ -50,7 +50,7 @@ export default function () {
                                     <>
                                         <div className="col-lg-6 content">
                                             <h1 dangerouslySetInnerHTML={{ __html: activite.titre}}></h1>
-                                            <h3>Le {activite.date} à {activite.lieu} de {activite.heure}</h3>
+                                            <h3></h3>
                                             <p dangerouslySetInnerHTML={{ __html: activite.resume}}></p>
                                         </div>
                                         <div className="col-lg-6 image" data-aos="fade-left" data-aos-duration="1500">
@@ -68,7 +68,8 @@ export default function () {
                                         </div>
                                         <div className="col-lg-6 content">
                                             <h1 dangerouslySetInnerHTML={{ __html: activite.titre}}/>
-                                            <h3>Le {activite.date} à {activite.lieu} de {activite.heure}</h3>
+                                            {/*<h3>Le {activite.date} à {activite.lieu} de {activite.hHÔTEL PRESIDENTeure}</h3>*/}
+                                            <h3></h3>
                                             <p dangerouslySetInnerHTML={{ __html: activite.resume}}></p>
                                         </div>
                                     </>
@@ -79,6 +80,7 @@ export default function () {
                     </div>
                 </section>
             )}
+
         </div>
     )
 }

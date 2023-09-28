@@ -16,7 +16,7 @@ class ApiWebTVController extends AbstractController
             [
                 'titre' => "Cérémonie de lancement des Mining Olympiades 2023 ",
                 'url' => "https://www.youtube-nocookie.com/embed/qP7xU4f-rRg?si=4k0c9NFRj1R10cnC",
-                'media' => "orange.png",
+                'media' => "20.jpg",
                 'slug' => 'lancement-2023'
             ]
         ];
@@ -30,7 +30,7 @@ class ApiWebTVController extends AbstractController
         $video = [
             'titre' => "Cérémonie de lancement des Mining Olympiades 2023 ",
             'url' => "https://www.youtube-nocookie.com/embed/qP7xU4f-rRg?si=4k0c9NFRj1R10cnC",
-            'media' => "orange.png",
+            'media' => "20.jpg",
             'slug' => 'lancement-2023'
         ];
 

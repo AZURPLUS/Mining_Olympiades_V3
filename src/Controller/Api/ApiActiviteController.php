@@ -15,7 +15,13 @@ class ApiActiviteController extends AbstractController
         $activites = [
             [
                 'titre' => "Journée <span>scientifique</span>",
-                'resume' => "En prélude au tournoi, cinq cent (500) jeunes gens, principalement issus de l’ (INPHB), une après-midi avec les étudiants en mine et géologie, est organisée viendront échanger et rencontrer les professionnels miniers. Le thème de cette année est : « synergie des compétences pour un secteur minier performant et durable ».",
+                'resume' => '
+                <ul>
+                    <li><u>Thème</u>: <strong>«l’importance des politiques de santé et sécurité dans les mines»</strong></li>
+                    <li><u>Date</u>: 15 décembre 2023 de 14h00 - 17h00</li>
+                    <li><u>Lieu</u>: INPHB CENTRE</li>
+                </ul>
+                ',
                 'icon' => 'icon-scientific-o.png',
                 'media' => 'scientifique.png',
                 'date' => "vendredi 15 décembre 2023",
@@ -24,7 +30,13 @@ class ApiActiviteController extends AbstractController
             ],
             [
                 'titre' => "Journée <span>sportives</span>",
-                'resume' => "Moment clé des Mining Olympiades, la journée sportive de cette édition mettra en confrontation des équipes hommes et femmes dans une vingtaine de disciplines mixtes. ",
+                'resume' => '
+                <ul>
+                    <li><u>Discipline</u>: une vingtaine de disciplines mixtes</li>
+                    <li><u>Date</u>: 16 décembre 2023 de 07h00 - 17h30</li>
+                    <li><u>Lieu</u>: INPHB CENTRE & SUD</li>
+                </ul>
+                ',
                 'icon' => 'icon-sport.png',
                 'media' => 'sports.png',
                 'date' => "samedi 16 décembre 2023",
@@ -33,7 +45,54 @@ class ApiActiviteController extends AbstractController
             ],
             [
                 'titre' => "Soirée de <span>recompense</span>",
-                'resume' => "Pour cette 7ème édition et comme à l’accoutumée, le GPMCI organisera une soirée dinatoire pour récompenser les vainqueurs et célébrer la fin d’année. Cette soirée primera les meilleurs compétiteurs du tournoi et remerciera les différents partenaires à l’organisation.",
+                'resume' => '
+                <ul>
+                    <li><u>Dress code</u>: Valorisons nos régions</li>
+                    <li><u>Date</u>: 16 décembre 2023 de 19h30 - 23h00</li>
+                    <li><u>Lieu</u>: HÔTEL PRESIDENT</li>
+                </ul>
+                ',
+                'icon' => 'icon-gala.png',
+                'media' => 'gala.png',
+                'date' => "samedi 16 décembre 2023",
+                'lieu' => 'HÔTEL PRESIDENT',
+                'heure' => "19h30 - 23h00"
+            ]
+        ];
+        return $this->json($activites);
+    }
+
+    #[Route('/accueil', name: 'api_activite_accueil', methods: ['GET'])]
+    public function accueil(): JsonResponse
+    {
+        $activites = [
+            [
+                'titre' => "Journée <span>scientifique</span>",
+                'resume' => "En prélude au tournoi, près de cinq cents (500) jeunes gens, principalement issus de l’INPHB et en s filières en
+lien avec les métiers des mines, sont invités à rencontrer, échanger et se rapprocher des professionnels miniers. <br/>
+Le thème retenu de cette année est : <strong>« l’importance des politiques de santé et sécurité dans les mines ».</strong>",
+                'icon' => 'icon-scientific-o.png',
+                'media' => 'scientifique.png',
+                'date' => "vendredi 15 décembre 2023",
+                'lieu' => 'INPHB CENTRE',
+                'heure' => "14h00 - 17h00"
+            ],
+            [
+                'titre' => "Journée <span>sportives</span>",
+                'resume' => "Moment clé des Mining Olympiades, la journée sportive de cette édition mettra en confrontation des équipes
+hommes et femmes dans une vingtaine de disciplines mixtes.",
+                'icon' => 'icon-sport.png',
+                'media' => 'sports.png',
+                'date' => "samedi 16 décembre 2023",
+                'lieu' => 'INPHB CENTRE & SUD',
+                'heure' => "7h00 - 17h30"
+            ],
+            [
+                'titre' => "Soirée de <span>recompense</span>",
+                'resume' => "Pour cette 7ème édition et comme à l’accoutumée, le GPMCI organisera une soirée gala pour récompenser les
+vainqueurs et célébrer la fin d’année.<br/>
+A cette occasion, il sera demandé aux participants d’arborer une tenue traditionnelle, célébrant la région/zone
+d’intervention de la compagnie d’origine.",
                 'icon' => 'icon-gala.png',
                 'media' => 'gala.png',
                 'date' => "samedi 16 décembre 2023",

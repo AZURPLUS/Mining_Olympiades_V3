@@ -6,7 +6,7 @@ export default function () {
     useEffect(() => {
         async function fetchActivites() {
             try {
-                const response = await fetch('/api/activite/');
+                const response = await fetch('/api/activite/accueil');
                 if (!response.ok){
                     throw new Error("La réquête a échoué");
                 }
@@ -37,13 +37,13 @@ export default function () {
                                     <img src={`/assets/images/icon/${activite.icon}`} alt={activite.titre} className="icon"/>
                                 </div>
                                 <h5 className="card-title">
-                                    <a href="#" dangerouslySetInnerHTML={{ __html: activite.titre}}></a>
+                                    <a href="/programme/" dangerouslySetInnerHTML={{ __html: activite.titre}}></a>
                                 </h5>
                                 <p
                                     className="card-text"
                                     style={{ textAlign: "justify"}}
+                                    dangerouslySetInnerHTML={{ __html: activite.resume}}
                                 >
-                                    {activite.resume}
                                 </p>
                             </div>
                         </div>
@@ -51,6 +51,7 @@ export default function () {
 
                 </div>
             </section>
+
         </div>
     );
 }

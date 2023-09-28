@@ -35,7 +35,7 @@ export default function () {
                             <div className="col video-picture" key={index}>
                                 <a href={`${apiRoot}/webtv/${video.slug}`}>
                                     <img
-                                        src={`/assets/images/${video.media}`}
+                                        src={`/assets/images/videos/${video.media}`}
                                         alt={video.titre}
                                         className="img-fluid video-affiche"
                                     />
