@@ -43,20 +43,19 @@ export default function () {
             modal.style.display = 'none';
         });
     })
+
+    const images = [];
+    for (let i = 1; i <= 17; i++) {
+        images.push(<img key={i} src={`/assets/images/photos/${i}.jpg`} alt="" className="photo" />);
+    }
+
     return (
         <div>
             <section id="media">
-                <div class="container">
-                    <div class="galerie">
-                        <img src="/assets/images/photos/01.jpg" alt="" class="photo"/>
-                            <img src="/assets/images/photos/02.jpg" alt="" class="photo"/>
-                                <img src="/assets/images/photos/03.jpg" alt="" class="photo"/>
-                                    <img src="/assets/images/photos/04.jpg" alt="" class="photo"/>
-                                        <img src="/assets/images/photos/05.jpg" alt="" class="photo"/>
-                                            <img src="/assets/images/photos/06.jpg" alt="" class="photo"/>
-                    </div>
-                    <div class="modal" id="modal">
-                        <div class="modal-nav">
+                <div className="container">
+                    <div className="galerie">{images}</div>
+                    <div className="modal" id="modal">
+                        <div className="modal-nav">
                             <button id="prevBtn">&lt;</button>
                             <img src="" alt="Image Zoom"/>
                                 <button id="nextBtn">&gt;</button>
