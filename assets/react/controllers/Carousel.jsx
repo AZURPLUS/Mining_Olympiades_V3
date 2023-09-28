@@ -5,28 +5,28 @@ import $ from 'jquery';
 export default function Carousel() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const carouselItems = [
+        // {
+        //     title: "Les Mining Olympiades 2023",
+        //     subtitle: "sous le thème: <span>Valorisons nos régions</span>",
+        //     date: "auront lieu les 15 et 16 décembre 2023 à Yamoussoukro",
+        //     link: "/participation"
+        // },
         {
-            title: "Les Mining Olympiades 2023",
-            subtitle: "sous le thème: <span>Valorisons nos régions</span>",
-            date: "auront lieu les 15 et 16 décembre 2023 à Yamoussoukro",
+            title: "Mining Olympiades 2023",
+            subtitle: "C'est une compétition sportive",
+            theme: "Pour les miniers",
             link: "/participation"
         },
         {
-            title: "Les Mining Olympiades 2023",
-            subtitle: "représentent <span>une journée scientifique</span> ",
-            theme: "axée sur le thème \"le thème\"",
+            title: "Mining Olympiades 2023",
+            subtitle: "C'est une journée scientifique",
+            date: "Pour les étudiants",
             link: "/participation"
         },
         {
-            title: "Les Mining Olympiades 2023",
-            subtitle: "englobent <span>une série de compétitions sportives</span>,",
-            date: "couvrant plus de 20 disciplines.",
-            link: "/participation"
-        },
-        {
-            title: "Les Mining Olympiades 2023",
-            subtitle: "se concluent par <span>une soirée de récompenses</span>",
-            artists: "rendant hommage aux personnalités",
+            title: "Mining Olympiades 2023",
+            subtitle: "C'est un dîner gala",
+            artists: "Pour les récompenses",
             link: "/participation"
         }
     ];
