@@ -60,8 +60,10 @@ export default function () {
             const responseData = await response.json();
             // Traiter la réponse du serveur, afficher un message, etc.
             console.log(responseData);
+
             Swal.fire('Succès', 'Enregistrement réussi', 'success');
-            window.location.href = '/'
+
+            window.location.href = '/membre/participation'
         } catch (error) {
             console.error("Erreur lors de la soumission du formulaire :", error);
             Swal.fire('Erreur', 'Une erreur s\'est produite', 'error');
