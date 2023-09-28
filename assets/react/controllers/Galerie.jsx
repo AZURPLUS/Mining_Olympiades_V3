@@ -46,7 +46,7 @@ export default function () {
 
     const images = [];
     for (let i = 1; i <= 17; i++) {
-        images.push(<img key={i} src={`/assets/images/photos/${i}.jpg`} alt="" className="photo" />);
+        images.push(<img key={i} src={`/assets/images/photos/${i}.jpg`} alt="" className="photo" loading="lazy" />);
     }
 
     return (
