@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Repository\CompagnieRepository;
 use App\Repository\DisciplineRepository;
+use App\Repository\JoueurRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\UserRepository;
 use http\Exception\InvalidArgumentException;
@@ -15,7 +16,8 @@ class AllRepositories
         private UserRepository $userRepository,
         private DisciplineRepository $disciplineRepository,
         private CompagnieRepository $compagnieRepository,
-        private ParticipantRepository $participantRepository
+        private ParticipantRepository $participantRepository,
+        private JoueurRepository $joueurRepository
     )
     {
     }
@@ -28,7 +30,7 @@ class AllRepositories
 
             $licence = date('y').'-'.$nombre_aleatoire.' '.$lettre_aleatoire;
 
-            $verifLicence = $this->participantRepository->findOneBy(['licence' => $licence]);
+            $verifLicence = $this->joueurRepository->findOneBy(['licence' => $licence]);
 
         } while($verifLicence);
 

@@ -105,7 +105,7 @@ export default function () {
                 window.location.href = '/membre/';
             }
             console.log(responseData.statut);
-            window.location.href = '/';
+            window.location.href = '/membre/participation';
         } catch (error) {
             console.error('Erreur lors de la sauvegarde des données :', error);
         }

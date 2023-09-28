@@ -39,9 +39,13 @@ class Abonnement
     #[ORM\Column(nullable: true)]
     private ?bool $solde = null;
 
+    #[ORM\OneToMany(mappedBy: 'abonnement', targetEntity: Joueur::class)]
+    private Collection $joueurs;
+
     public function __construct()
     {
         $this->disciplines = new ArrayCollection();
+        $this->joueurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,6 +157,36 @@ class Abonnement
     public function setSolde(?bool $solde): static
     {
         $this->solde = $solde;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Joueur>
+     */
+    public function getJoueurs(): Collection
+    {
+        return $this->joueurs;
+    }
+
+    public function addJoueur(Joueur $joueur): static
+    {
+        if (!$this->joueurs->contains($joueur)) {
+            $this->joueurs->add($joueur);
+            $joueur->setAbonnement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJoueur(Joueur $joueur): static
+    {
+        if ($this->joueurs->removeElement($joueur)) {
+            // set the owning side to null (unless already changed)
+            if ($joueur->getAbonnement() === $this) {
+                $joueur->setAbonnement(null);
+            }
+        }
 
         return $this;
     }
