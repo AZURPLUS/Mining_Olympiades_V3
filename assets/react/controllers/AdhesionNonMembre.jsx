@@ -5,6 +5,10 @@ import $ from 'jquery';
 import 'dropify/dist/css/dropify.min.css';
 import 'dropify/dist/js/dropify.min';
 import ReactLoading from 'react-loading';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 export default function () {
     const [isLoading, setIsLoading] = useState(false);
@@ -63,10 +67,19 @@ export default function () {
                 console.error("Erreur lors de la soumission du formulaire.");
             }
             const data = await response.json();
-            console.log(data);
-            window.location.href = window.location.origin;
 
             setIsLoading(false);
+
+            // Attendez 3 secondes avant d'afficher l'alerte
+            MySwal.fire({
+                icon: 'success',
+                title: 'Adhésion',
+                text: `Votre demande a été envoyée avec succès! Vous serez contacté sous peu.`,
+                timer: 5000
+            });
+            setTimeout(() => {
+                window.location.href = window.location.origin;
+            }, 3000);
 
         } catch (error) {
             console.error("Une erreur s'est produite lors de la soumission du formulaire :", error);
