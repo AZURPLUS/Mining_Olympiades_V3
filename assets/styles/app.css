@@ -39,7 +39,7 @@ body {
   align-content: center;
   align-items: center;
   height: 100%;
-  color: #b16105; }
+  color: #f39200; }
   .loading-message span {
     animation: flash 2s linear infinite; }
 
@@ -80,7 +80,7 @@ body {
   100% {
     opacity: 0; } }
 #topHead {
-  background-color: #b16105;
+  background-color: #f39200;
   color: #fff;
   z-index: 1; }
   #topHead a {
@@ -95,7 +95,7 @@ body {
       #topHead a.lien:hover {
         color: rgba(255, 255, 255, 0.5); }
     #topHead a.bouton {
-      background: linear-gradient(180deg, rgba(1, 75, 23, 0.6) 0%, #014b17 100%);
+      background: linear-gradient(180deg, rgba(11, 142, 54, 0.6) 0%, #0b8e36 100%);
       padding: 12px 50px;
       font-size: 1.2rem;
       text-transform: uppercase;
@@ -104,11 +104,11 @@ body {
       #topHead a.bouton span {
         width: 30px;
         height: 30px;
-        background: rgba(1, 75, 23, 0.7);
+        background: rgba(11, 142, 54, 0.7);
         border-radius: 50%;
         animation: fill 1s ease-in-out infinite alternate; }
       #topHead a.bouton:hover {
-        background: linear-gradient(90deg, #014b17 0%, rgba(1, 75, 23, 0.6) 100%);
+        background: linear-gradient(90deg, #0b8e36 0%, rgba(11, 142, 54, 0.6) 100%);
         opacity: 0.8; }
     #topHead a i {
       margin-right: 5px;
@@ -126,7 +126,7 @@ body {
     display: flex;
     justify-content: space-around; }
     #navbar .navbar .navbar-nav a.nav-link {
-      color: #014b17;
+      color: #0b8e36;
       font-weight: 500;
       font-size: 1.1rem; }
   #navbar .navbar .liens a {
@@ -137,7 +137,7 @@ body {
     #navbar .navbar .liens a i {
       margin-right: 5px; }
   #navbar .navbar .liens .participation {
-    background: linear-gradient(180deg, rgba(1, 75, 23, 0.6) 0%, #014b17 100%);
+    background: linear-gradient(180deg, rgba(11, 142, 54, 0.6) 0%, #0b8e36 100%);
     padding: 10px; }
     #navbar .navbar .liens .participation a {
       color: #fff;
@@ -177,8 +177,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /*background-color: rgba($color: $couleur-orange, $alpha: 0.5);*/
-    background-color: rgba(0, 0, 0, 0.5); }
+    /*background-color: rgba($color: $couleur-orange, $alpha: 0.5);*/ }
   #carousel .carousel-container {
     overflow: hidden;
     min-height: 500px;
@@ -209,13 +208,13 @@ body {
         text-decoration: none;
         text-transform: uppercase;
         color: white;
-        background: linear-gradient(180deg, rgba(1, 75, 23, 0.6) 0%, #014b17 100%);
+        background: linear-gradient(180deg, rgba(11, 142, 54, 0.6) 0%, #0b8e36 100%);
         padding: 10px 25px;
         border-radius: 5px;
         font-weight: bold;
         animation: danse 1s ease-in-out infinite alternate; }
         #carousel .carousel-elt a:hover {
-          background: linear-gradient(45deg, rgba(177, 97, 5, 0.6) 0%, #b16105 100%);
+          background: linear-gradient(45deg, rgba(243, 146, 0, 0.6) 0%, #f39200 100%);
           opacity: 0.9; }
 
 @keyframes danse {
@@ -229,23 +228,23 @@ body {
     font-style: italic;
     font-size: 1.3rem; }
     #presentation h3 span {
-      color: #b16105; }
+      color: #f39200; }
   #presentation h1 {
     font-weight: 700;
-    color: #014b17;
+    color: #0b8e36;
     margin-bottom: 30px;
     cursor: pointer;
     transition: 0.3s ease-in-out; }
     #presentation h1:hover {
-      color: #b16105; }
+      color: #f39200; }
   #presentation a {
     text-decoration: none;
-    color: #b16105;
+    color: #f39200;
     font-weight: 400;
     font-size: 1.2rem;
     font-style: italic; }
     #presentation a:hover {
-      color: #014b17; }
+      color: #0b8e36; }
       #presentation a:hover::after {
         padding-left: 30px; }
     #presentation a::after {
@@ -267,7 +266,7 @@ body {
     #activite .card .card-body {
       padding: 30px 30px; }
     #activite .card.vert {
-      background: #014b17;
+      background: #0b8e36;
       border: solid 1px 0;
       color: #fff; }
       #activite .card.vert a {
@@ -279,7 +278,7 @@ body {
     #activite .card.gris {
       background: #F6F4FE; }
       #activite .card.gris a {
-        color: #014b17;
+        color: #0b8e36;
         text-decoration: none;
         transition: 0.3s ease-in-out; }
         #activite .card.gris a:hover {
@@ -291,7 +290,7 @@ body {
     #activite .card img {
       margin-bottom: 20px; }
     #activite .card:hover {
-      background-color: #b16105; }
+      background-color: #f39200; }
       #activite .card:hover img {
         transform: scale(1.2); }
 
@@ -303,38 +302,38 @@ body {
     font-style: italic;
     font-size: 1.3rem; }
     #discipline h3 span {
-      color: #b16105; }
+      color: #f39200; }
   #discipline h1 {
     font-weight: 700;
-    color: #014b17;
+    color: #0b8e36;
     margin-bottom: 30px;
     cursor: pointer;
     transition: 0.3s ease-in-out; }
     #discipline h1:hover {
-      color: #b16105; }
+      color: #f39200; }
   #discipline .ligne {
     text-align: center;
     text-transform: uppercase;
     font-weight: 400;
     padding: 7px;
     cursor: pointer;
-    border: solid 1px rgba(177, 97, 5, 0.3); }
+    border: solid 1px rgba(243, 146, 0, 0.3); }
     #discipline .ligne:hover {
-      background: #b16105;
+      background: #f39200;
       color: white;
-      border: solid 1px #014b17; }
+      border: solid 1px #0b8e36; }
 
 #contact {
   margin-top: 200px; }
   #contact .contact {
-    background: rgba(177, 97, 5, 0.2);
+    background: rgba(243, 146, 0, 0.2);
     padding: 100px 10px 50px; }
     #contact .contact a {
       text-decoration: none;
-      color: #014b17;
+      color: #0b8e36;
       font-weight: 700; }
       #contact .contact a:hover {
-        color: #b16105; }
+        color: #f39200; }
       #contact .contact a i {
         font-weight: 900;
         font-size: 1.3rem; }
@@ -388,40 +387,40 @@ body {
   #inscription .inscription .bouton i {
     padding-right: 10px; }
   #inscription .inscription .bouton:hover {
-    background: #b16105; }
+    background: #f39200; }
     #inscription .inscription .bouton:hover i {
-      color: #014b17; }
+      color: #0b8e36; }
   #inscription .inscription .btn-lien:hover {
     background: inherit;
-    color: #014b17; }
+    color: #0b8e36; }
   #inscription .inscription .form-check a {
-    color: #b16105;
+    color: #f39200;
     text-decoration: none; }
     #inscription .inscription .form-check a:hover {
-      color: #014b17; }
+      color: #0b8e36; }
   #inscription .inscription label span {
-    color: #b16105; }
+    color: #f39200; }
   #inscription .inscription .licence {
     font-weight: bold;
-    color: #b16105; }
+    color: #f39200; }
   #inscription .inscription h3 {
     padding-top: 50px;
     padding-bottom: 50px;
     font-weight: 700;
-    color: #014b17; }
+    color: #0b8e36; }
   #inscription .inscription .form-check-label span {
     font-size: .9rem; }
     #inscription .inscription .form-check-label span.bloc {
       padding-left: 7px; }
     #inscription .inscription .form-check-label span.valeur {
-      color: #b16105;
+      color: #f39200;
       font-weight: 600; }
   #inscription .inscription h4 {
     font-size: 1.3rem; }
     #inscription .inscription h4 span {
       font-weight: 700;
       font-size: 1.5rem;
-      color: #b16105; }
+      color: #f39200; }
 
 #page {
   margin-top: 100px; }
@@ -436,11 +435,11 @@ body {
       font-weight: 600;
       font-size: 1.8rem; }
       #page .page h1 span {
-        color: #b16105; }
+        color: #f39200; }
     #page .page h3 {
       font-weight: 600;
       font-size: 1rem;
-      color: #014b17;
+      color: #0b8e36;
       font-style: italic;
       margin-bottom: 30px; }
     #page .page .illustration {
@@ -460,7 +459,7 @@ body {
         #page .page .activite .image .bg-img {
           position: relative; }
     #page .page .contact-info {
-      background: #014b17;
+      background: #0b8e36;
       padding: 50px 30px;
       color: white; }
       #page .page .contact-info h3 {
@@ -478,7 +477,7 @@ body {
           color: white; }
 
 #headWebtv {
-  background-color: #b16105;
+  background-color: #f39200;
   color: #fff;
   z-index: 1; }
   #headWebtv .headWebtv {
@@ -497,7 +496,7 @@ body {
       text-decoration: none;
       transition: all 0.3s ease-in-out; }
       #headWebtv .headWebtv a.bouton {
-        background: linear-gradient(180deg, rgba(1, 75, 23, 0.6) 0%, #014b17 100%);
+        background: linear-gradient(180deg, rgba(11, 142, 54, 0.6) 0%, #0b8e36 100%);
         padding: 10px 50px;
         font-size: 1.2rem;
         text-transform: uppercase;
@@ -506,13 +505,13 @@ body {
         #headWebtv .headWebtv a.bouton span {
           width: 30px;
           height: 30px;
-          background: rgba(1, 75, 23, 0.7);
+          background: rgba(11, 142, 54, 0.7);
           border-radius: 50%;
           animation: fill 1s ease-in-out infinite alternate; }
         #headWebtv .headWebtv a.bouton:hover {
           background: white;
           opacity: 0.8;
-          color: #014b17; }
+          color: #0b8e36; }
 
 #webtv .webtv {
   margin-top: 20px; }
@@ -574,9 +573,9 @@ body {
       color: #fff;
       /* Couleur de l'icône */ }
     #replay .replay .video-picture:hover .play-icon {
-      background: #b16105; }
+      background: #f39200; }
       #replay .replay .video-picture:hover .play-icon::before {
-        color: #014b17;
+        color: #0b8e36;
         transform: scale(1.2); }
 
 #media {
@@ -634,6 +633,23 @@ body {
 @media screen and (max-width: 480px) {
   .topHead {
     display: none; }
+
+  #carousel h1 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    text-transform: uppercase; }
+  #carousel h2 {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.5rem; }
+    #carousel h2 span {
+      text-decoration: underline;
+      color: greenyellow; }
+  #carousel h3 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 50px; }
 
   #inscription .inscription .instruction-bloc {
     -webkit-box-pack: center;
