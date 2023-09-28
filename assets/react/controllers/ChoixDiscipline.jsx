@@ -134,10 +134,10 @@ export default function () {
                                             <h3 className="titre">Choix des disciplines</h3>
                                         </div>
                                         <div className="col-6 text-center">
-                                            <h4>Total choisi: <span>{totalJoueursChoisis}</span></h4>
+                                            <h4>Joueurs participants: <span>{totalJoueursChoisis}</span></h4>
                                         </div>
                                         <div className="col-6 text-center">
-                                            <h4>Total restant: <span>{nombreMaxJoueurs - totalJoueursChoisis}</span></h4>
+                                            <h4>Joueurs restants: <span>{nombreMaxJoueurs - totalJoueursChoisis}</span></h4>
                                         </div>
                                     </div>
                                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 no-gutters mt-5">

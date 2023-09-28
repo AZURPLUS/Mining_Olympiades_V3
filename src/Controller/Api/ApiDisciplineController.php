@@ -107,7 +107,7 @@ class ApiDisciplineController extends AbstractController
             ], Response::HTTP_OK);
         }
 
-        $abonnement = $this->abonnementRepository->findOneBy(['compagnie' => $membre->getCompagnie()]);
+        $abonnement = $this->abonnementRepository->findOneBy(['compagnie' => $membre->getCompagnie()],['id' => "DESC"]);
 
         $disciplines=[];
         foreach ($abonnement->getDisciplines() as $discipline){
