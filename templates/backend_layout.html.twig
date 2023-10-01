@@ -140,15 +140,33 @@
                             </li>
                         </ul>
                     </li>
-
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ path('app_backend_compagnie_index') }}" aria-expanded="false">
+                        <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                               <span>
-                                <i class="ti-image"></i>
+                                <i class="ti-desktop"></i>
                               </span>
-                            <span class="hide-menu">Compagnie</span>
+                            <span class="hide-menu">Sociétés</span>
                         </a>
+                        <ul aria-expanded="false" class="collapse first-level">
+                            <li class="sidebar-item">
+                                <a href="{{ path('app_backend_compagnie_index') }}" class="sidebar-link">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti-angle-right"></i>
+                                    </div>
+                                    <span class="hide-menu">Membres</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{ path('app_backend_adhesion_index') }}" class="sidebar-link">
+                                    <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti-angle-right"></i>
+                                    </div>
+                                    <span class="hide-menu">Adhérent</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li class="sidebar-item">
                         <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                               <span>

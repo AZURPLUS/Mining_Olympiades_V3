@@ -48,7 +48,7 @@
                             <a href="mailto:olympiades@chambredesmines.org" class="lien"><i class="bi bi-envelope"></i> olympiades@chambredesmines.org</a>
                         </div>
                         <div class="col-4 text-center">
-                            <a href="#" class="bouton" id="boutonParticiper"><span></span><i class="bi bi-person-add"></i> Participer</a>
+                            <a href="#" class="bouton boutonParticiper"><span></span><i class="bi bi-person-add"></i> Participer</a>
                         </div>
                     </div>
                 </section>
@@ -79,6 +79,17 @@
 {#                                    <li class="nav-item">#}
 {#                                        <a class="nav-link" href="#">Actualités</a>#}
 {#                                    </li>#}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Participer
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">S'inscrire à la journée scientifique</a></li>
+                                            <li><a class="dropdown-item boutonParticiper" href="#">S'inscrire à la journée sportive</a></li>
+                                            <li><a class="dropdown-item" href="#">Télécharger la plaquette</a></li>
+                                            <li><a class="dropdown-item" href="#">Devenir sponsor</a></li>
+                                        </ul>
+                                    </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Médiathèque
@@ -120,6 +131,16 @@
 {#                                        <li class="nav-item">#}
 {#                                            <a class="nav-link" href="#">Actualités</a>#}
 {#                                        </li>#}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Médiathèque
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_photo_index')) }}">Photos</a></li>
+{#                                                <li><a class="dropdown-item" href="#">Presse</a></li>#}
+{#                                                <li><a class="dropdown-item" href="#">Documents</a></li>#}
+                                            </ul>
+                                        </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Médiathèque
@@ -208,7 +229,7 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.all.min.js"></script>
-            <script src="{{ absolute_url(asset('assets/js/sweetalert.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/js/btnParticiper.js')) }}"></script>
             <script>
                 AOS.init();
             </script>

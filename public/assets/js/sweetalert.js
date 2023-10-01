@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const boutonParticiper = document.getElementById("boutonParticiper");
+    const boutonParticiper = document.querySelectorAll(".boutonParticiper");
     const urlRoot = window.location.origin;
 
     boutonParticiper.addEventListener("click", function () {
@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             showCancelButton: true,
             confirmButtonText: "Oui, je suis membre",
             cancelButtonText: "Non, je ne suis pas membre",
+            showThirdButton: true, // Activer le troisième bouton
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = urlRoot + '/membre/';

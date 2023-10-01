@@ -75,7 +75,7 @@ export default function () {
                 icon: 'success',
                 title: 'Adhésion',
                 text: `Votre demande a été envoyée avec succès! Vous serez contacté sous peu.`,
-                timer: 5000
+                timer: 6000
             });
             setTimeout(() => {
                 window.location.href = window.location.origin;

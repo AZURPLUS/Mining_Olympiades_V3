@@ -162,7 +162,7 @@ class ApiDisciplineController extends AbstractController
         $this->entityManager->persist($joueur);
         $this->entityManager->flush();
 
-        sweetalert()->addSuccess("Le participant a été ajouté avec succès!");
+//        sweetalert()->addSuccess("Le participant a été ajouté avec succès!");
 
         return $this->json([
             'message' => 'Le participant a été ajouté avec succès! avec succès!',

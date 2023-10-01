@@ -4,6 +4,8 @@ import withReactContent from 'sweetalert2-react-content';
 import AOS from 'aos';
 import ReactLoading from 'react-loading';
 
+const MySwal = withReactContent(Swal);
+
 export default function () {
     const [isLoading, setIsLoading] = useState(false);
     const [disciplines, setDisciplines] = useState([]);
@@ -59,11 +61,20 @@ export default function () {
 
             const responseData = await response.json();
             // Traiter la réponse du serveur, afficher un message, etc.
-            console.log(responseData);
+            setIsLoading(false);
 
-            Swal.fire('Succès', 'Enregistrement réussi', 'success');
+            // Attendez 3 secondes avant d'afficher l'alerte
+            MySwal.fire({
+                icon: 'success',
+                title: 'Participation',
+                text: `Le participant a été enregistré avec succès!`,
+                timer: 6000
+            });
+            setTimeout(() => {
+                window.location.href = '/membre/participation';
+            }, 3000);
 
-            window.location.href = '/membre/participation'
+
         } catch (error) {
             console.error("Erreur lors de la soumission du formulaire :", error);
             Swal.fire('Erreur', 'Une erreur s\'est produite', 'error');
@@ -82,7 +93,7 @@ export default function () {
                                 <form onSubmit={handleSubmit}>
                                     <div className="row mb-5 justify-content-center align-content-center">
                                         <div className="col-12 mb-1 text-center">
-                                            <h3 className="titre">Formulaire</h3>
+                                            <h3 className="titre">Formulaire de participation</h3>
                                         </div>
                                     </div>
                                     <div className="row row-cols-1 row-cols-lg-2 g-4 no-gutters">
@@ -180,14 +191,15 @@ export default function () {
                                                     name="email"
                                                     placeholder="email"
                                                     autoComplete="off"
+                                                    required
                                                 />
-                                                <label htmlFor="floatingInput">Email</label>
+                                                <label htmlFor="floatingInput">Email <span>*</span></label>
                                             </div>
                                         </div>
 
                                         <div className="col">
                                             <div className="mb-3">
-                                                <label htmlFor="">Photo</label>
+                                                <label htmlFor="">Photo <span>*</span></label>
                                                 <input
                                                     className="form-control form-control-lg"
                                                     type="file"
@@ -196,6 +208,21 @@ export default function () {
                                                     required
                                                     id="_media"
                                                     name="media"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="col">
+                                            <div className="mb-3">
+                                                <label htmlFor="">Carte professionnelle <span>*</span></label>
+                                                <input
+                                                    className="form-control form-control-lg"
+                                                    type="file"
+                                                    data-preview=".preview"
+                                                    placeholder="Photo"
+                                                    required
+                                                    id="_carte"
+                                                    name="carte"
                                                 />
                                             </div>
                                         </div>

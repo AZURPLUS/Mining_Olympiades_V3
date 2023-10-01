@@ -49,7 +49,7 @@ class ApiAdhesionController extends AbstractController
         $this->entityManager->persist($adhesion);
         $this->entityManager->flush();
 
-        sweetalert()->addSuccess("Votre demande a été envoyée avec succès! Vous serez contacté dans un sous peu.");
+//        sweetalert()->addSuccess("Votre demande a été envoyée avec succès! Vous serez contacté dans un sous peu.");
 
         return $this->json([
             'message' => 'Adhésion ajoutée avec succès!'
