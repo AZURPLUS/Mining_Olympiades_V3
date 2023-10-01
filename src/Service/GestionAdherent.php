@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Adhesion;
 use App\Entity\Compagnie;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -37,10 +38,10 @@ class GestionAdherent
     }
 
     public function notification($adhesion): void
-    {
-        $email = (new Email())
+    { //dd($adhesion->getEmail());
+        $email = (new NotificationEmail())
             ->from('noreply@miningolympiades.org')
-            ->to($adhesion->getEmail())
+            ->to('delrodieamoikon@gmail.com')
             ->subject("Validation de votre demande d'adhesion")
             ->text('Votre demande a été validée avec succès!')
             ->html('<p>See Twig integration for better HTML integration!</p>');
@@ -48,7 +49,7 @@ class GestionAdherent
         try {
             $this->mailer->send($email);
             // Si nous sommes ici, l'envoi a réussi
-            dd( 'L\'e-mail a été envoyé avec succès!');
+            //dd( 'L\'e-mail a été envoyé avec succès!');
         } catch (TransportExceptionInterface $e) {
             // Une exception est lancée si quelque chose ne va pas
             echo 'Erreur lors de l\'envoi de l\'e-mail: '.$e->getMessage();

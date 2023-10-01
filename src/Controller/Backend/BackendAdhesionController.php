@@ -7,16 +7,20 @@ use App\Form\AdhesionType;
 use App\Repository\AdhesionRepository;
 use App\Service\GestionAdherent;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/backend/adhesion')]
 class BackendAdhesionController extends AbstractController
 {
     public function __construct(
-        private GestionAdherent $gestionAdherent
+        private GestionAdherent $gestionAdherent,
+        private MailerInterface $mailer
     )
     {
     }
@@ -67,6 +71,24 @@ class BackendAdhesionController extends AbstractController
         if ($this->isCsrfTokenValid('validation'.$adhesion->getId(), $request->get('_csrf_token'))) {
 
             $this->gestionAdherent->validation($adhesion);
+
+            $email = (new Email())
+                ->from('noreply@miningolympiades.org')
+                ->to('delrodieamoikon@gmail.com')
+                ->subject("Validation de votre demande d'adhesion")
+                ->text('Votre demande a été validée avec succès!')
+                ->html('<p>See Twig integration for better HTML integration!</p>');
+
+            try {
+                $this->mailer->send($email);
+                // Si nous sommes ici, l'envoi a réussi
+                dump( 'L\'e-mail a été envoyé avec succès 1!');
+            } catch (TransportExceptionInterface $e) {
+                // Une exception est lancée si quelque chose ne va pas
+                echo 'Erreur lors de l\'envoi de l\'e-mail: '.$e->getMessage();
+            }
+
+
 
             sweetalert()->addSuccess("La demande de la compagnie {$adhesion->getEntreprise()} a été validée avec succès!");
 
