@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\Sponsor;
 use App\Repository\SponsorRepository;
 use App\Service\GestionMedia;
+use App\Service\Utilities;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,8 @@ class ApiSponsoringController extends AbstractController
     public function __construct(
         private EntityManagerInterface $entityManager,
         private GestionMedia $gestionMedia,
-        private SponsorRepository $sponsorRepository
+        private SponsorRepository $sponsorRepository,
+        private Utilities $utilities
     )
     {
     }
@@ -56,7 +58,7 @@ class ApiSponsoringController extends AbstractController
         $sponsor->setFonction(htmlspecialchars($request->get('fonction')));
         $sponsor->setContact(htmlspecialchars($request->get('contact')));
         $sponsor->setEntreprise(htmlspecialchars($request->get('compagnie')));
-        $sponsor->setSecteur(htmlspecialchars($request->get('secteur')));
+        $sponsor->setSecteur($this->utilities->secteurSponsor(htmlspecialchars($request->get('secteur'))));
         $sponsor->setSlug((new AsciiSlugger())->slug(strtolower($request->get('compagnie'))));
         $sponsor->setObjet(htmlspecialchars($request->get('objet')));
 
