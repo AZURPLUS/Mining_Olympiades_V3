@@ -28,3 +28,4 @@ services:
         arguments:
             $participantDirectory: '%kernel.project_dir%/public/upload/participants'
             $adhesionDirectory: '%kernel.project_dir%/public/upload/adhesion'
+            $sponsorDirectory: '%kernel.project_dir%/public/upload/sponsors'

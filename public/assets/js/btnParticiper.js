@@ -28,10 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         window.location.href = urlRoot + '/membre/';
                     } else if (value === 'nonMembre') {
                         window.location.href = urlRoot + '/participation/';
+                    } else if (value === 'sponsor') {
+                        window.location.href = urlRoot + '/sponsoring/';
                     } else {
                         // La sélection a été faite mais n'a pas conduit à une redirection
                         // Ajoutez le code ici si nécessaire
-                        swal.fire('Aucun choix')
+                        swal.fire('En cours....')
                     }
                 }
             })

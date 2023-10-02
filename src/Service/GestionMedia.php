@@ -10,13 +10,15 @@ class GestionMedia
 {
     private $mediaProfile;
     private mixed $mediAdhesion;
+    private mixed $mediaSponsoring;
 
     public function __construct(
-        $participantDirectory, $adhesionDirectory
+        $participantDirectory, $adhesionDirectory, $sponsorDirectory
     )
     {
         $this->mediaProfile = $participantDirectory;
         $this->mediAdhesion = $adhesionDirectory;
+        $this->mediaSponsoring = $sponsorDirectory;
     }
 
     /**
@@ -59,6 +61,7 @@ class GestionMedia
         try {
             if ($media === 'participant') $file->move($this->mediaProfile, $newFilename);
             elseif ($media === 'adhesion') $file->move($this->mediAdhesion, $newFilename);
+            elseif ($media === 'sponsor') $file->move($this->mediaSponsoring, $newFilename);
             else $file->move($this->mediaProfile, $newFilename);
         }catch (FileException $e){
 
@@ -78,6 +81,7 @@ class GestionMedia
     {
         if ($media === 'participant') unlink($this->mediaProfile.'/'.$ancienMedia);
         elseif ($media === 'adhesion') unlink($this->mediAdhesion.'/'.$ancienMedia);
+        elseif ($media === 'sponsor') unlink($this->mediaSponsoring.'/'.$ancienMedia);
         else return false;
 
         return true;
