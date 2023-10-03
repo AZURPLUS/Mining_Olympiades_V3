@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SponsorRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SponsorRepository::class)]
@@ -43,8 +44,11 @@ class Sponsor
     #[ORM\Column(nullable: true)]
     private ?bool $statut = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $objet = null;
+    private ?string $offre = null;
 
     public function getId(): ?int
     {
@@ -171,14 +175,26 @@ class Sponsor
         return $this;
     }
 
-    public function getObjet(): ?string
+    public function getDescription(): ?string
     {
-        return $this->objet;
+        return $this->description;
     }
 
-    public function setObjet(?string $objet): static
+    public function setDescription(?string $description): static
     {
-        $this->objet = $objet;
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getOffre(): ?string
+    {
+        return $this->offre;
+    }
+
+    public function setOffre(?string $offre): static
+    {
+        $this->offre = $offre;
 
         return $this;
     }

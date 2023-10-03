@@ -16,7 +16,6 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 #[Route('/api/sponsoring')]
 class ApiSponsoringController extends AbstractController
 {
-    const OBJET = "Télécharger la plaquette de présentation";
     public function __construct(
         private EntityManagerInterface $entityManager,
         private GestionMedia $gestionMedia,
@@ -29,17 +28,14 @@ class ApiSponsoringController extends AbstractController
     #[Route('/', name: 'app_api_sponsoring_add', methods: ['POST'])]
     public function add(Request $request)
     {
-        $objet = htmlspecialchars($request->get('objet'));
-        if ($objet !== self::OBJET){
-            // verifion si le sponsor existe déjà
-            $slug = (new AsciiSlugger())->slug(strtolower($request->get('compagnie')));
-            $verification = $this->sponsorRepository->findOneBy(['slug' => $slug]);
-            if ($verification){
-                return $this->json([
-                    'statut' => false,
-                    'message' => "Vous êtes déjà enregistré"
-                ], Response::HTTP_BAD_REQUEST);
-            }
+        // vérifions si le sponsor existe déjà
+        $slug = (new AsciiSlugger())->slug(strtolower($request->get('compagnie')));
+        $verification = $this->sponsorRepository->findOneBy(['slug' => $slug]);
+        if ($verification){
+            return $this->json([
+                'statut' => false,
+                'message' => "Vous êtes déjà enregistré"
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         $this->saveSponsoring($request);
@@ -60,13 +56,8 @@ class ApiSponsoringController extends AbstractController
         $sponsor->setEntreprise(htmlspecialchars($request->get('compagnie')));
         $sponsor->setSecteur($this->utilities->secteurSponsor(htmlspecialchars($request->get('secteur'))));
         $sponsor->setSlug((new AsciiSlugger())->slug(strtolower($request->get('compagnie'))));
-        $sponsor->setObjet(htmlspecialchars($request->get('objet')));
-
-        $mediaFile = $request->files->get('media');
-        if ($mediaFile){
-            $media = $this->gestionMedia->upload($mediaFile, 'sponsor');
-            $sponsor->setMedia($media);
-        }
+        $sponsor->setDescription(htmlspecialchars($request->get('description')));
+        $sponsor->setOffre(htmlspecialchars($request->get('offre')));
 
         $this->entityManager->persist($sponsor);
         $this->entityManager->flush();

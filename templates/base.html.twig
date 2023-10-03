@@ -70,22 +70,16 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="{{ absolute_url(path('app_home')) }}">Accueil</a>
                                     </li>
-{#                                    <li class="nav-item">#}
-{#                                        <a class="nav-link" href="{{ absolute_url(path('app_frontend_presentation_index')) }}">Présentation</a>#}
-{#                                    </li>#}
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ absolute_url(path('app_frontend_programme_index')) }}">Programme</a>
                                     </li>
-{#                                    <li class="nav-item">#}
-{#                                        <a class="nav-link" href="#">Actualités</a>#}
-{#                                    </li>#}
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Participer
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="#">S'inscrire à la journée scientifique</a></li>
-                                            <li><a class="dropdown-item boutonParticiper" href="#">S'inscrire à la journée sportive</a></li>
+                                            <li><a class="dropdown-item membreParticipation" href="#">S'inscrire à la journée sportive</a></li>
                                             <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_telecharger')) }}">Télécharger la plaquette</a></li>
                                             <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_sponsoring_index')) }}">Devenir sponsor</a></li>
                                         </ul>
@@ -230,6 +224,7 @@
             <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.all.min.js"></script>
             <script src="{{ absolute_url(asset('assets/js/btnParticiper.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/js/btnParticiper2.js')) }}"></script>
             <script>
                 AOS.init();
             </script>

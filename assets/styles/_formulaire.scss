@@ -120,5 +120,29 @@
                 color: $couleur-orange;
             }
         }
+
+        .illustration{
+            transition: 0.3s ease-in-out;
+
+            img{
+                &:hover{
+                    transform: scale(1.5);
+                }
+            }
+        }
+
+        .montant{
+            text-align: center;
+            font-weight: 700;
+            color: $couleur-orange;
+            margin: auto 0;
+        }
+
+        .lien-modal{
+            a{
+                text-decoration: none;
+                color: $couleur-verte;
+            }
+        }
     }
 }

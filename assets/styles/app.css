@@ -421,6 +421,18 @@ body {
       font-weight: 700;
       font-size: 1.5rem;
       color: #f39200; }
+  #inscription .inscription .illustration {
+    transition: 0.3s ease-in-out; }
+    #inscription .inscription .illustration img:hover {
+      transform: scale(1.5); }
+  #inscription .inscription .montant {
+    text-align: center;
+    font-weight: 700;
+    color: #f39200;
+    margin: auto 0; }
+  #inscription .inscription .lien-modal a {
+    text-decoration: none;
+    color: #0b8e36; }
 
 #page {
   margin-top: 100px; }
@@ -475,6 +487,11 @@ body {
         #page .page .contact-info .contenu a {
           text-decoration: none;
           color: white; }
+    #page .page .telechargement a {
+      text-decoration: none;
+      color: #f39200; }
+      #page .page .telechargement a:hover {
+        color: #0b8e36; }
 
 #headWebtv {
   background-color: #f39200;

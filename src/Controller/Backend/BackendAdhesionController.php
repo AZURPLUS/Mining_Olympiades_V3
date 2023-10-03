@@ -11,6 +11,7 @@ use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
@@ -62,7 +63,7 @@ class BackendAdhesionController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_backend_adhesion_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Adhesion $adhesion, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Adhesion $adhesion, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
 //        dd($request->get('_csrf_token'));
 //        $form = $this->createForm(AdhesionType::class, $adhesion);
@@ -80,12 +81,13 @@ class BackendAdhesionController extends AbstractController
                 ->html('<p>See Twig integration for better HTML integration!</p>');
 
             try {
-                $this->mailer->send($email);
+                $mailer->send($email);
                 // Si nous sommes ici, l'envoi a réussi
-                dump( 'L\'e-mail a été envoyé avec succès 1!');
+                sweetalert()->addSuccess("L\'e-mail a été envoyé avec succès 1!");
+//                dump( 'L\'e-mail a été envoyé avec succès 1!');
             } catch (TransportExceptionInterface $e) {
                 // Une exception est lancée si quelque chose ne va pas
-                echo 'Erreur lors de l\'envoi de l\'e-mail: '.$e->getMessage();
+                dump('Erreur lors de l\'envoi de l\'e-mail: '.$e->getMessage());
             }
 
 

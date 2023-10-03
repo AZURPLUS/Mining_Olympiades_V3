@@ -26,7 +26,7 @@ export default function Carousel() {
         {
             title: "Mining Olympiades 2023",
             subtitle: "C'est un dîner gala",
-            artists: "Pour les récompenses",
+            artists: "De récompenses",
             link: "/participation"
         }
     ];
@@ -84,7 +84,7 @@ export default function Carousel() {
                             >
                                 <h1 dangerouslySetInnerHTML={{ __html: item.title}}/>
                                 {item.subtitle && <h2 dangerouslySetInnerHTML={{ __html: item.subtitle}}/>}
-                                {item.theme && <h3>sous le thème: <span className="theme">{item.theme}</span></h3>}
+                                {item.theme && <h3> <span className="theme">{item.theme}</span></h3>}
                                 {item.date && <h3>{item.date}</h3>}
                                 {item.artists && <h3>{item.artists}</h3>}
                                 {/*<a className="bouton" onClick={handleClick}>Participer</a>*/}

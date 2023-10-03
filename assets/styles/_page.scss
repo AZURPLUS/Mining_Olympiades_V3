@@ -107,5 +107,16 @@
                 }
             }
         }
+
+        .telechargement{
+            a{
+                text-decoration: none;
+                color: $couleur-orange;
+
+                &:hover{
+                    color: $couleur-verte;
+                }
+            }
+        }
     }
 }

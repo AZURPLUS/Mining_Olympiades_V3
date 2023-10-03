@@ -5,6 +5,7 @@ import AOS from 'aos';
 import $ from 'jquery';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import {Modal, Button} from "react-bootstrap";
 
 const MySwal = withReactContent(Swal);
 const docUrl = '/doc/plaquette-commerciale.pdf'
@@ -19,7 +20,12 @@ export default function (props) {
     const [contact, setContact] = useState('');
     const [compagnie, setCompagnie] = useState('')
     const [fonction, setFonction] = useState('')
-    const [media, setMedia] = useState('')
+    const [secteur, setSecteur] = useState('')
+    const [description, setDescription] = useState('')
+    const [selectedOffer, setSelectedOffer] = useState('');
+    const [offerAmount, setOfferAmount] = useState('');
+    const [isModalVisible, setModalVisible] = useState(false);
+
 
     useEffect(() => {
         AOS.init();
@@ -29,6 +35,26 @@ export default function (props) {
         }
 
     }, []);
+
+    const handleOfferChange = (e) => {
+        const selectedOffer = e.target.value;
+        setSelectedOffer(selectedOffer);
+
+        // Set the corresponding amount based on the selected offer
+        const amounts = {
+            DIAMANT: '12 500 000 Fcfa',
+            OR: '10 000 000 Fcfa',
+            LITHIUM: '7 500 000 Fcfa',
+            PARTENAIRE: '5 000 000 Fcfa',
+        };
+
+        setOfferAmount(amounts[selectedOffer] || '');
+    };
+
+    const handleCliquezIciClick = () => {
+        setModalVisible(true);
+    };
+
 
     const handleSubmit = async(e) => {
       e.preventDefault();
@@ -95,11 +121,11 @@ export default function (props) {
                     <section id="inscription">
                         <div className="inscription">
                             <div className="row no-gutters justify-content-center align-items-center">
+                                <h3 className="text-center">{props.titre}</h3>
                                 <div className="col-xl-10">
                                     <div className="formulaire-bloc" data-aos="fade-up" data-aos-duration="1500">
-                                        <h3>{props.titre}</h3>
                                         <form onSubmit={handleSubmit}>
-                                            <div className="row row-cols-1 row-cols-lg-2 g-4 no-gutters mt-5">
+                                            <div className="row row-cols-1 row-cols-lg-2 g-4 no-gutters">
                                                 <div className="col">
                                                     <div className="form-floating">
                                                         <input
@@ -129,7 +155,7 @@ export default function (props) {
                                                             value={prenoms}
                                                             onChange={(e)=> setPrenoms(e.target.value.toUpperCase())}
                                                         />
-                                                        <label htmlFor="floatingInput">Prenoms <span>*</span> </label>
+                                                        <label htmlFor="floatingInput">Prénoms <span>*</span> </label>
                                                     </div>
                                                 </div>
                                                 <div className="col">
@@ -193,51 +219,70 @@ export default function (props) {
                                                             value={fonction}
                                                             onChange={(e)=> setFonction(e.target.value.toUpperCase())}
                                                         />
-                                                        <label htmlFor="floatingInput">Fonction professionnelle <span>*</span> </label>
+                                                        <label htmlFor="floatingInput">Fonction <span>*</span> </label>
+                                                    </div>
+                                                </div>
+                                                <div className="col">
+                                                    <div className="form-floating">
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            id="_secteur"
+                                                            name="secteur"
+                                                            placeholder="secteur"
+                                                            autoComplete="off"
+                                                            required
+                                                            value={secteur}
+                                                            onChange={(e)=> setSecteur(e.target.value.toUpperCase())}
+                                                        />
+                                                        <label htmlFor="floatingInput">Secteur <span>*</span> </label>
+                                                    </div>
+                                                </div>
+                                                <div className="col">
+                                                    <div className="form-floating">
+                                                        <textarea
+                                                            className="form-control"
+                                                            placeholder="Description de votre entreprise"
+                                                            id="_description"
+                                                            name="description"
+                                                        />
+                                                        <label htmlFor="_description">Description</label>
                                                     </div>
                                                 </div>
                                                 <div className="col">
                                                     <div className="form-floating">
                                                         <select
                                                             className="form-select"
-                                                            id="_secteur"
-                                                            aria-label="Floating label select secteur"
-                                                            name="secteur"
+                                                            id="_offre"
+                                                            aria-label="Floating label select offre"
+                                                            name="offre"
                                                             autoComplete="off"
                                                             required
+                                                            onChange={(e) => handleOfferChange(e)}
                                                         >
                                                             <option value=""></option>
-                                                            <option value="production">Production minière</option>
-                                                            <option value="construction">Construction</option>
-                                                            <option value="recherche">Recherche minière</option>
-                                                            <option value="sous-traitant">Sous-traitants</option>
-                                                            <option value="fournisseur">Fournisseur de services</option>
-                                                            <option value="geo-service">Geo service</option>
-                                                            <option value="autre">Autre</option>
+                                                            <option value="DIAMANT">Diamant</option>
+                                                            <option value="OR">Or</option>
+                                                            <option value="LITHIUM">Lithium</option>
+                                                            <option value="PARTENAIRE">Partenaire</option>
                                                         </select>
-                                                        <label htmlFor="_civilite">Secteur <span>*</span></label>
+                                                        <label htmlFor="_offre">Offre <span>*</span></label>
                                                     </div>
                                                 </div>
                                                 <div className="col">
-                                                    <div className="mb-3">
-                                                        <input
-                                                            className="form-control form-control-lg dropify"
-                                                            // ref={dropifyRef}
-                                                            type="file"
-                                                            data-preview=".preview"
-                                                            placeholder="Photo"
-                                                            // required
-                                                            id="_media"
-                                                            name="media"
-                                                        />
-                                                        <label htmlFor="media">Logo </label>
-                                                    </div>
+                                                    <span className="montant">{offerAmount}</span>
+                                                </div>
+                                                <div className="col lien-modal">
+                                                    <em>
+                                                        Voir les différentes offres de sponsoring
+                                                        <a href="#" onClick={handleCliquezIciClick}> Cliquez ici</a>
+                                                    </em>
                                                 </div>
 
                                             </div>
 
                                             <div className="row mt-5 d-flex justify-content-center align-content-center align-items-center">
-                                                <div className="col-12 col-md-6 d-grid gap-2">
+                                                <div className="col-12 col-lg-10 col-xl-6 d-grid gap-2">
                                                     <input
                                                         type="hidden"
                                                         name="objet"
@@ -256,6 +301,21 @@ export default function (props) {
                                 </div>
                             </div>
                         </div>
+
+                        <Modal show={isModalVisible} onHide={() => setModalVisible(false)} size="xl">
+                            <Modal.Header closeButton>
+                                <Modal.Title>Offre de sponsoring</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <img src="/assets/images/offre-sponsor.png" alt="" className="img-fluid" loading="lazy"/>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={() => setModalVisible(false)}>
+                                    Fermer
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>;
+
                     </section>
                 )
             }
