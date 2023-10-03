@@ -19,7 +19,7 @@ class FrontendSponsorController extends AbstractController
     #[Route('/telecharger', name:'app_frontend_telecharger')]
     public function telecharger()
     {
-        return $this->render('frontend/sponsoring.html.twig',[
+        return $this->render('frontend/telechargeur.html.twig',[
             'titre' => "Télécharger la plaquette de présentation"
         ]);
     }
