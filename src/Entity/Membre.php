@@ -19,6 +19,9 @@ class Membre
     #[ORM\ManyToOne(inversedBy: 'membres')]
     private ?User $user = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $participation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Membre
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getParticipation(): ?int
+    {
+        return $this->participation;
+    }
+
+    public function setParticipation(?int $participation): static
+    {
+        $this->participation = $participation;
 
         return $this;
     }

@@ -8,6 +8,7 @@ const MySwal = withReactContent(Swal);
 
 export default function () {
     const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [disciplines, setDisciplines] = useState([]);
     const [selectedDisciplines, setSelectedDisciplines] = useState([]);
     const [totalJoueursChoisis, setTotalJoueursChoisis] = useState(0);
@@ -79,6 +80,8 @@ export default function () {
         setSelectedDisciplines(newSelectedDisciplines);
     };
 
+    console.log(totalJoueursChoisis)
+
     const saveAbonnementData = async () => {
         try {
             const response = await fetch('/api/discipline/abonnement', {
@@ -88,6 +91,7 @@ export default function () {
                 },
                 body: JSON.stringify({
                     disciplines: selectedDisciplines,
+                    totalJoueurs: totalJoueursChoisis
                     // Autres données à envoyer si nécessaire
                 }),
             });
@@ -104,8 +108,22 @@ export default function () {
             if (responseData.statut === 'Echec'){
                 window.location.href = '/membre/';
             }
-            console.log(responseData.statut);
-            window.location.href = '/membre/participation';
+
+
+            MySwal.fire({
+                icon: 'success',
+                title: 'Participation',
+                text: `Veuillez enregistrer vos participants`,
+                timer: 9000
+            });
+
+            setLoading(false)
+
+            setTimeout(() => {
+                window.location.href = '/membre/participation';
+            }, 6000);
+
+
         } catch (error) {
             console.error('Erreur lors de la sauvegarde des données :', error);
         }
@@ -163,6 +181,11 @@ export default function () {
 
                                     <div className="row mt-5 d-flex justify-content-center align-content-center align-items-center">
                                         <div className="col-12 col-md-6 d-grid gap-2">
+                                            <input
+                                                type="hidden"
+                                                name="nombreJoueu"
+                                                value={totalJoueursChoisis}
+                                            />
                                             <button
                                                 type="submit"
                                                 className="btn btn-success btn-lg bouton"

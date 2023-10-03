@@ -42,6 +42,12 @@ class Abonnement
     #[ORM\OneToMany(mappedBy: 'abonnement', targetEntity: Joueur::class)]
     private Collection $joueurs;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $totalJoueur = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $restantJoueur = null;
+
     public function __construct()
     {
         $this->disciplines = new ArrayCollection();
@@ -187,6 +193,30 @@ class Abonnement
                 $joueur->setAbonnement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTotalJoueur(): ?int
+    {
+        return $this->totalJoueur;
+    }
+
+    public function setTotalJoueur(?int $totalJoueur): static
+    {
+        $this->totalJoueur = $totalJoueur;
+
+        return $this;
+    }
+
+    public function getRestantJoueur(): ?int
+    {
+        return $this->restantJoueur;
+    }
+
+    public function setRestantJoueur(?int $restantJoueur): static
+    {
+        $this->restantJoueur = $restantJoueur;
 
         return $this;
     }

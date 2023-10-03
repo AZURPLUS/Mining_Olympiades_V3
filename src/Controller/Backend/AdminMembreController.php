@@ -91,6 +91,7 @@ class AdminMembreController extends AbstractController
         $requestCompagnie = $request->get('_compagnie');
         $requetEmail = $request->get('_email');
         $requestPassword = $request->get('_password');
+        $requestParticipation = $request->get('_participation');
 
         // Recherche de la compagnie
         $compagnie = $this->compagnieRepository->findOneBy(['id' => (int) $requestCompagnie]);
@@ -113,6 +114,7 @@ class AdminMembreController extends AbstractController
         }
         $membre->setCompagnie($compagnie);
         $membre->setUser($user);
+        $membre->setParticipation((int) $requestParticipation);
         $this->entityManager->persist($membre);
 
         $this->entityManager->flush();

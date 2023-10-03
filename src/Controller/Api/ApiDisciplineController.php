@@ -72,8 +72,10 @@ class ApiDisciplineController extends AbstractController
         $abonnement->setReference($this->reference());
         $abonnement->setCompagnie($membre->getCompagnie());
         $abonnement->setAnnee(date('Y'));
-        $abonnement->setMontant(1500000);
+        $abonnement->setMontant($membre->getParticipation());
         $abonnement->setSolde(false);
+        $abonnement->setRestantJoueur($datas['totalJoueurs']);
+        $abonnement->setTotalJoueur($datas['totalJoueurs']);
 
         foreach ($datas['disciplines'] as $data){
             $discipline =$this->disciplineRepository->findOneBy(['id' => $data]) ;
@@ -85,7 +87,7 @@ class ApiDisciplineController extends AbstractController
         $this->entityManager->persist($abonnement);
         $this->entityManager->flush();
 
-        sweetalert()->addSuccess("Vos disciplines ont été sauvegardées avec succès!");
+//        sweetalert()->addSuccess("Vos disciplines ont été sauvegardées avec succès!");
 
         return $this->json([
             'message' => 'Vos disciplines ont été sauvegardées avec succès!',
