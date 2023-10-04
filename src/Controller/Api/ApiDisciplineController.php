@@ -3,10 +3,14 @@
 namespace App\Controller\Api;
 
 use App\Entity\Abonnement;
+use App\Entity\Compagnie;
 use App\Entity\Joueur;
 use App\Repository\AbonnementRepository;
+use App\Repository\CompetirRepository;
 use App\Repository\DisciplineRepository;
+use App\Repository\JoueurRepository;
 use App\Repository\MembreRepository;
+use App\Repository\ParticipantRepository;
 use App\Service\AllRepositories;
 use App\Service\GestionMedia;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,7 +32,10 @@ class ApiDisciplineController extends AbstractController
         private AbonnementRepository $abonnementRepository,
         private DisciplineRepository $disciplineRepository,
         private EntityManagerInterface $entityManager,
-        private GestionMedia $gestionMedia
+        private GestionMedia $gestionMedia,
+        private ParticipantRepository $participantRepository,
+        private CompetirRepository $competirRepository,
+        private JoueurRepository $joueurRepository
     )
     {
     }
@@ -149,6 +156,7 @@ class ApiDisciplineController extends AbstractController
         }
 
         $discipline = $this->disciplineRepository->findOneBy(['id'=> $disciplineId]);
+        $abonnement = $this->abonnementRepository->findOneBy(['compagnie' => $membre->getCompagnie()]);
 
         $joueur = new Joueur();
         $joueur->setNom($nom);
@@ -160,6 +168,7 @@ class ApiDisciplineController extends AbstractController
         $joueur->setLicence($this->allRepositories->generateLicence());
         $joueur->setMedia($this->gestionMedia->upload($mediaFile, 'participant'));
         $joueur->addDiscipline($discipline);
+        $joueur->setAbonnement($abonnement);
 
         $this->entityManager->persist($joueur);
         $this->entityManager->flush();
@@ -170,6 +179,26 @@ class ApiDisciplineController extends AbstractController
             'message' => 'Le participant a été ajouté avec succès! avec succès!',
             'statut' => "success",
         ]);
+    }
+
+    #[Route('/membre/liste/', name: 'api_discipline_membre_liste', methods: ['GET'])]
+    public function liste()
+    {
+        $user = $this->getUser();
+        $membre = $this->membreRepository->findOneBy(['user' => $user]);
+        if (!$membre){
+            sweetalert()->addError("Echec, votre compte ne vous autorise pas à choisir des disciplines");
+            return $this->json([
+                'message' => "Echec, votre compte ne vous autorise pas à choisir des disciplines",
+                'statut' => 'Echec'
+            ], Response::HTTP_OK);
+        }
+
+        $participants = $this->joueurRepository->getJoueurByCompagnie($membre->getCompagnie()); //dd($participants);
+
+        $jsonParticipants = $this->serializer->serialize($participants, 'json', ['groups' => 'participation']); //dd($jsonParticipants);
+
+        return new JsonResponse($jsonParticipants, Response::HTTP_OK, [], true);
     }
 
     private function reference(): string

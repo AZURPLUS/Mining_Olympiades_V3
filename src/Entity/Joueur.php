@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: JoueurRepository::class)]
-class Joueur
+class Joueur  implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -185,5 +185,20 @@ class Joueur
         $this->abonnement = $abonnement;
 
         return $this;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return  [
+            'id' => $this->id,
+            'nom' => $this->nom,
+            'prenoms' => $this->prenoms,
+            'matricule' => $this->matricule,
+            'contact' => $this->contact,
+            'licence' => $this->licence,
+            'email' => $this->email,
+            'media' => $this->media,
+            'discipline' => $this->discipline
+        ];
     }
 }

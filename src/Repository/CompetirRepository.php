@@ -21,28 +21,18 @@ class CompetirRepository extends ServiceEntityRepository
         parent::__construct($registry, Competir::class);
     }
 
-//    /**
-//     * @return Competir[] Returns an array of Competir objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Competir
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getParticipantByCompagnie($compagnie)
+    {
+        return $this->createQueryBuilder('c')
+            ->addSelect('p')
+            ->addSelect('d')
+            ->addSelect('cp')
+            ->leftJoin('c.participant', 'p')
+            ->leftJoin('c.discipline', 'd')
+            ->leftJoin('p.compagnie', 'cp')
+            ->where('cp = :compagnie')
+            ->setParameter('compagnie', $compagnie)
+            ->getQuery()->getResult()
+            ;
+    }
 }

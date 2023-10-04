@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import AOS from 'aos';
 import ReactLoading from 'react-loading';
+import ListeParticipant from "./ListeParticipant";
 
 const MySwal = withReactContent(Swal);
 
@@ -82,6 +83,8 @@ export default function () {
             setIsLoading(false);
         }
     };
+
+
 
     return (
         <div>
@@ -250,6 +253,7 @@ export default function () {
                     <ReactLoading type="spin" color="#007BFF" />
                 </div>
             ) : null}
+            <ListeParticipant/>
         </div>
     );
 }

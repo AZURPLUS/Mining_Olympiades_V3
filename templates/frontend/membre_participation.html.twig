@@ -21,4 +21,21 @@
         </section>
     </div>
 {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/vendor/DataTables/datatables.min.css')) }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('backoffice/vendor/DataTables/datatables.min.js')) }}"></script>
+    <script>
+        $('#listes').DataTable( {
+            dom: 'Bfrtip',
+            scrollX: true,
+            buttons: [
+                'copy', 'excel', 'pdf'
+            ]
+        } );
+    </script>
+{% endblock %}
 
