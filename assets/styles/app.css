@@ -433,6 +433,14 @@ body {
   #inscription .inscription .lien-modal a {
     text-decoration: none;
     color: #0b8e36; }
+  #inscription .inscription h5.abonnement {
+    font-style: italic; }
+    #inscription .inscription h5.abonnement span {
+      font-weight: 800;
+      color: #0b8e36;
+      text-decoration: underline; }
+      #inscription .inscription h5.abonnement span:hover {
+        color: #f39200; }
 
 #page {
   margin-top: 100px; }

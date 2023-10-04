@@ -144,5 +144,21 @@
                 color: $couleur-verte;
             }
         }
+
+        h5{
+            &.abonnement{
+                font-style: italic;
+
+                span{
+                    font-weight: 800;
+                    color: $couleur-verte;
+                    text-decoration: underline;
+
+                    &:hover{
+                        color: $couleur-orange;
+                    }
+                }
+            }
+        }
     }
 }

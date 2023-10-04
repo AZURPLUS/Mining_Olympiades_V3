@@ -33,6 +33,7 @@ export default function () {
                 console.log('la liste')
                 console.log(participantData);
                 // Initialize DataTables after fetching data
+
                 $(tableRef.current).DataTable({
                     data: participantData,
                     columns: [
@@ -57,26 +58,26 @@ export default function () {
                     buttons: [
                         {
                             extend: 'copy',
-                            className: 'btn btn-secondary', // Utilisez la classe de boutons Bootstrap
+                            className: 'btn btn-outline-success', // Utilisez la classe de boutons Bootstrap
                         },
                         {
                             extend: 'csv',
-                            className: 'btn btn-secondary',
+                            className: 'btn btn-outline-success',
                         },
                         {
                             extend: 'excel',
-                            className: 'btn btn-secondary',
+                            className: 'btn btn-outline-success',
                         },
                         {
                             extend: 'pdf',
                             text: 'PDF',
                             title: 'Liste des participants',
                             filename: 'liste_participants',
-                            className: 'btn btn-secondary',
+                            className: 'btn btn-outline-success',
                         },
                         {
                             extend: 'print',
-                            className: 'btn btn-secondary',
+                            className: 'btn btn-outline-success',
                         },
                     ],
                 });
@@ -95,7 +96,7 @@ export default function () {
             <section id="inscription">
                 <div className="inscription">
                     <h3 className="titre">Liste des participants</h3>
-                    <div className="liste mt-5">
+                    <div className="liste mt-3">
                         <table ref={tableRef} className="display" style={{ width: '100%' }} />
                     </div>
                 </div>

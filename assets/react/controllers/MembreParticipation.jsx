@@ -13,9 +13,24 @@ export default function () {
     const [selectedDiscipline, setSelectedDiscipline] = useState('');
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] = useState('');
+    const [abonnement, setAbonnement] = useState([])
 
     useEffect(() => {
         AOS.init();
+
+        async function fetchAbonnement(){
+            try {
+                const response = await fetch('/api/abonnement/');
+                if (!response.ok){
+                    throw new Error("La réquête a échoué")
+                }
+
+                const data = await response.json();
+                setAbonnement(data);
+            } catch (e) {
+                console.error("Erreur de la récupération de l'abonnement: ", e);
+            }
+        }
 
         async function fetchDiscipline(){
             try {
@@ -32,6 +47,7 @@ export default function () {
             }
         }
         fetchDiscipline();
+        fetchAbonnement();
     }, []);
 
 
@@ -95,8 +111,12 @@ export default function () {
                             <div className="formulaire-bloc"  data-aos="fade-up" data-aos-duration="1500">
                                 <form onSubmit={handleSubmit}>
                                     <div className="row mb-5 justify-content-center align-content-center">
-                                        <div className="col-12 mb-1 text-center">
-                                            <h3 className="titre">Formulaire de participation</h3>
+                                        <div className="col-12 mb-1">
+                                            <h3 className="titre text-center">Formulaire de participation</h3>
+                                            <h5 className="abonnement text-left">
+                                                Il reste encore <span>{abonnement.restantJoueur}</span> {abonnement.restantJoueur > 1 ? 'participants' : 'participant'} à inscrire.
+
+                                            </h5>
                                         </div>
                                     </div>
                                     <div className="row row-cols-1 row-cols-lg-2 g-4 no-gutters">
@@ -154,7 +174,7 @@ export default function () {
                                                     value={prenom}
                                                     onChange={handlePrenomChange}
                                                 />
-                                                <label htmlFor="floatingInput">Prenoms <span>*</span></label>
+                                                <label htmlFor="floatingInput">Prénoms <span>*</span></label>
                                             </div>
                                         </div>
                                         <div className="col">

@@ -140,6 +140,7 @@ class ApiDisciplineController extends AbstractController
         $contact = $request->request->get('contact');
         $email = $request->request->get('email');
         $mediaFile = $request->files->get('media');
+        $carteFile = $request->files->get('carte');
 
         // Vous pouvez également gérer le fichier uploadé (photo) ici
         $media = $request->files->get('media');
@@ -167,10 +168,15 @@ class ApiDisciplineController extends AbstractController
         $joueur->setSlug((new AsciiSlugger())->slug(strtolower($nom.'-'.$prenoms.'-'.$matricule)));
         $joueur->setLicence($this->allRepositories->generateLicence());
         $joueur->setMedia($this->gestionMedia->upload($mediaFile, 'participant'));
+        $joueur->setCarte($this->gestionMedia->upload($carteFile, 'participant'));
         $joueur->addDiscipline($discipline);
         $joueur->setAbonnement($abonnement);
 
         $this->entityManager->persist($joueur);
+
+        // Mise a jour du nombre de joueurs restants
+        $abonnement->setRestantJoueur((int)$abonnement->getRestantJoueur() - 1);
+
         $this->entityManager->flush();
 
 //        sweetalert()->addSuccess("Le participant a été ajouté avec succès!");

@@ -45,6 +45,9 @@ class Joueur  implements \JsonSerializable
     #[ORM\ManyToOne(inversedBy: 'joueurs')]
     private ?Abonnement $abonnement = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $carte = null;
+
     public function __construct()
     {
         $this->discipline = new ArrayCollection();
@@ -200,5 +203,17 @@ class Joueur  implements \JsonSerializable
             'media' => $this->media,
             'discipline' => $this->discipline
         ];
+    }
+
+    public function getCarte(): ?string
+    {
+        return $this->carte;
+    }
+
+    public function setCarte(?string $carte): static
+    {
+        $this->carte = $carte;
+
+        return $this;
     }
 }
