@@ -108,7 +108,7 @@ export default function () {
                 <div className="inscription">
                     <div className="row no-gutters justify-content-center align-items-center">
                         <div className="col-xl-10">
-                            {abonnement.restantJoueur > 100 ? (
+                            {abonnement.restantJoueur > 0 ? (
                                 <div className="formulaire-bloc">
                                     <form onSubmit={handleSubmit}>
                                         <div className="row mb-5 justify-content-center align-content-center">
