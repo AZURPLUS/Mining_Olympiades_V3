@@ -79,7 +79,7 @@ export default function () {
             });
             setTimeout(() => {
                 window.location.href = window.location.origin;
-            }, 3000);
+            }, 6000);
 
         } catch (error) {
             console.error("Une erreur s'est produite lors de la soumission du formulaire :", error);
@@ -97,7 +97,7 @@ export default function () {
                         <div className="inscription">
                             <div className="row">
                                 <div className="col-12 text-center">
-                                    <h3>Formulaire d'adhésion</h3>
+                                    <h3>Formulaire de participation</h3>
                                 </div>
                             </div>
                             <div className="row no-gutters justify-content-center align-items-center">
@@ -154,7 +154,7 @@ export default function () {
                                                             value={prenoms}
                                                             onChange={(e)=> setPrenoms(e.target.value.toUpperCase())}
                                                         />
-                                                        <label htmlFor="floatingInput">Prenoms <span>*</span></label>
+                                                        <label htmlFor="floatingInput">Prénoms <span>*</span></label>
                                                     </div>
                                                 </div>
                                                 <div className="col">
@@ -212,7 +212,7 @@ export default function () {
                                                             autoComplete="off"
                                                             required
                                                         />
-                                                        <label htmlFor="_telephone">Telephone <span>*</span></label>
+                                                        <label htmlFor="_telephone">Contact <span>*</span></label>
                                                     </div>
                                                 </div>
                                                 <div className="col">

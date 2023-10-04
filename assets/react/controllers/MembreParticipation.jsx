@@ -108,162 +108,175 @@ export default function () {
                 <div className="inscription">
                     <div className="row no-gutters justify-content-center align-items-center">
                         <div className="col-xl-10">
-                            <div className="formulaire-bloc"  data-aos="fade-up" data-aos-duration="1500">
-                                <form onSubmit={handleSubmit}>
-                                    <div className="row mb-5 justify-content-center align-content-center">
-                                        <div className="col-12 mb-1">
-                                            <h3 className="titre text-center">Formulaire de participation</h3>
-                                            <h5 className="abonnement text-left">
-                                                Il reste encore <span>{abonnement.restantJoueur}</span> {abonnement.restantJoueur > 1 ? 'participants' : 'participant'} à inscrire.
+                            {abonnement.restantJoueur > 100 ? (
+                                <div className="formulaire-bloc">
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="row mb-5 justify-content-center align-content-center">
+                                            <div className="col-12 mb-1">
+                                                <h3 className="titre text-center">Formulaire de participation</h3>
+                                                <h5 className="abonnement text-left">
+                                                    Il reste encore <span>{abonnement.restantJoueur}</span> {abonnement.restantJoueur > 1 ? 'participants' : 'participant'} à inscrire.
 
-                                            </h5>
+                                                </h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="row row-cols-1 row-cols-lg-2 g-4 no-gutters">
-                                        <div className="col">
-                                            <div className="form-floating">
-                                                <select
-                                                    className="form-select"
-                                                    id="_discipline"
-                                                    name="discipline"
-                                                    aria-label="Floating label select example"
-                                                    value={selectedDiscipline}
-                                                    onChange={(e) => setSelectedDiscipline(e.target.value)}
+                                        <div className="row row-cols-1 row-cols-lg-2 g-4 no-gutters">
+                                            <div className="col">
+                                                <div className="form-floating">
+                                                    <select
+                                                        className="form-select"
+                                                        id="_discipline"
+                                                        name="discipline"
+                                                        aria-label="Floating label select example"
+                                                        value={selectedDiscipline}
+                                                        onChange={(e) => setSelectedDiscipline(e.target.value)}
+                                                    >
+                                                        <option>-- Choisissez la discipline de compétition --</option>
+                                                        <option value=""></option>
+                                                        {disciplines.map((discipline) =>(
+                                                            <option
+                                                                key={discipline.id}
+                                                                value={discipline.id}
+                                                            >
+                                                                {discipline.titre}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                    <label htmlFor="_discipline">Discipline <span>*</span></label>
+                                                </div>
+                                            </div>
+
+                                            <div className="col">
+                                                <div className="form-floating">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        id="_nom"
+                                                        name="nom"
+                                                        placeholder="nom"
+                                                        autoComplete="off"
+                                                        required
+                                                        value={nom}
+                                                        onChange={handleNomChange}
+                                                    />
+                                                    <label htmlFor="floatingInput">Nom <span>*</span> </label>
+                                                </div>
+                                            </div>
+                                            <div className="col">
+                                                <div className="form-floating">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        id="_prenoms"
+                                                        name="prenoms"
+                                                        placeholder="prenoms"
+                                                        autoComplete="off"
+                                                        required
+                                                        value={prenom}
+                                                        onChange={handlePrenomChange}
+                                                    />
+                                                    <label htmlFor="floatingInput">Prénoms <span>*</span></label>
+                                                </div>
+                                            </div>
+                                            <div className="col">
+                                                <div className="form-floating">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        id="_matricule"
+                                                        name="matricule"
+                                                        placeholder="matricule"
+                                                        autoComplete="off"
+                                                        required
+                                                    />
+                                                    <label htmlFor="_matricule">Matricule <span>*</span></label>
+                                                </div>
+                                            </div>
+                                            <div className="col">
+                                                <div className="form-floating">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        id="_contact"
+                                                        name="contact"
+                                                        placeholder="contact"
+                                                        autoComplete="off"
+                                                        required
+                                                    />
+                                                    <label htmlFor="floatingInput">Contact <span>*</span></label>
+                                                </div>
+                                            </div>
+                                            <div className="col">
+                                                <div className="form-floating">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        id="_email"
+                                                        name="email"
+                                                        placeholder="email"
+                                                        autoComplete="off"
+                                                        required
+                                                    />
+                                                    <label htmlFor="floatingInput">Email <span>*</span></label>
+                                                </div>
+                                            </div>
+
+                                            <div className="col">
+                                                <div className="mb-3">
+                                                    <label htmlFor="">Photo <span>*</span></label>
+                                                    <input
+                                                        className="form-control form-control-lg"
+                                                        type="file"
+                                                        data-preview=".preview"
+                                                        placeholder="Photo"
+                                                        required
+                                                        id="_media"
+                                                        name="media"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="col">
+                                                <div className="mb-3">
+                                                    <label htmlFor="">Carte professionnelle <span>*</span></label>
+                                                    <input
+                                                        className="form-control form-control-lg"
+                                                        type="file"
+                                                        data-preview=".preview"
+                                                        placeholder="Photo"
+                                                        required
+                                                        id="_carte"
+                                                        name="carte"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div className="row mt-5 d-flex justify-content-center align-content-center align-items-center">
+                                            <div className="col-12 col-md-6 d-grid gap-2">
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-success btn-lg bouton"
                                                 >
-                                                    <option>-- Choisissez la discipline de compétition --</option>
-                                                    <option value=""></option>
-                                                    {disciplines.map((discipline) =>(
-                                                        <option
-                                                            key={discipline.id}
-                                                            value={discipline.id}
-                                                        >
-                                                            {discipline.titre}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                                <label htmlFor="_discipline">Discipline <span>*</span></label>
+                                                    <i className="bi bi-floppy"></i> Enregistrer
+                                                </button>
                                             </div>
                                         </div>
+                                    </form>
+                                </div>
+                                ): (
+                                   <div className="annonce">
+                                       <p>
+                                           Félicitations vos {abonnement.totalJoueur} participants ont été enregistrés avec succès!
+                                       </p>
+                                       <p>
+                                           Merci de télécharger <a href="/facture/">votre facture</a>.
+                                       </p>
+                                   </div>
+                                )
+                            }
 
-                                        <div className="col">
-                                            <div className="form-floating">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    id="_nom"
-                                                    name="nom"
-                                                    placeholder="nom"
-                                                    autoComplete="off"
-                                                    required
-                                                    value={nom}
-                                                    onChange={handleNomChange}
-                                                />
-                                                <label htmlFor="floatingInput">Nom <span>*</span> </label>
-                                            </div>
-                                        </div>
-                                        <div className="col">
-                                            <div className="form-floating">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    id="_prenoms"
-                                                    name="prenoms"
-                                                    placeholder="prenoms"
-                                                    autoComplete="off"
-                                                    required
-                                                    value={prenom}
-                                                    onChange={handlePrenomChange}
-                                                />
-                                                <label htmlFor="floatingInput">Prénoms <span>*</span></label>
-                                            </div>
-                                        </div>
-                                        <div className="col">
-                                            <div className="form-floating">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    id="_matricule"
-                                                    name="matricule"
-                                                    placeholder="matricule"
-                                                    autoComplete="off"
-                                                    required
-                                                />
-                                                <label htmlFor="_matricule">Matricule <span>*</span></label>
-                                            </div>
-                                        </div>
-                                        <div className="col">
-                                            <div className="form-floating">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    id="_contact"
-                                                    name="contact"
-                                                    placeholder="contact"
-                                                    autoComplete="off"
-                                                    required
-                                                />
-                                                <label htmlFor="floatingInput">Contact <span>*</span></label>
-                                            </div>
-                                        </div>
-                                        <div className="col">
-                                            <div className="form-floating">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    id="_email"
-                                                    name="email"
-                                                    placeholder="email"
-                                                    autoComplete="off"
-                                                    required
-                                                />
-                                                <label htmlFor="floatingInput">Email <span>*</span></label>
-                                            </div>
-                                        </div>
-
-                                        <div className="col">
-                                            <div className="mb-3">
-                                                <label htmlFor="">Photo <span>*</span></label>
-                                                <input
-                                                    className="form-control form-control-lg"
-                                                    type="file"
-                                                    data-preview=".preview"
-                                                    placeholder="Photo"
-                                                    required
-                                                    id="_media"
-                                                    name="media"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="col">
-                                            <div className="mb-3">
-                                                <label htmlFor="">Carte professionnelle <span>*</span></label>
-                                                <input
-                                                    className="form-control form-control-lg"
-                                                    type="file"
-                                                    data-preview=".preview"
-                                                    placeholder="Photo"
-                                                    required
-                                                    id="_carte"
-                                                    name="carte"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="row mt-5 d-flex justify-content-center align-content-center align-items-center">
-                                        <div className="col-12 col-md-6 d-grid gap-2">
-                                            <button
-                                                type="submit"
-                                                className="btn btn-success btn-lg bouton"
-                                            >
-                                                <i className="bi bi-floppy"></i> Enregistrer
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>

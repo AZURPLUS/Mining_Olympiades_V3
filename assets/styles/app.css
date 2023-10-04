@@ -441,6 +441,15 @@ body {
       text-decoration: underline; }
       #inscription .inscription h5.abonnement span:hover {
         color: #f39200; }
+  #inscription .inscription .annonce p {
+    font-size: 1.2rem; }
+  #inscription .inscription .annonce a {
+    text-decoration: none;
+    font-style: italic;
+    color: #0b8e36;
+    font-weight: 700; }
+    #inscription .inscription .annonce a:hover {
+      color: #f39200; }
 
 #page {
   margin-top: 100px; }
