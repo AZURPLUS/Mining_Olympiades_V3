@@ -4,6 +4,8 @@ import withReactContent from 'sweetalert2-react-content';
 import AOS from 'aos';
 import ReactLoading from 'react-loading';
 import ListeParticipant from "./ListeParticipant";
+import {Page, View, Text, Document, PDFViewer, StyleSheet, PDFDownloadLink, Image, Font, } from '@react-pdf/renderer';
+import logo from '../../images/gpmci.png';
 
 const MySwal = withReactContent(Swal);
 
@@ -100,7 +102,29 @@ export default function () {
         }
     };
 
+    // PDF
+    Font.register({
+        family: 'Oswald',
+        src: 'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf'
+    });
+    const styles = StyleSheet.create({
+        body:{paddingTop:35, paddingBottom: 65, paddingHorizontal:35},
+        titre:{fontSize: 20, fontWeight: "bold", border: 1, paddingTop: 10, paddingBottom: 10, textAlign: "center", fontFamily: 'Oswald', marginTop:50  },
+        logo:{width:150, }
+    });
 
+    const Facture = () => (
+        <Document>
+            <Page size="A4" orientation="portrait" style={styles.body}>
+                <Image
+                    src={logo}
+                    style={styles.logo}
+                />
+                <Text style={styles.titre}>PARTICIPATION AUX MINING OLYMPIADES 2023</Text>
+                <Text></Text>
+            </Page>
+        </Document>
+    );
 
     return (
         <div>
@@ -271,7 +295,12 @@ export default function () {
                                            Félicitations vos {abonnement.totalJoueur} participants ont été enregistrés avec succès!
                                        </p>
                                        <p>
-                                           Merci de télécharger <a href="/facture/">votre facture</a>.
+                                           {/*Merci de télécharger <a href="/facture/">votre facture</a>.*/}
+                                           <PDFDownloadLink document={<Facture />} fileName={`facture-${abonnement.reference}.pdf`}>
+                                               {({ blob, url, loading, error }) =>
+                                                   loading ? 'Chargement de la facture...' : 'Merci de télécharger votre facture'
+                                               }
+                                           </PDFDownloadLink>
                                        </p>
                                    </div>
                                 )
