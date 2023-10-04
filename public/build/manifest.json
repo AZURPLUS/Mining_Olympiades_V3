@@ -1,14 +1,14 @@
 {
-  "build/app.css": "http://localhost:8080/build/app.css",
-  "build/app.js": "http://localhost:8080/build/app.js",
-  "build/runtime.js": "http://localhost:8080/build/runtime.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-bc85a0.css": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-bc85a0.css",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-bc85a0.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-react_dist-bc85a0.js",
-  "build/images/bg.png": "http://localhost:8080/build/images/bg.ec6d0a47.png",
-  "build/images/vert.png": "http://localhost:8080/build/images/vert.7e714318.png",
-  "build/images/orange.png": "http://localhost:8080/build/images/orange.86029097.png",
-  "build/fonts/dropify.eot": "http://localhost:8080/build/fonts/dropify.533b98a9.eot",
-  "build/fonts/dropify.ttf": "http://localhost:8080/build/fonts/dropify.fa3ea434.ttf",
-  "build/fonts/dropify.woff": "http://localhost:8080/build/fonts/dropify.26224e38.woff",
-  "build/images/dropify.svg": "http://localhost:8080/build/images/dropify.86d35fae.svg"
+  "build/app.css": "/build/app.5154e892.css",
+  "build/app.js": "/build/app.c96b8cbd.js",
+  "build/runtime.js": "/build/runtime.9a71ee5d.js",
+  "build/817.72ba4c68.css": "/build/817.72ba4c68.css",
+  "build/817.bd2db222.js": "/build/817.bd2db222.js",
+  "build/images/bg.png": "/build/images/bg.ec6d0a47.png",
+  "build/images/vert.png": "/build/images/vert.7e714318.png",
+  "build/images/orange.png": "/build/images/orange.86029097.png",
+  "build/fonts/dropify.eot": "/build/fonts/dropify.533b98a9.eot",
+  "build/fonts/dropify.ttf": "/build/fonts/dropify.fa3ea434.ttf",
+  "build/fonts/dropify.woff": "/build/fonts/dropify.26224e38.woff",
+  "build/images/dropify.svg": "/build/images/dropify.86d35fae.svg"
 }
