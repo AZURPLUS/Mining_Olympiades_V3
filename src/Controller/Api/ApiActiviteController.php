@@ -44,12 +44,12 @@ class ApiActiviteController extends AbstractController
                 'heure' => "7h00 - 17h30"
             ],
             [
-                'titre' => "Soirée de <span>recompense</span>",
+                'titre' => "Soirée de <span>récompense</span>",
                 'resume' => '
                 <ul>
                     <li><u>Dress code</u>: Valorisons nos régions</li>
                     <li><u>Date</u>: 16 décembre 2023 de 19h30 - 23h00</li>
-                    <li><u>Lieu</u>: HÔTEL PRESIDENT</li>
+                    <li><u>Lieu</u>: HÔTEL HP RESORT (Ex-Hôtel Parlementaire)</li>
                 </ul>
                 ',
                 'icon' => 'icon-gala.png',
