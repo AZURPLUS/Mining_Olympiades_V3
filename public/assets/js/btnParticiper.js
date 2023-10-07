@@ -30,10 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         window.location.href = urlRoot + '/participation/';
                     } else if (value === 'sponsor') {
                         window.location.href = urlRoot + '/sponsoring/';
+                    } else if (value === 'etudiant') {
+                        window.location.href = urlRoot + '/journee-scientifique/';
                     } else {
                         // La sélection a été faite mais n'a pas conduit à une redirection
                         // Ajoutez le code ici si nécessaire
-                        swal.fire('En cours....')
+                        swal.fire('Veuillez selectionner une option dans la liste')
                     }
                 }
             })

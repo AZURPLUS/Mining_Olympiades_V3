@@ -116,6 +116,14 @@ body {
     #topHead a .bi-person-add {
       animation: flash 2s ease-in-out infinite alternate;
       font-size: 1.3rem; }
+    #topHead a.deconnexion {
+      padding-left: 10px;
+      font-weight: 700;
+      transition: 0.3s ease-in-out; }
+      #topHead a.deconnexion:hover {
+        color: #0b8e36; }
+        #topHead a.deconnexion:hover i {
+          transform: scale(1.1); }
   #topHead .topHead {
     padding: 10px 0; }
 
