@@ -118,6 +118,7 @@ class ApiDisciplineController extends AbstractController
 
         $abonnement = $this->abonnementRepository->findOneBy(['compagnie' => $membre->getCompagnie()],['id' => "DESC"]);
 
+
         $disciplines=[];
         foreach ($abonnement->getDisciplines() as $discipline){
             $disciplines[] = $discipline;
@@ -149,7 +150,7 @@ class ApiDisciplineController extends AbstractController
         $user = $this->getUser();
         $membre = $this->membreRepository->findOneBy(['user' => $user]);
         if (!$membre){
-            sweetalert()->addError("Echec, votre compte ne vous autorise pas à choisir des disciplines");
+//            sweetalert()->addError("Echec, votre compte ne vous autorise pas à choisir des disciplines");
             return $this->json([
                 'message' => "Echec, votre compte ne vous autorise pas à choisir des disciplines",
                 'statut' => 'Echec'
@@ -158,6 +159,18 @@ class ApiDisciplineController extends AbstractController
 
         $discipline = $this->disciplineRepository->findOneBy(['id'=> $disciplineId]);
         $abonnement = $this->abonnementRepository->findOneBy(['compagnie' => $membre->getCompagnie()]);
+
+        $disciplineJoueurs = $this->joueurRepository->getNombreJoueurByAbonnementAndDiscipline($disciplineId, $abonnement->getId());
+
+//        dd($disciplineJoueurs);
+
+        if ((int)$disciplineJoueurs >= (int)$discipline->getJoueur()){
+            return $this->json([
+                'message' => "Echec, votre compte ne vous autorise pas à choisir des disciplines",
+                'statut' => "disciplineAtteinte",
+                'discipline' => $discipline->getTitre()
+            ]);
+        }
 
         $joueur = new Joueur();
         $joueur->setNom($nom);

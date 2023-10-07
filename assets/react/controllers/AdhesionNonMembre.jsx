@@ -75,11 +75,11 @@ export default function () {
                 icon: 'success',
                 title: 'Adhésion',
                 text: `Votre demande a été envoyée avec succès! Vous serez contacté sous peu.`,
-                timer: 6000
+                timer: 10000
             });
             setTimeout(() => {
                 window.location.href = window.location.origin;
-            }, 6000);
+            }, 10000);
 
         } catch (error) {
             console.error("Une erreur s'est produite lors de la soumission du formulaire :", error);

@@ -35,4 +35,20 @@ class JoueurRepository extends ServiceEntityRepository
             ->getQuery()->getResult()
             ;
     }
+
+    public function getNombreJoueurByAbonnementAndDiscipline(int $discipline, int $abonnement)
+    {
+        return $this->createQueryBuilder('j')
+            ->addSelect('a')
+            ->addSelect('d')
+            ->leftJoin('j.abonnement', 'a')
+            ->leftJoin('j.discipline', 'd')
+            ->where('a.id = :abonnement')
+            ->andWhere('d.id = :discipline')
+            ->setParameters([
+                'discipline' => $discipline,
+                'abonnement' => $abonnement
+            ])
+            ->getQuery()->getResult();
+    }
 }

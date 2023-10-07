@@ -133,7 +133,7 @@ export default function (abonnement) {
                     {/*Merci de télécharger <a href="/facture/">votre facture</a>.*/}
                     <PDFDownloadLink document={<Facture />} fileName={`facture-${abonnement.abonnement.reference}.pdf`}>
                         {({ blob, url, loading, error }) =>
-                            loading ? 'Chargement de la facture...' : 'Merci cliquer ici pour télécharger votre facture'
+                            loading ? 'Chargement de la facture...' : 'Merci de cliquer ici pour télécharger votre facture'
                         }
                     </PDFDownloadLink>
                 </p>

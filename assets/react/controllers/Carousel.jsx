@@ -50,7 +50,7 @@ export default function Carousel() {
         }
 
         showItem(currentIndex);
-        interval = setInterval(cycleItems, 3000);
+        interval = setInterval(cycleItems, 4000);
 
         const carousel = document.querySelector(".carousel");
         carousel.addEventListener("mouseenter", () => {
@@ -58,7 +58,7 @@ export default function Carousel() {
         });
 
         carousel.addEventListener("mouseleave", () => {
-            interval = setInterval(cycleItems, 3000);
+            interval = setInterval(cycleItems, 4000);
         });
 
         const slide = setInterval(() => {

@@ -15,6 +15,7 @@ export default function () {
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] = useState('');
     const [abonnement, setAbonnement] = useState([]);
+    const [contact, setContact] = useState('');
 
     useEffect(() => {
         AOS.init();
@@ -31,6 +32,12 @@ export default function () {
             } catch (e) {
                 console.error("Erreur de la récupération de l'abonnement: ", e);
             }
+        }
+
+        const handleContactChange = (e) => {
+            const cleanedValue = e.target.value.replace(/\D/g, '');
+            const formattedValue = cleanedValue.slice(0, 10);
+            setContact(formattedValue);
         }
 
         async function fetchDiscipline(){
@@ -60,6 +67,12 @@ export default function () {
         setPrenom(e.target.value.toUpperCase());
     }
 
+    const handleContactChange = (e) => {
+        const cleanedValue = e.target.value.replace(/\D/g, '');
+        const formattedValue = cleanedValue.slice(0, 10);
+        setContact(formattedValue);
+    }
+
     // Fonction pour gérer la soumission du formulaire
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -81,16 +94,29 @@ export default function () {
             // Traiter la réponse du serveur, afficher un message, etc.
             setIsLoading(false);
 
-            // Attendez 3 secondes avant d'afficher l'alerte
-            MySwal.fire({
-                icon: 'success',
-                title: 'Participation',
-                text: `Le participant a été enregistré avec succès!`,
-                timer: 6000
-            });
-            setTimeout(() => {
-                window.location.href = '/membre/participation';
-            }, 3000);
+            console.log(responseData.statut)
+
+            if (responseData.statut === 'disciplineAtteinte'){
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Participation',
+                    text: `Echec! le nombre de joueurs pour la discipline '${responseData.discipline}' est déjà atteint. Veuillez l'affecter à une autre discipline.`,
+                    timer: 10000
+                });
+            }else{
+                // Attendez 3 secondes avant d'afficher l'alerte
+                MySwal.fire({
+                    icon: 'success',
+                    title: 'Participation',
+                    text: `Le participant a été enregistré avec succès!`,
+                    timer: 10000
+                });
+                setTimeout(() => {
+                    window.location.href = '/membre/participation';
+                }, 10000);
+
+            }
+
 
 
         } catch (error) {
@@ -115,7 +141,6 @@ export default function () {
                                                 <h3 className="titre text-center">Formulaire de participation</h3>
                                                 <h5 className="abonnement text-left">
                                                     Il reste encore <span>{abonnement.restantJoueur}</span> {abonnement.restantJoueur > 1 ? 'participants' : 'participant'} à inscrire.
-
                                                 </h5>
                                             </div>
                                         </div>
@@ -201,6 +226,8 @@ export default function () {
                                                         placeholder="contact"
                                                         autoComplete="off"
                                                         required
+                                                        value={contact}
+                                                        onChange={handleContactChange}
                                                     />
                                                     <label htmlFor="floatingInput">Contact <span>*</span></label>
                                                 </div>
