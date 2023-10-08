@@ -48,8 +48,9 @@
                                     <thead>
                                     <tr>
                                         <th class="text-center text-uppercase">#</th>
-                                        <th class="text-center text-uppercase">Titre</th>
+                                        <th class="text-center text-uppercase">Titres</th>
                                         <th class="text-center text-uppercase">Joueurs</th>
+                                        <th class="text-center text-uppercase">Complementaires</th>
                                         <th class="text-center text-uppercase">actions</th>
                                     </tr>
                                     </thead>
@@ -59,6 +60,9 @@
                                             <td>{{ loop.index }}</td>
                                             <td>{{ discipline.titre }}</td>
                                             <td class="text-center">{{ discipline.joueur }}</td>
+                                            <td class="text-center">
+                                                {{ discipline.complementaire ? '<span class="badge bg-success">OUI</span>' : '<span class="badge bg-danger">NON</span>'}}
+                                            </td>
                                             <td class="text-center">
                                                 <a href="{{ path('app_backend_discipline_edit', {'id': discipline.id}) }}"><i class="ti-pencil-alt"></i></a>
                                             </td>

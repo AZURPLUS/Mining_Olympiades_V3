@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Discipline;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +21,11 @@ class DisciplineType extends AbstractType
             ->add('joueur', IntegerType::class,[
                 'attr'=>['class'=>'form-control', 'autocomplete'=>"off", 'placeholder'=>"Nombre de joueurs"]
             ])
-//            ->add('slug')
+            ->add('complementaire', CheckboxType::class,[
+                'required' => false,
+                'label' => "Concerné(e) par le choix complémentaire",
+                'attr' => ['class' => 'form-check-input']
+            ])
         ;
     }
 

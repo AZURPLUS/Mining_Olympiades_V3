@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AbonnementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AbonnementRepository::class)]
@@ -47,6 +48,9 @@ class Abonnement
 
     #[ORM\Column(nullable: true)]
     private ?int $restantJoueur = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $createdAt = null;
 
     public function __construct()
     {
@@ -217,6 +221,18 @@ class Abonnement
     public function setRestantJoueur(?int $restantJoueur): static
     {
         $this->restantJoueur = $restantJoueur;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

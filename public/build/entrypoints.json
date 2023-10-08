@@ -3,11 +3,11 @@
     "app": {
       "js": [
         "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/vendors-node_modules_react-pdf_renderer_lib_react-pdf_browser_es_js-node_modules_symfony_stim-e5347e.js",
+        "http://localhost:8080/build/vendors-node_modules_react-pdf_renderer_lib_react-pdf_browser_es_js-node_modules_symfony_stim-cd484b.js",
         "http://localhost:8080/build/app.js"
       ],
       "css": [
-        "http://localhost:8080/build/vendors-node_modules_react-pdf_renderer_lib_react-pdf_browser_es_js-node_modules_symfony_stim-e5347e.css",
+        "http://localhost:8080/build/vendors-node_modules_react-pdf_renderer_lib_react-pdf_browser_es_js-node_modules_symfony_stim-cd484b.css",
         "http://localhost:8080/build/app.css"
       ]
     }

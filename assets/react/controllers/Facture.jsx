@@ -27,7 +27,7 @@ export default function (abonnement) {
     // Font.register({family: 'Times-Roman' })
     const styles = StyleSheet.create({
         body:{paddingTop:35, paddingBottom: 65, paddingHorizontal:35},
-        titre:{fontSize: 20, fontWeight: "bold", border: 1, paddingTop: 10, paddingBottom: 10, textAlign: "center", fontFamily: 'Helvetica-Bold', marginTop:50  },
+        titre:{fontSize: 20, fontWeight: "bold", border: 1, paddingTop: 10, paddingBottom: 10, textAlign: "center", fontFamily: 'Helvetica-Bold', marginTop:20  },
         entete:{borderBottom: 2, borderBottomColor: "orange"},
         logo:{width:150, },
         date:{display: "grid", textAlign: "left", marginLeft: 300, fontSize: 11, marginTop:20, fontWeight: 700},
@@ -46,7 +46,7 @@ export default function (abonnement) {
         colonne2:{flexGrow:1},
         labelMontantTotal:{ fontFamily: 'Helvetica-Bold', fontSize: 13, border:1},
         valeurMontantTotal: {fontFamily: 'Helvetica-Bold', fontSize:13, textAlign: "right", paddingRight:20, backgroundColor: "darkorange", paddingTop:7, paddingBottom:7, marginRight:30, paddingLeft:20},
-        sectionReglement:{fontFamily: "Times-Roman", marginTop:50, fontSize: 12},
+        sectionReglement:{fontFamily: "Times-Roman", marginTop:25, fontSize: 12},
         optionReglement:{color: "red", fontFamily: "Times-Italic", fontSize:10, paddingTop:5},
         consigne:{fontFamily:"Times-Bold", marginTop:15, fontSize:10},
         signature:{textAlign: 'right', marginRight: 50, fontFamily: "Times-Bold", fontSize:10, marginTop:25},
@@ -128,6 +128,9 @@ export default function (abonnement) {
             <div className="annonce">
                 <p>
                     Félicitations vos  participants ont été enregistrés avec succès!
+                </p>
+                <p>
+                    Voulez-vous choisir des disciplines supplémentaires ? <a href="/discipline-supplementaire/">Cliquez ici</a>
                 </p>
                 <p>
                     {/*Merci de télécharger <a href="/facture/">votre facture</a>.*/}

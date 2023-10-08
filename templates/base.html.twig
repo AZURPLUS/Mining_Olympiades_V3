@@ -50,7 +50,7 @@
                         <div class="col-4 text-center">
                             <a href="#" class="bouton boutonParticiper"><span></span><i class="bi bi-person-add"></i> Participer</a>
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <a href="{{ absolute_url(path('app_logout')) }}" class="deconnexion"><i class="bi bi-unlock"></i> Déconnexion</a>
+                                <a href="{{ absolute_url(path('app_logout')) }}" class="deconnexion desktop"><i class="bi bi-unlock"></i> <span>Déconnexion</span></a>
                             {% endif %}
 
                         </div>
@@ -167,7 +167,7 @@
                                         </div>
 
                                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                            <a href="{{ absolute_url(path('app_logout')) }}" class="deconnexion mt-3"><i class="bi bi-unlock"></i> Déconnexion</a>
+                                            <a href="{{ absolute_url(path('app_logout')) }}" class="deconnexion mt-3"><i class="bi bi-unlock"></i> <span>Déconnexion</span> </a>
                                         {% endif %}
                                     </div>
                                 </div>

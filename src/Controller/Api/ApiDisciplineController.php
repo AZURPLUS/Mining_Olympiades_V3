@@ -57,7 +57,7 @@ class ApiDisciplineController extends AbstractController
     {
         $datas = json_decode($request->getContent(), true);
         if (!$datas || empty($datas['disciplines'])){
-            sweetalert()->addError("Echec, Veuillez choisir les disciplines !");
+//            sweetalert()->addError("Echec, Veuillez choisir les disciplines !");
             return $this->json([
                 'message' => "Echec, veuillez choisir les disciplines",
                 'statut' => "Echec"
@@ -83,6 +83,7 @@ class ApiDisciplineController extends AbstractController
         $abonnement->setSolde(false);
         $abonnement->setRestantJoueur($datas['totalJoueurs']);
         $abonnement->setTotalJoueur($datas['totalJoueurs']);
+        $abonnement->setCreatedAt(new \DateTime());
 
         foreach ($datas['disciplines'] as $data){
             $discipline =$this->disciplineRepository->findOneBy(['id' => $data]) ;
@@ -218,6 +219,36 @@ class ApiDisciplineController extends AbstractController
         $jsonParticipants = $this->serializer->serialize($participants, 'json', ['groups' => 'participation']); //dd($jsonParticipants);
 
         return new JsonResponse($jsonParticipants, Response::HTTP_OK, [], true);
+    }
+
+    #[Route('/options/choix/supplementaire/', name: 'api_discipline_choix_supplementaire', methods: ['GET'])]
+    public function discipline()
+    {
+        $user = $this->getUser();
+        $membre = $this->membreRepository->findOneBy(['user' => $user]);
+        if (!$membre){
+            sweetalert()->addError("Echec, votre compte ne vous autorise pas à choisir des disciplines");
+            return $this->json([
+                'message' => "Echec, votre compte ne vous autorise pas à choisir des disciplines",
+                'statut' => 'Echec'
+            ], Response::HTTP_OK);
+        }
+
+        $abonnement = $this->abonnementRepository->findOneBy(['compagnie' => $membre->getCompagnie()],['id' => "DESC"]);
+        $disciplines = $this->disciplineRepository->getListeExclues();
+
+
+        // Discipline concernée par
+        $disciplineChoisies=[];
+        foreach ($abonnement->getDisciplines() as $discipline){
+            $disciplineChoisies[] = $discipline;
+        }
+        $disciplineConcernees = array_udiff($disciplines, $disciplineChoisies, function ($a, $b){
+            return $a->getId() - $b->getId();
+        });
+
+        $jsonDiscipline = $this->serializer->serialize($disciplines, 'json', ['groups' => 'participation']);
+        return new JsonResponse($jsonDiscipline, Response::HTTP_OK, [], true);
     }
 
     private function reference(): string

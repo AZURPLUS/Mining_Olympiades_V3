@@ -43,7 +43,6 @@ class FrontendMembreController extends AbstractController
         if (!$membre) return false;
 
         $abonnement = $this->abonnementRepository->findOneBy(['compagnie' => $membre->getCompagnie()]);
-//        dd($abonnement);
 
         if (!$abonnement) return false;
 

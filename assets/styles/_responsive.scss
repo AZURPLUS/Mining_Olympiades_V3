@@ -334,4 +334,22 @@
         }
     }
 }
+
+@media screen and (min-width: 992px) and (max-width: 1400px){
+    #topHead{
+        a{
+            &.desktop{
+                i{
+                    &.bi-unlock{
+                        font-weight: 900;
+                        font-size: 1.2rem;
+                    }
+                }
+                span{
+                    display: none;
+                }
+            }
+        }
+    }
+}
     

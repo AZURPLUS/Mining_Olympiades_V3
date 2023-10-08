@@ -38,6 +38,9 @@ class Discipline implements \JsonSerializable
     #[ORM\ManyToMany(targetEntity: Joueur::class, mappedBy: 'discipline')]
     private Collection $joueurs;
 
+    #[ORM\Column(nullable: true, options: (['default' => true]))]
+    private ?bool $Complementaire = null;
+
     public function __construct()
     {
         $this->competirs = new ArrayCollection();
@@ -176,6 +179,18 @@ class Discipline implements \JsonSerializable
         if ($this->joueurs->removeElement($joueur)) {
             $joueur->removeDiscipline($this);
         }
+
+        return $this;
+    }
+
+    public function isComplementaire(): ?bool
+    {
+        return $this->Complementaire;
+    }
+
+    public function setComplementaire(?bool $Complementaire): static
+    {
+        $this->Complementaire = $Complementaire;
 
         return $this;
     }

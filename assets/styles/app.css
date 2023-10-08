@@ -859,5 +859,11 @@ body {
       width: 90%; }
     #inscription .inscription .formulaire-bloc {
       padding-left: 40px; } }
+@media screen and (min-width: 992px) and (max-width: 1400px) {
+  #topHead a.desktop i.bi-unlock {
+    font-weight: 900;
+    font-size: 1.2rem; }
+  #topHead a.desktop span {
+    display: none; } }
 
 /*# sourceMappingURL=app.css.map */
