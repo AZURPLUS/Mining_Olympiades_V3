@@ -39,15 +39,18 @@ class GestionAdherent
     }
 
     public function notification($adhesion): void
-    { //dd($adhesion->getEmail());
-        $email = (new NotificationEmail())
+    {
+        //dd($adhesion);
+        $email = (new Email())
             ->from('noreply@miningolympiades.org')
             ->to('delrodieamoikon@gmail.com')
-            ->subject("Validation de votre demande d'adhesion")
+            ->subject("Validation de votre demande d'adhésion")
             ->text('Votre demande a été validée avec succès!')
-            ->html('<p>See Twig integration for better HTML integration!</p>');
+            ->html('<p>See Twig integration for better HTML integration!</p>')
+        ;
 
         try {
+//            dd($email);
             $this->mailer->send($email);
             // Si nous sommes ici, l'envoi a réussi
             //dd( 'L\'e-mail a été envoyé avec succès!');
