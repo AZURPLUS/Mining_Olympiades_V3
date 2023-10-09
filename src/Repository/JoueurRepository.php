@@ -51,4 +51,28 @@ class JoueurRepository extends ServiceEntityRepository
             ])
             ->getQuery()->getResult();
     }
+
+    public function getAll()
+    {
+        return $this->createQueryBuilder('j')
+            ->addSelect('a')
+            ->addSelect('d')
+            ->leftJoin('j.abonnement', 'a')
+            ->leftJoin('j.discipline', 'd')
+            ->getQuery()->getResult()
+            ;
+    }
+
+    public function getOneById($joueur)
+    {
+        return $this->createQueryBuilder('j')
+            ->addSelect('a')
+            ->addSelect('d')
+            ->leftJoin('j.abonnement', 'a')
+            ->leftJoin('j.discipline', 'd')
+            ->where('j.id = :joueur')
+            ->setParameter('joueur', $joueur)
+            ->getQuery()->getOneOrNullResult()
+            ;
+    }
 }

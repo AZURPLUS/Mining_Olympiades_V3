@@ -90,4 +90,29 @@ class AllRepositories
     {
         return $this->participantRepository->findOneBy(['slug' => $slug]);
     }
+
+    public function getProfileJoueur($joueurId)
+    {
+        $joueur = $this->joueurRepository->getOneById($joueurId);
+
+        $jeu = '';
+        foreach ($joueur->getDiscipline() as $discipline){
+            $jeu = $discipline->getTitre();
+        }
+
+        return [
+            'id' => $joueur->getId(),
+            'nom' => $joueur->getNom(),
+            'prenoms' => $joueur->getPrenoms(),
+            'matricule' => $joueur->getMatricule(),
+            'licence' => $joueur->getLicence(),
+            'entreprise' => $joueur->getAbonnement()->getCompagnie()->getTitre(),
+            'email' => $joueur->getEmail(),
+            'contact' => $joueur->getContact(),
+            'discipline' => $jeu,
+            'slug' => $joueur->getSlug(),
+            'media' => $joueur->getMedia(),
+            'carte' => $joueur->getCarte()
+        ];
+    }
 }

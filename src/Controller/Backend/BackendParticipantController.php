@@ -2,9 +2,12 @@
 
 namespace App\Controller\Backend;
 
+use App\Entity\Joueur;
 use App\Entity\Participant;
 use App\Form\ParticipantType;
+use App\Repository\JoueurRepository;
 use App\Repository\ParticipantRepository;
+use App\Service\AllRepositories;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,11 +17,19 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/backend/participant')]
 class BackendParticipantController extends AbstractController
 {
+    public function __construct(
+        private JoueurRepository $joueurRepository,
+        private AllRepositories $allRepositories
+    )
+    {
+    }
+
     #[Route('/', name: 'app_backend_participant_index', methods: ['GET'])]
     public function index(ParticipantRepository $participantRepository): Response
     {
+//        dd($this->joueurRepository->findAll());
         return $this->render('backend_participant/index.html.twig', [
-            'participants' => $participantRepository->findAll(),
+            'participants' => $this->joueurRepository->getAll(),
         ]);
     }
 
@@ -43,10 +54,10 @@ class BackendParticipantController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_backend_participant_show', methods: ['GET'])]
-    public function show(Participant $participant): Response
+    public function show(Joueur $joueur): Response
     {
         return $this->render('backend_participant/show.html.twig', [
-            'participant' => $participant,
+            'participant' => $this->allRepositories->getProfileJoueur($joueur->getId()),
         ]);
     }
 
