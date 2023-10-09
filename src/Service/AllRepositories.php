@@ -115,4 +115,58 @@ class AllRepositories
             'carte' => $joueur->getCarte()
         ];
     }
+
+    public function getAllCompagnieWithParticipant()
+    {
+        $compagnies = $this->getAllCompagnie();
+
+        $entreprise = [];
+        foreach ($compagnies as $compagny){
+            $abonnements = $compagny->getAbonnements();
+            $abonnement = [];
+            foreach ($abonnements as $abonnement){
+                $abonnement = $abonnement;
+            }
+
+            $entreprise [] =[
+                'id' => $compagny->getId(),
+                'slug' => $compagny->getSlug(),
+                'titre' => $compagny->getTitre(),
+                'nom' => $compagny->getTitre(),
+                'dg' => $compagny->getDg(),
+                'representant' => $compagny->getRepresentant(),
+                'contact' => $compagny->getContact(),
+                'email' => $compagny->getEmail(),
+                'participant' => count($this->joueurRepository->getJoueurByCompagnie($compagny->getId())),
+                'abonnement' => $abonnement
+            ];
+        }
+
+        return $entreprise;
+    }
+
+    public function getOneCompagnieWithParticipants(?int $getId)
+    {
+        $compagny = $this->compagnieRepository->findOneBy(['id' => $getId]);
+
+        $abonnement = [];
+        foreach ($compagny->getAbonnements() as $abonnement){
+            $abonnement = $abonnement;
+        }
+
+        return [
+            'id' => $compagny->getId(),
+            'slug' => $compagny->getSlug(),
+            'titre' => $compagny->getTitre(),
+            'nom' => $compagny->getTitre(),
+            'dg' => $compagny->getDg(),
+            'representant' => $compagny->getRepresentant(),
+            'contact' => $compagny->getContact(),
+            'email' => $compagny->getEmail(),
+            'participant' => count($this->joueurRepository->getJoueurByCompagnie($compagny->getId())),
+            'participants' => $this->joueurRepository->getJoueurByCompagnie($compagny->getId()),
+            'abonnement' => $abonnement,
+        ];
+
+    }
 }

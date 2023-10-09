@@ -50,7 +50,7 @@ class BackendCompagnieController extends AbstractController
         }
 
         return $this->render('backend_compagnie/index.html.twig', [
-            'compagnies' => $compagnieRepository->findAll(),
+            'compagnies' => $this->allRepositories->getAllCompagnieWithParticipant(),
             'compagnie' => $compagnie,
             'form' => $form,
             'suppression' => false
@@ -81,7 +81,7 @@ class BackendCompagnieController extends AbstractController
     public function show(Compagnie $compagnie): Response
     {
         return $this->render('backend_compagnie/show.html.twig', [
-            'compagnie' => $compagnie,
+            'compagnie' => $this->allRepositories->getOneCompagnieWithParticipants($compagnie->getId()),
         ]);
     }
 

@@ -53,7 +53,8 @@
                                         <th class="text-center text-uppercase">Representant</th>
                                         <th class="text-center text-uppercase">Email</th>
                                         <th class="text-center text-uppercase">Contact</th>
-                                        <th class="text-center text-uppercase">actions</th>
+                                        <th class="text-center text-uppercase">Participants</th>
+                                        <th class="text-center text-uppercase">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -65,7 +66,9 @@
                                             <td>{{ compagnie.representant }}</td>
                                             <td>{{ compagnie.email }}</td>
                                             <td>{{ compagnie.contact }}</td>
+                                            <td class="text-center">{{ compagnie.participant }}</td>
                                             <td class="text-center">
+                                                <a href="{{ path('app_backend_compagnie_show', {'id': compagnie.id}) }}" title="Liste des participants"><i class="ti-list"></i></a> &nbsp; | &nbsp;
                                                 <a href="{{ path('app_backend_compagnie_edit', {'id': compagnie.id}) }}"><i class="ti-pencil-alt"></i></a>
                                             </td>
                                         </tr>
