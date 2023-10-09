@@ -73,26 +73,8 @@ class BackendAdhesionController extends AbstractController
 
             $this->gestionAdherent->validation($adhesion);
 
-            $email = (new Email())
-                ->from('noreply@miningolympiades.org')
-                ->to('delrodieamoikon@gmail.com')
-                ->subject("Validation de votre demande d'adhesion")
-                ->text('Votre demande a été validée avec succès!')
-                ->html('<p>See Twig integration for better HTML integration!</p>');
 
-            try {
-                $mailer->send($email);
-                // Si nous sommes ici, l'envoi a réussi
-                sweetalert()->addSuccess("L\'e-mail a été envoyé avec succès 1!");
-//                dump( 'L\'e-mail a été envoyé avec succès 1!');
-            } catch (TransportExceptionInterface $e) {
-                // Une exception est lancée si quelque chose ne va pas
-                dump('Erreur lors de l\'envoi de l\'e-mail: '.$e->getMessage());
-            }
-
-
-
-            sweetalert()->addSuccess("La demande de la compagnie {$adhesion->getEntreprise()} a été validée avec succès!");
+            sweetalert()->addSuccess("La demande de la compagnie {$adhesion->getEntreprise()} a été validée avec succès! Veuillez enregistrer en tant que membre ");
 
             return $this->redirectToRoute('app_backend_adhesion_index', [], Response::HTTP_SEE_OTHER);
         }

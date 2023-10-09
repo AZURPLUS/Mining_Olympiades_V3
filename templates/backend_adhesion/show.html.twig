@@ -76,7 +76,9 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <img src="{{ absolute_url(asset('upload/adhesion/' ~ adhesion.media)) }}" alt="" class="img-fluid">
+                                    {% if adhesion.media %}
+                                        <img src="{{ absolute_url(asset('upload/adhesion/' ~ adhesion.media)) }}" alt="" class="img-fluid">
+                                    {% endif %}
                                 </div>
                             </div>
 
@@ -90,7 +92,7 @@
                                 <div class="col text-left">
                                     <form action="{{ path('app_backend_adhesion_edit', {'id': adhesion.id}) }}" method="post">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('validation' ~ adhesion.id) }}">
-                                        <button type="submit" class="btn btn-primary btn-lg">Valider</button>
+                                        <button type="submit" class="btn btn-primary btn-lg {{ adhesion.statut ? 'disabled' : '' }}">Valider</button>
                                     </form>
 {#                                    <a href="{{ path('app_backend_adhesion_edit', {'id': adhesion.id}) }}" class="btn btn-primary btn-lg">Valider</a>#}
                                 </div>

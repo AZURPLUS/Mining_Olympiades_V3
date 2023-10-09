@@ -33,7 +33,7 @@ class GestionAdherent
 
         $adhesion->setStatut(true);
 
-        //$this->entityManager->flush();
+        $this->entityManager->flush();
 
         $this->notification($adhesion);
     }
