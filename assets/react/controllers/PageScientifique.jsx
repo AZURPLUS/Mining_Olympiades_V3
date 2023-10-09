@@ -80,6 +80,10 @@ export default function () {
                     title: 'Inscription',
                     text: `Votre inscription a été enregistrée avec succès!`,
                     timer: 6000
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = window.location.origin;
+                    }
                 });
 
                 setLoading(false)

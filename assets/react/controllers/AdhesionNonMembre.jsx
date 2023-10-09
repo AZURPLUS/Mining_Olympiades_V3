@@ -17,6 +17,7 @@ export default function () {
     const [nom, setNom] = useState("");
     const [prenoms, setPrenoms] = useState("");
     const [entreprise, setEntreprise] = useState("");
+    const [fonction, setFonction] = useState("");
 
     useEffect(() => {
         AOS.init();
@@ -74,15 +75,19 @@ export default function () {
             MySwal.fire({
                 icon: 'success',
                 title: 'Adhésion',
-                text: `Votre demande a été envoyée avec succès! Vous serez contacté sous peu.`,
+                text: `Votre demande a été envoyée avec succès! Vous serez contacté par les administrateurs.`,
                 timer: 10000
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = window.location.origin;
+                }
             });
             setTimeout(() => {
                 window.location.href = window.location.origin;
             }, 10000);
 
         } catch (error) {
-            console.error("Une erreur s'est produite lors de la soumission du formulaire :", error);
+            console.error("Une erreur s'est prPageScientifiqueoduite lors de la soumission du formulaire :", error);
 
             setIsLoading(false);
         }
@@ -167,6 +172,8 @@ export default function () {
                                                             placeholder="fonction"
                                                             autoComplete="off"
                                                             required
+                                                            value={fonction}
+                                                            onChange={(e)=> setFonction(e.target.value.toUpperCase())}
                                                         />
                                                         <label htmlFor="_fonction">Fonction <span>*</span></label>
                                                     </div>
@@ -221,8 +228,10 @@ export default function () {
                                                             className="form-control"
                                                             placeholder="Leave a comment here"
                                                             id="_adresse"
+                                                            required
+                                                            name="adresse"
                                                         ></textarea>
-                                                        <label htmlFor="_adresse">Adresse</label>
+                                                        <label htmlFor="_adresse">Adresse <span>*</span></label>
                                                     </div>
                                                 </div>
 
@@ -235,7 +244,6 @@ export default function () {
                                                             type="file"
                                                             data-preview=".preview"
                                                             placeholder="Photo"
-                                                            required
                                                             id="_media"
                                                             name="media"
                                                         />

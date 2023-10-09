@@ -106,7 +106,17 @@ export default function () {
             const responseData = await response.json();
 
             if (responseData.statut === 'Echec'){
-                window.location.href = '/membre/';
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Auncune discipline',
+                    text: `Veuillez choisir les disciplines`,
+                    timer: 9000
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/membre/';
+                    }
+                });
+                // window.location.href = '/membre/';
             }
 
 
@@ -115,6 +125,10 @@ export default function () {
                 title: 'Participation',
                 text: `Veuillez enregistrer vos participants`,
                 timer: 9000
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/membre/participation';
+                }
             });
 
             setLoading(false)

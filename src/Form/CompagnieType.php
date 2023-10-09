@@ -21,7 +21,7 @@ class CompagnieType extends AbstractType
                 'label' => "Nom *"
             ])
             ->add('dg', TextType::class,[
-                'attr' => ['class' => 'form-control', 'placeholder'=>"Nom du DG", 'autcomplete'=>"off"],
+                'attr' => ['class' => 'form-control', 'placeholder'=>"Nom du DG", 'auto complete'=>"off"],
                 'label' => "Directeur Général",
                 'required' => false
             ])

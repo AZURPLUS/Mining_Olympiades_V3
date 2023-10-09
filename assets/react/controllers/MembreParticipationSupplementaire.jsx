@@ -112,6 +112,10 @@ export default function () {
                     title: 'Participation',
                     text: `Le participant a été enregistré avec succès!`,
                     timer: 10000
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/membre/participation';
+                    }
                 });
                 setTimeout(() => {
                     window.location.href = '/membre/participation';

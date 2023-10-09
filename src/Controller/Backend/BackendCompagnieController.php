@@ -37,6 +37,10 @@ class BackendCompagnieController extends AbstractController
                 return $this->redirectToRoute('app_backend_compagnie_index');
             }
 
+            $compagnie->setTitre(strtoupper($compagnie->getTitre()));
+            $compagnie->setDg(strtoupper($compagnie->getDg()));
+            $compagnie->setRepresentant(strtoupper($compagnie->getRepresentant()));
+
             $entityManager->persist($compagnie);
             $entityManager->flush();
 

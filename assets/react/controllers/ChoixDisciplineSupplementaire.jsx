@@ -111,6 +111,10 @@ export default function () {
                     title: 'Disciplines supplémentaires',
                     text: `Veuillez choisir les disciplines supplémentaires!`,
                     timer: 6000
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/discipline-supplementaire';
+                    }
                 });
                 setTimeout(() => {
                     window.location.href = '/discipline-supplementaire/';
@@ -124,6 +128,10 @@ export default function () {
                     title: 'Opération réfusée',
                     text: `Echèc, votre compte ne vous autorise pas à choisir des disciplines!`,
                     timer: 6000
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/discipline-supplementaire/';
+                    }
                 });
                 setTimeout(() => {
                     window.location.href = '/discipline-supplementaire/';
@@ -141,6 +149,10 @@ export default function () {
                 title: 'Disciplines supplémentaires',
                 text: `Disciplines supplémentaires ajoutées avec succès! Veuillez enregistrer maintenant vos participants`,
                 timer: 6000
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/discipline-supplementaire/participants';
+                }
             });
             setTimeout(() => {
                 window.location.href = '/discipline-supplementaire/participants';

@@ -96,6 +96,10 @@ export default function (props) {
                   title: 'Sponsoring',
                   text: `Votre demande a été envoyée avec succès! Vous serez contacté sous peu.`,
                   timer: 6000
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      window.location.href = '/sponsoring/telechargement/plaquette';
+                  }
               });
 
               setTimeout(() => {
