@@ -2,13 +2,13 @@
   "entrypoints": {
     "app": {
       "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/vendors-node_modules_react-pdf_renderer_lib_react-pdf_browser_es_js-node_modules_symfony_stim-cd484b.js",
-        "http://localhost:8080/build/app.js"
+        "/build/runtime.188fa053.js",
+        "/build/814.55893a7c.js",
+        "/build/app.1411cfaf.js"
       ],
       "css": [
-        "http://localhost:8080/build/vendors-node_modules_react-pdf_renderer_lib_react-pdf_browser_es_js-node_modules_symfony_stim-cd484b.css",
-        "http://localhost:8080/build/app.css"
+        "/build/814.72ba4c68.css",
+        "/build/app.a1d8afeb.css"
       ]
     }
   }
