@@ -5,6 +5,7 @@ import AOS from 'aos';
 import ReactLoading from 'react-loading';
 import ListeParticipant from "./ListeParticipant";
 import Facture from "./Facture";
+import FactureInachevee from "./FactureInachevee";
 
 const MySwal = withReactContent(Swal);
 
@@ -148,6 +149,7 @@ export default function () {
                                                 <h5 className="abonnement text-left">
                                                     Il reste encore <span>{abonnement.restantJoueur}</span> {abonnement.restantJoueur > 1 ? 'participants' : 'participant'} à inscrire.
                                                 </h5>
+                                                <FactureInachevee abonnement={abonnement}/>
                                             </div>
                                         </div>
                                         <div className="row row-cols-1 row-cols-lg-2 g-4 no-gutters">
