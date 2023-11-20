@@ -52,7 +52,7 @@ export default function () {
 
                 const disciplineData = await response.json();
                 setDisciplines(disciplineData);
-                console.log(disciplineData)
+                console.log(`Formateur ${disciplineData}`);
             } catch (e) {
                 console.error("Erreur de la récupération des discipline: ", e)
             }

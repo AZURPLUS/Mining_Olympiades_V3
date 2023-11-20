@@ -39,6 +39,7 @@
         "prop-types": "^15.6.0",
         "react-bootstrap": "^2.9.0",
         "react-data-table-component": "^7.5.4",
+        "react-icons": "^4.12.0",
         "react-loading": "^2.0.3",
         "react-loading-overlay": "^1.0.1",
         "react-spinner-overlay": "^0.1.33",

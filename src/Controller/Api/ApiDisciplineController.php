@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\Abonnement;
 use App\Entity\Compagnie;
 use App\Entity\Joueur;
+use App\Entity\Membre;
 use App\Repository\AbonnementRepository;
 use App\Repository\CompetirRepository;
 use App\Repository\DisciplineRepository;
@@ -249,6 +250,34 @@ class ApiDisciplineController extends AbstractController
 
         $jsonDiscipline = $this->serializer->serialize($disciplines, 'json', ['groups' => 'participation']);
         return new JsonResponse($jsonDiscipline, Response::HTTP_OK, [], true);
+    }
+
+    #[Route('/membre/delete/{id}', name: 'api_discipline_membre_delete', methods: ['DELETE'])]
+    public function suppression(Joueur $joueur): JsonResponse
+    {
+        // Utilisateur, verification du membre
+        $user = $this->getUser();
+        $membre = $this->membreRepository->findOneBy(['user' => $user]);
+        if (!$membre){
+//            sweetalert()->addError("Echec, votre compte ne vous autorise pas à choisir des disciplines");
+            return $this->json([
+                'message' => "Echec, votre compte ne vous autorise pas à choisir des disciplines",
+                'statut' => 'Echec'
+            ], Response::HTTP_OK);
+        }
+
+//        $discipline = $this->disciplineRepository->findOneBy(['id'=> $disciplineId]);
+        $abonnement = $this->abonnementRepository->findOneBy(['compagnie' => $membre->getCompagnie()]);
+
+        $this->entityManager->remove($joueur);
+        $joueur->getDiscipline()->clear();
+        $this->gestionMedia->removeUpload($joueur->getMedia(), 'participant');
+
+        // Mise a jour du nombre de joueurs restants
+        $abonnement->setRestantJoueur((int)$abonnement->getRestantJoueur() + 1);
+        $this->entityManager->flush();
+
+        return new JsonResponse('Suppression OK', Response::HTTP_OK, [], true);
     }
 
     private function reference(): string

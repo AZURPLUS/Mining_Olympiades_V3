@@ -11,15 +11,55 @@ import "datatables.net-buttons/js/buttons.print.js";
 import $ from "jquery";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Francais from '../../js/French.json';
+import { IoTrashOutline } from "react-icons/io5";
+import Swal from 'sweetalert2';
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
 
 
 export default function () {
     const [participants, setParticipants] = useState([]);
     const tableRef = useRef();
 
+    function deleteParticipant(participantId) {
+        if (window.confirm('Êtes-vous sûr de vouloir supprimer ce participant ?')) {
+            // alert(participantId)
+            // Envoyer une requête de suppression au backend (utilisez fetch ou une bibliothèque comme axios)
+            fetch(`/api/discipline/membre/delete/${participantId}`, {
+                method: 'DELETE',
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('La suppression a échoué');
+                    }
+                    // Mettre à jour l'état local (participants) en supprimant le participant
+                    const updatedParticipants = participants.filter((p) => p.id !== participantId);
+                    setParticipants(updatedParticipants);
+
+                    MySwal.fire({
+                        icon: 'success',
+                        title: 'Suppression',
+                        text: `Le participant a été supprimé avec succès!`,
+                        timer: 10000
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/membre/participation';
+                        }
+                    });
+                    setTimeout(() => {
+                        window.location.href = '/membre/participation';
+                    }, 7000);
+
+                    fetchParticipants();
+
+                })
+                .catch(error => console.error('Erreur lors de la suppression :', error));
+        }
+    }
+
     useEffect(() => {
         AOS.init();
-        
+
         async function fetchParticipants() {
             console.log('entrée')
             try {
@@ -50,6 +90,12 @@ export default function () {
                             render: function (data, type, row) {
                                 // Utiliser row.discipline pour accéder aux détails de la discipline
                                 return row.discipline.map((discipline) => discipline.titre).join(', ');
+                            },
+                        },
+                        {
+                            title: 'Actions',
+                            render: function (data, type, row) {
+                                return `<button class="btn btn-danger btn-sm delete-btn" data-participant-id="${row.id}"><i class="bi bi-trash"></i></button>`;
                             },
                         },
                     ],
@@ -88,8 +134,13 @@ export default function () {
         }
 
         fetchParticipants();
-    }, []);
 
+        $(tableRef.current).on('click', '.delete-btn', function () {
+            const participantId = $(this).data('participant-id');
+            deleteParticipant(participantId);
+        });
+
+    }, []);
 
     return (
         <div>
