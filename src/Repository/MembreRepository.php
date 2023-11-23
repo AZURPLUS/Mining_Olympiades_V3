@@ -21,6 +21,18 @@ class MembreRepository extends ServiceEntityRepository
         parent::__construct($registry, Membre::class);
     }
 
+    public function getMonitoring()
+    {
+        return $this->createQueryBuilder('m')
+            ->addSelect('u')
+            ->addSelect('c')
+            ->leftJoin('m.user', 'u')
+            ->leftJoin('m.compagnie', 'c')
+            ->orderBy('u.lastConnectedAt', "DESC")
+            ->getQuery()->getResult()
+            ;
+    }
+
 //    /**
 //     * @return Membre[] Returns an array of Membre objects
 //     */

@@ -21,28 +21,20 @@ class AbonnementRepository extends ServiceEntityRepository
         parent::__construct($registry, Abonnement::class);
     }
 
-//    /**
-//     * @return Abonnement[] Returns an array of Abonnement objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getAbonnementWithCompagnie()
+    {
+        return $this->createQueryBuilder("a")
+            ->addSelect('c')
+            ->leftJoin('a.compagnie', 'c')
+            ->orderBy('a.totalJoueur', 'DESC')
+            ->getQuery()->getResult()
+            ;
+    }
 
-//    public function findOneBySomeField($value): ?Abonnement
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getTotalJoueur()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('SUM(a.totalJoueur) AS sum')
+            ->getQuery()->getSingleScalarResult();
+    }
 }

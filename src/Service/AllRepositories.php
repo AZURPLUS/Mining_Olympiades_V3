@@ -2,9 +2,11 @@
 
 namespace App\Service;
 
+use App\Repository\AbonnementRepository;
 use App\Repository\CompagnieRepository;
 use App\Repository\DisciplineRepository;
 use App\Repository\JoueurRepository;
+use App\Repository\MembreRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\UserRepository;
 use http\Exception\InvalidArgumentException;
@@ -17,7 +19,9 @@ class AllRepositories
         private DisciplineRepository $disciplineRepository,
         private CompagnieRepository $compagnieRepository,
         private ParticipantRepository $participantRepository,
-        private JoueurRepository $joueurRepository
+        private JoueurRepository $joueurRepository,
+        private MembreRepository $membreRepository,
+        private AbonnementRepository $abonnementRepository
     )
     {
     }
@@ -168,5 +172,31 @@ class AllRepositories
             'abonnement' => $abonnement,
         ];
 
+    }
+
+    public function getMembreConneted()
+    {
+        return $this->membreRepository->getMonitoring();
+    }
+
+    public function getAbonnementStat()
+    {
+        $abonnements = $this->abonnementRepository->getAbonnementWithCompagnie();
+        $total = $this->abonnementRepository->getTotalJoueur() ?? 1;
+        $tableau=[]; $i=0;
+        foreach ($abonnements as $abonnement){
+            $pourcentage = round(((int) $abonnement->getTotalJoueur() * 100 / $total), 1);
+            $tableau[$i++]=[
+                'id' => $abonnement->getId(),
+                'reference' => $abonnement->getReference(),
+                'montant' => $abonnement->getmontant(),
+                'compagnie' => $abonnement->getcompagnie(),
+                'totalJoueur' => $abonnement->getTotalJoueur(),
+                'restantJoueur' => $abonnement->getRestantJoueur(),
+                'pourcentage' => $pourcentage
+            ];
+        }
+
+        return $tableau;
     }
 }
