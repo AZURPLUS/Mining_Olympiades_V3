@@ -62,8 +62,8 @@ class BackendParticipantController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_backend_participant_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Participant $participant, EntityManagerInterface $entityManager): Response
-    {
+    public function edit(Request $request, Joueur $joueur, EntityManagerInterface $entityManager): Response
+    { dd($joueur);
         $form = $this->createForm(ParticipantType::class, $participant);
         $form->handleRequest($request);
 
