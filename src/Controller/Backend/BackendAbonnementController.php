@@ -24,7 +24,7 @@ class BackendAbonnementController extends AbstractController
     public function index(AbonnementRepository $abonnementRepository): Response
     {
         return $this->render('backend_abonnement/index.html.twig', [
-            'abonnements' => $abonnementRepository->findAll(),
+            'abonnements' => $abonnementRepository->getRealAbonnement(),
         ]);
     }
 

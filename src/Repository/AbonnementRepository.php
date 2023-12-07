@@ -37,4 +37,11 @@ class AbonnementRepository extends ServiceEntityRepository
             ->select('SUM(a.totalJoueur) AS sum')
             ->getQuery()->getSingleScalarResult();
     }
+
+    public function getRealAbonnement()
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.totalJoueur <> a.restantJoueur')
+            ->getQuery()->getResult();
+    }
 }
