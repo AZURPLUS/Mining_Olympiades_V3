@@ -193,7 +193,7 @@ class AllRepositories
                 'compagnie' => $abonnement->getcompagnie(),
                 'totalJoueur' => $abonnement->getTotalJoueur(),
                 'restantJoueur' => $abonnement->getRestantJoueur(),
-                'pourcentage' => $pourcentage
+                'pourcentage' => $pourcentage,
             ];
         }
 
