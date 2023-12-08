@@ -49,23 +49,19 @@
                                     <tr>
                                         <th class="text-center text-uppercase">#</th>
                                         <th class="text-center text-uppercase">DISCIPLINES</th>
-                                        <th class="text-center text-uppercase">EQUIPES</th>
-                                        <th class="text-center text-uppercase">actions</th>
+{#                                        <th class="text-center text-uppercase">EQUIPES</th>#}
+{#                                        <th class="text-center text-uppercase">actions</th>#}
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for discipline in disciplines %}
+                                    {% for abonnement in discipline.abonnements %}
                                         <tr>
                                             <td>{{ loop.index }}</td>
-                                            <td>{{ discipline.titre }}</td>
-                                            <td class="text-center">{{ discipline.abonnements|length }}</td>
-                                            <td class="text-center">
-                                                <a href="{{ path('app_backend_competition_discipline', {'discipline': discipline.id}) }}"><i class="ti-list"></i></a>
-                                            </td>
+                                            <td>{{ abonnement.compagnie.titre }}</td>
                                         </tr>
                                     {% else %}
                                         <tr>
-                                            <td colspan="4">Aucune discipline trouvée</td>
+                                            <td colspan="2">Aucune discipline trouvée</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

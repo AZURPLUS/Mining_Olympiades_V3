@@ -6,6 +6,7 @@ use App\Entity\Discipline;
 use App\Repository\AbonnementRepository;
 use App\Repository\DisciplineRepository;
 use App\Repository\JoueurRepository;
+use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -40,9 +41,11 @@ class BackendCompetitionController extends AbstractController
         ]);
     }
 
-    #[Route('/{equipe}', name: 'app_backend_competition_equipe', methods: ['GET'])]
+    #[Route('/{discipline}', name: 'app_backend_competition_discipline', methods: ['GET'])]
     public function equipe(Discipline $discipline)
     {
-        dd($discipline);
+        return $this->render('backend_competition/discipline.html.twig', [
+            'discipline' => $discipline
+        ]);
     }
 }
