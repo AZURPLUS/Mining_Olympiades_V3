@@ -30,4 +30,14 @@ class DisciplineRepository extends ServiceEntityRepository
             ->getQuery()->getResult()
             ;
     }
+
+    public function getListeWithAbonnement($discipline)
+    {
+        return $this->createQueryBuilder('d')
+            ->addSelect('a')
+            ->leftJoin('d.abonnements', 'a')
+            ->where('d.id = :discipline')
+            ->setParameter('discipline', $discipline)
+            ->getQuery()->getResult();
+    }
 }

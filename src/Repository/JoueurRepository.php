@@ -89,4 +89,28 @@ class JoueurRepository extends ServiceEntityRepository
             ;
     }
 
+    public function getJoueursByDisciplineGroupByAbonnement($discipline)
+    {
+        return $this->createQueryBuilder('j')
+            ->addSelect('d')
+            ->leftJoin('j.discipline', 'd')
+            ->where('d.id = :discipline')
+            ->groupBy('j.abonnement')
+            ->setParameter('discipline', $discipline)
+            ->getQuery()->getResult();
+    }
+
+    public function getJoueursByDisciplineGroupByCompagnie($discipline)
+    {
+        return $this->createQueryBuilder('j')
+            ->addSelect('d')
+            ->addSelect('a')
+            ->leftJoin('j.discipline', 'd')
+            ->leftJoin('j.abonnement', 'a')
+            ->where('d.id = :discipline')
+            ->groupBy('a.compagnie')
+            ->setParameter('discipline', $discipline)
+            ->getQuery()->getResult();
+    }
+
 }
