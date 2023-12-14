@@ -7,6 +7,7 @@ use App\Repository\JoueurRepository;
 use App\Repository\MembreRepository;
 use App\Service\AllRepositories;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/print')]
@@ -34,18 +35,43 @@ class BackendBadgeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_backend_badge_compagnie', methods: ['GET'])]
-    public function badge(Compagnie $compagnie)
+    #[Route('/{id}/', name: 'app_backend_badge_compagnie', methods: ['GET'])]
+    public function badge(Request $request, Compagnie $compagnie)
     {
         $joueurs = $this->joueurRepository->getJoueurByCompagnie($compagnie);
+
+        $nombre = count($joueurs);
+
+        $flag = (int) $request->get('flag');
+        $fin = $flag;
+        if ($flag < 1) {
+            $fin = 1;
+        }
+
+//        $limit = 1;
+        $limit = $fin * 10;
+//        $debut = 0;
+        $debut = $limit - 10;
+
+        if ($nombre > $limit) {
+            if ($flag < 1) {
+                $flag = 2;
+            }
+        }
+
+//        dd($flag);
+
+        $joueurs = array_slice($joueurs, $debut, $limit);
+
         $participants=[];
         foreach ($joueurs as $joueur){
+
             $participants[] = $this->allRepositories->getProfileJoueur($joueur->getId());
         }
 
-//        dd($participants);
         return $this->render('backend/badges.html.twig',[
-            'joueurs' =>$participants
+            'joueurs' =>$participants,
+            'flag' => $flag
         ]);
     }
 
