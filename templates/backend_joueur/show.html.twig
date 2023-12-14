@@ -42,39 +42,48 @@
                         <div class="card-body">
 
                             <div class="row justify-content-center align-content-center">
-                                <div class="col-md-8" style="border: solid 1px #ccc; font-size: 1.1rem; padding: 10px 20px;">
-                                    <div class="row">
-                                        <div class="col-md-9">
+                                <div class="col-md-8 badge" style="border: solid 1px #ccc; font-size: 1.1rem; padding: 10px 20px;" id="participant-badge">
+                                    <div class="row info">
+                                        <div class="col-md-12">
                                             <div class="row">
-                                                <div class="col-12"><strong>Entreprise :</strong> {{ participant['entreprise'] }}</div>
-                                                <div class="col-12 mt-3"><strong>Licence :</strong> <span style="font-weight: 900; color: darkgreen">{{ participant['licence'] }}</span> </div>
-                                                <div class="col-12 mt-3"><strong>Nom :</strong> {{ participant['nom'] }}</div>
-                                                <div class="col-12 mt-3"><strong>Prénoms :</strong> {{ participant['prenoms'] }}</div>
-                                                <div class="col-12 mt-3"><strong>Matricule :</strong> {{ participant['matricule'] }}</div>
-                                                <div class="col-12 mt-3"><strong>Email :</strong> {{ participant['email'] }}</div>
-                                                <div class="col-12 mt-3"><strong>Contact :</strong> {{ participant['contact'] }}</div>
-                                                <div class="col-12 mt-3"><strong>Discipline :</strong>{{ participant.discipline}} </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="row">
-                                                <div class="col-12">
+                                                <div class="col-12 mb-3 licence"> {{ participant['licence'] }} </div>
+                                                <div class="col-12 photo d-flex justify-content-center align-content-center align-items-center">
                                                     <img src="{{ absolute_url(asset('upload/participants/' ~ participant.media)) }}" alt="" class="img-fluid">
                                                 </div>
-                                                <div class="col-12 text-center mt-5" style="font-size: .9rem; font-weight: 700;">
-                                                    <a href="{{ absolute_url(asset('upload/participants/' ~ participant.carte)) }}" target="_blank">Justificatif</a>
+                                                <div class="col-12 mt-3">
+                                                    <div class="label">Entreprise</div>
+                                                    <div class="donnees">{{ participant['entreprise'] }}</div>
+                                                </div>
+                                                <div class="col-12 mt-2">
+                                                    <div class="label">Nom</div>
+                                                    <div class="donnees">{{ participant['nom'] }}</div>
+                                                </div>
+                                                <div class="col-12 mt-2">
+                                                    <div class="label">Prénoms</div>
+                                                    <div class="donnees">{{ participant['prenoms'] }}</div>
+                                                </div>
+                                                <div class="col-12 mt-2">
+                                                    <div class="label">Matricule</div>
+                                                    <div class="donnees">{{ participant['matricule'] }}</div>
+                                                </div>
+                                                <div class="col-12 mt-2">
+                                                    <div class="label">Contact</div>
+                                                    <div class="donnees">{{ participant['contact'] }}</div>
+                                                </div>
+                                                <div class="col-12 mt-2">
+                                                    <div class="label">Discipline</div>
+                                                    <div class="donnees">{{ participant.discipline}} </div>
                                                 </div>
                                             </div>
-
-
+                                        </div>
                                         </div>
                                     </div>
-                                </div>
+                            </div>
                             </div>
                             <div class="row text-center mt-5">
                                 <div class="col-12">
                                     <a href="{{ path('app_backend_joueur_index') }}" class="btn btn-outline-primary">Retour à la liste</a>
-                                    <a href="#" class="btn btn-primary disabled">Imprimer</a>
+                                    <button class="btn btn-primary" id="btnImprimer">Imprimer</button>
                                 </div>
                                 <div class="col-12 text-start mt-5">
                                     {{ include('backend_joueur/_delete_form.html.twig') }}
@@ -84,10 +93,36 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
 
     </div>
 
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/css/badge.css')) }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("btnImprimer").addEventListener("click", function() {
+                imprimerBadge();
+            });
+
+            function imprimerBadge() {
+                var badge = document.getElementById('participant-badge');
+                var fenetreImpression = window.open('', '_blank');
+                console.log('click')
+                fenetreImpression.document.write('<html><head><title>Badge</title></head><body>');
+                fenetreImpression.document.write('<img src="' + badge.toDataURL() + '" style="width:100%;">');
+                fenetreImpression.document.write('</body></html>');
+                fenetreImpression.document.close();
+                fenetreImpression.print();
+            }
+        });
+    </script>
 {% endblock %}
