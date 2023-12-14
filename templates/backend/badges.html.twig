@@ -146,8 +146,11 @@
 
         await Promise.all(pdfPromises);
 
-        // Fusionner les fichiers PDF
-        mergePDFs();
+        // Attendre l'achèvement du processus de fusion
+        await mergePDFs();
+
+        // Nettoyer : supprimer les fichiers PDF individuels
+        cleanUpPDFs();
     }
 
     async function mergePDFs() {
@@ -179,7 +182,26 @@
         a.click();
         document.body.removeChild(a);
     }
-</script>
 
+    function cleanUpPDFs() {
+        for (let i = 1; ; i++) {
+            const fileName = `badge_${i}.pdf`;
+            const fileToRemove = new File([new Blob()], fileName, { type: 'application/pdf' });
+
+            try {
+                URL.revokeObjectURL(URL.createObjectURL(fileToRemove));
+                window.URL.revokeObjectURL(fileToRemove);
+            } catch (e) {
+                console.error('Erreur lors de la révocation de l\'URL d\'objet :', e);
+            }
+
+            try {
+                window.URL.revokeObjectURL(fileName);
+            } catch (e) {
+                console.error('Erreur lors de la révocation de l\'URL d\'objet :', e);
+            }
+        }
+    }
+</script>
 </body>
 </html>
