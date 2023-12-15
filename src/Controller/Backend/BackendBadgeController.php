@@ -56,7 +56,10 @@ class BackendBadgeController extends AbstractController
         if ($nombre > $limit) {
             if ($flag < 1) {
                 $flag = 2;
+            }else{
+                $flag += 1;
             }
+
         }
 
 //        dd($flag);
