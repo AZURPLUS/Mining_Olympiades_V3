@@ -87,7 +87,7 @@ Le thème retenu de cette année est: <strong>« l’importance des politiques d
             ],
             [
                 'titre' => "Soirée de <span>recompense</span>",
-                'resume' => "Pour cette 7ème édition et comme à l’accoutumée, le GPMCI organisera une soirée gala pour récompenser les vainqueurs et célébrer la fin d’année.  <br/>
+                'resume' => "Pour cette 8ème édition et comme à l’accoutumée, le GPMCI organisera une soirée gala pour récompenser les vainqueurs et célébrer la fin d’année.  <br/>
 A cette occasion, il seta demandé aux participants d'arborer une tenue traditionnelle, célébrant la région/zone d'intervention de la compagnie d'origine.
 Un hommage sera rendu à des personnalités du secteur minier qui l’ont impacté",
                 'icon' => 'icon-gala.png',

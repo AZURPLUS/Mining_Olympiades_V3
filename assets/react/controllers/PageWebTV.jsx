@@ -12,7 +12,7 @@ export default function (props) {
 
         async function fetchVideo(){
             try {
-                let slug = 'lancement-2023';
+                let slug = 'lancement-2024';
                 const response = await fetch(`/api/webtv/${props.slug}`);
                 if (!response.ok){
                     throw new Error("La réquête a échouée");

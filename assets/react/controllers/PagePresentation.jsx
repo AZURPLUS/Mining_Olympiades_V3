@@ -35,7 +35,7 @@ export default function () {
                 <div className="page">
                     <div className="row d-flex justify-content-center align-items-center g-4">
                         <div className="col-lg-7 content" data-aos="fade-left" data-aos-duration="1500">
-                            <h1>{presentation.titre} <span>7è édition</span></h1>
+                            <h1>{presentation.titre} <span>8è édition</span></h1>
                             <div
 
                                 dangerouslySetInnerHTML={{ __html: presentation.contenu}}
@@ -43,7 +43,7 @@ export default function () {
                         </div>
                         <div className="col-lg-5 illustration" data-aos="zoom-in" data-aos-duration="1500">
                             {/*<img src="/assets/images/sportifs.png" alt="" className="img-fluid"/>*/}
-                            {mediaUrl && <img src={mediaUrl} alt="Mining Olympiades 2023" className="img-fluid"/>}
+                            {mediaUrl && <img src={mediaUrl} alt="Mining Olympiades 2024" className="img-fluid"/>}
                         </div>
                     </div>
                 </div>

@@ -113,7 +113,7 @@ export default function () {
                                         <div className="instruction-contenu">
                                             <h3>Journée <span>scientifique</span></h3>
                                             <p>
-                                                La journée scientifique de cette 7ème édition à pour thème : <strong><em>« L’importance des politiques de santé et sécurité dans les mines »</em></strong>.
+                                                La journée scientifique de cette 8ème édition à pour thème : <strong><em>« L’importance des politiques de santé et sécurité dans les mines »</em></strong>.
                                             </p>
                                         </div>
                                     </div>
