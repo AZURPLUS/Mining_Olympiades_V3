@@ -1,8 +1,20 @@
 import React from "react";
 
+import styled from "styled-components";
+
+const ResponsiveContainer = styled.div`
+  width: 100vw;
+  overflow: hidden;
+  padding: 0 20px;
+
+  @media (min-width: 768px) {
+    padding: 0 50px;
+  }
+`;
+
 export default function () {
   return (
-    <div style={{ width: "100vw", overflow: "hidden" }}>
+    <ResponsiveContainer>
       <section id="discipline">
         <div className="disciplines">
           <div
@@ -68,6 +80,6 @@ export default function () {
           </div>
         </div>
       </section>
-    </div>
+    </ResponsiveContainer>
   );
 }

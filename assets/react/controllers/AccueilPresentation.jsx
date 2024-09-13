@@ -54,7 +54,6 @@ const ContentWrapper = styled.div`
 `;
 
 const Title = styled.h4`
-  color: #018b4c;
   font-weight: bold;
   font-size: 1.5rem;
   line-height: 1.2;

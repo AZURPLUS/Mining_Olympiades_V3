@@ -87,6 +87,7 @@ export default function () {
             display: "flex",
             justifyContent: "center",
             marginTop: "100px",
+            padding: "0 50px",
           }}
         >
           {events.map((event, index) => (
@@ -95,8 +96,8 @@ export default function () {
               style={{
                 backgroundColor: event.bgColor,
                 margin: "10px",
-                borderTopLeftRadius: "4rem",
-                borderTopRightRadius: "4rem",
+                borderTopLeftRadius: "20px",
+                borderTopRightRadius: "20px",
                 width: "400px",
                 boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
               }}
@@ -104,8 +105,8 @@ export default function () {
               {/* Image en haut */}
               <div
                 style={{
-                  borderTopLeftRadius: "4rem",
-                  borderTopRightRadius: "4rem",
+                  borderTopLeftRadius: "20px",
+                  borderTopRightRadius: "20px",
                   height: "17rem",
                   backgroundImage: `url(/assets/images/${event.img})`,
                   backgroundSize: "cover",
@@ -184,6 +185,7 @@ export default function () {
             flexDirection: "column",
             alignItems: "center",
             marginTop: "100px",
+            padding: "0 20px",
           }}
         >
           {events.map((event, index) => (
@@ -194,7 +196,7 @@ export default function () {
                 margin: "10px",
                 borderTopLeftRadius: "4rem",
                 borderTopRightRadius: "4rem",
-                width: "400px",
+                width: "100%",
                 boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
               }}
             >
