@@ -79,7 +79,7 @@ export default function Carousel() {
                 >
                   {item.title}
                 </h1>
-                <p
+                {/* <p
                   style={{
                     fontSize: "1.25rem",
                     wordWrap: "break-word",
@@ -87,7 +87,7 @@ export default function Carousel() {
                   }}
                 >
                   {item.description}
-                </p>
+                </p> */}
               </div>
             ))}
           </div>
