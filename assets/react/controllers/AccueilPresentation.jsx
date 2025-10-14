@@ -89,8 +89,8 @@ const ReadMoreButton = styled.button`
   background-color: #f69322;
   color: #fff;
   border: none;
-  border-radius: 100px;
-  padding: 10px 20px;
+  border-radius: 80px;
+  padding: 6px 10px;
   margin-top: 10px;
   cursor: pointer;
   display: flex;
@@ -101,10 +101,16 @@ const ReadMoreButton = styled.button`
     font-size: 1rem;
   }
 
+  a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+  }
+
   span {
     background-color: #fff;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -173,28 +179,30 @@ export default function PresentationComponent() {
           <Content dangerouslySetInnerHTML={{ __html: trimmedContent }} />
           {data.contenu && data.contenu.length > 500 && (
             <ReadMoreButton>
-              Lire plus{" "}
-              <span>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  style={{ width: "60%" }}
-                >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      d="M14.7055 18.9112C14.2784 18.7306 14 18.3052 14 17.8333V15H3C2.44772 15 2 14.5523 2 14V10C2 9.44772 2.44772 9 3 9H14V6.1667C14 5.69483 14.2784 5.26942 14.7055 5.08884C15.1326 4.90826 15.6241 5.00808 15.951 5.34174L21.6653 11.175C22.1116 11.6307 22.1116 12.3693 21.6653 12.825L15.951 18.6583C15.6241 18.9919 15.1326 19.0917 14.7055 18.9112Z"
-                      fill="#1f884e"
-                    ></path>
-                  </g>
-                </svg>
-              </span>
+              <a href="/presentation">
+                Lire Plus
+                <span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ width: "60%" }}
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier"> 
+                      <path
+                        d="M14.7055 18.9112C14.2784 18.7306 14 18.3052 14 17.8333V15H3C2.44772 15 2 14.5523 2 14V10C2 9.44772 2.44772 9 3 9H14V6.1667C14 5.69483 14.2784 5.26942 14.7055 5.08884C15.1326 4.90826 15.6241 5.00808 15.951 5.34174L21.6653 11.175C22.1116 11.6307 22.1116 12.3693 21.6653 12.825L15.951 18.6583C15.6241 18.9919 15.1326 19.0917 14.7055 18.9112Z"
+                        fill="#1f884e"
+                      ></path>
+                    </g>
+                  </svg>
+                </span>
+              </a>
             </ReadMoreButton>
           )}
         </ContentWrapper>

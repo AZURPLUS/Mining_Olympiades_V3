@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
         input: "select",
         inputOptions: {
           Compétitions: {
-            membre: "Membre du GPMCI",
-            nonMembre: "Non membre du GPMCI",
+            membre: "Se connecter",
+            nonMembre: "S'inscrire",
           },
           "Journée scientifique": {
             etudiant: "Etudiant",
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             sponsor: "Sponsor",
           },
         },
-        inputPlaceholder: "-- Choisissez votre profil --",
+        inputPlaceholder: "-- Choisissez une option --",
         showCancelButton: true,
         cancelButtonText: "Annuler",
         preConfirm: (value) => {

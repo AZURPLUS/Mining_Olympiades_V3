@@ -37,6 +37,13 @@ class FrontendMembreController extends AbstractController
         return $this->render('frontend/membre_participation.html.twig');
     }
 
+    #[Route('/modification', name: 'app_frontend_membre_modification')]
+    public function modifier(): Response
+    {
+//        dd($this->listeParticipant());
+        return $this->render('frontend/modification_discipline.html.twig');
+    }
+
     private function verifEtape(): bool
     {
         $membre = $this->membreRepository->findOneBy(['user' =>$this->getUser()->getId() ]);

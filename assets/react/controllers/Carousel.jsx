@@ -7,17 +7,22 @@ export default function Carousel() {
 
   const carouselItems = [
     {
-      title: "SOYEZ PRÊT POUR L’OLYMPIADES DES MINES 2024",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      title: "",
+      image: "/assets/images/visuel.png",
+      ytLink: " https://youtube.com/live/t02cjVmsv-Q?feature=share",
+    },
+    
+    {
+      title: "SOYEZ PRÊT POUR LES OLYMPIADES DES MINES 2025",
+      image: "/assets/images/img-slide-default.png",
     },
     {
       title: "DÉCOUVREZ LES NOUVELLES OPPORTUNITÉS",
-      description:
-        "Proin eget tortor risus. Nulla quis lorem ut libero malesuada feugiat.",
+      image: "/assets/images/img-slide-default.png",
     },
     {
       title: "PARTICIPEZ À DES COMPÉTITIONS EXCITANTES",
-      description: "Vivamus suscipit tortor eget felis porttitor volutpat.",
+      image: "/assets/images/img-slide-default.png",
     },
   ];
 
@@ -26,7 +31,7 @@ export default function Carousel() {
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselItems.length);
-    }, 4000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [carouselItems.length]);
@@ -37,7 +42,12 @@ export default function Carousel() {
       <section
         className="d-none d-lg-block"
         id="carousel"
-        style={{ padding: "100px 50px 0 50px", height: "650px" }}
+        style={{
+          padding: "100px 50px 0 50px",
+          height: "650",
+          backgroundImage: `url(${carouselItems[currentIndex].image})`,
+          transition: "opacity 1s ease-in-out",
+        }}
       >
         <div
           className="carousel-container"
@@ -46,7 +56,8 @@ export default function Carousel() {
             color: "white",
             textAlign: "left",
             padding: "50px 20px",
-            maxWidth: "450px",
+            // maxWidth: "450px",
+            maxWidth: "700px",
           }}
         >
           <div
@@ -71,57 +82,53 @@ export default function Carousel() {
               >
                 <h1
                   style={{
-                    fontSize: "2rem",
+                    // fontSize: "2rem",
+                    fontSize: "2.7rem",
                     marginBottom: "10px",
-                    lineHeight: "1.2",
+                    lineHeight: "1.3",
                     wordWrap: "break-word",
+                    color: "#f69322",
+                    fontWeight: "800",
+                    textShadow: "1px 0 5px #e5e7eb",
                   }}
                 >
                   {item.title}
                 </h1>
-                {/* <p
-                  style={{
-                    fontSize: "1.25rem",
-                    wordWrap: "break-word",
-                    color: "#f69322",
-                  }}
-                >
-                  {item.description}
-                </p> */}
               </div>
             ))}
           </div>
 
           {/* Indicateurs de carrousel */}
-          <div
-            className="carousel-indicators"
-            style={{
-              position: "absolute",
-              bottom: "20px",
-              left: "0",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-              paddingLeft: "20px",
-              marginLeft: "0",
-            }}
-          >
-            {carouselItems.map((_, index) => (
-              <div
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                aria-label={`Slide ${index + 1}`}
-                style={{
-                  width: currentIndex === index ? "50px" : "13px",
-                  height: currentIndex === index ? "13px" : "13px",
-                  backgroundColor: "#f69322",
-                  marginRight: "10px",
-                  cursor: "pointer",
-                  borderRadius: currentIndex === index ? "5px" : "100px",
-                  transition: "width 0.3s ease, background-color 0.3s ease",
-                }}
-              />
-            ))}
+          <div className="carousel-indicators">
+            <div className="circle-indicator">
+              {carouselItems.map((_, index) => (
+                <div
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  aria-label={`Slide ${index + 1}`}
+                  style={{
+                    width: currentIndex === index ? "50px" : "13px",
+                    height: currentIndex === index ? "13px" : "13px",
+                    backgroundColor: "#f69322",
+                    marginRight: "10px",
+                    cursor: "pointer",
+                    borderRadius: currentIndex === index ? "5px" : "100px",
+                    transition: "width 0.3s ease, background-color 0.3s ease",
+                  }}
+                />
+              ))}
+            </div>
+            {/* {carouselItems[currentIndex].ytLink && (
+              <a
+                href={carouselItems[currentIndex].ytLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="yt-link"
+              >
+                <img src="/assets/icons/brand-youtube.svg" alt="" /> Suivre le
+                direct
+              </a>
+            )} */}
           </div>
         </div>
       </section>
@@ -131,7 +138,12 @@ export default function Carousel() {
       <section
         className="d-block d-lg-none"
         id="carousel"
-        style={{ padding: "0 0", height: "70vh" }}
+        style={{
+          padding: "0 0",
+          height: "80vh",
+          backgroundImage: `url(${carouselItems[currentIndex].image})`,
+          transition: "opacity 1s ease-in-out",
+        }}
       >
         <div
           className="carousel-container"
@@ -140,7 +152,6 @@ export default function Carousel() {
             color: "white",
             textAlign: "left",
             padding: "100px 20px",
-            maxWidth: "500px",
             height: "100%",
           }}
         >
@@ -174,6 +185,8 @@ export default function Carousel() {
                     marginBottom: "10px",
                     lineHeight: "1.2",
                     wordWrap: "break-word",
+                    color: "#f69322",
+                    fontWeight: "800",
                   }}
                 >
                   {item.title}
@@ -198,22 +211,35 @@ export default function Carousel() {
               maxWidth: "500px",
             }}
           >
-            {carouselItems.map((_, index) => (
-              <div
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                aria-label={`Slide ${index + 1}`}
-                style={{
-                  width: currentIndex === index ? "50px" : "13px",
-                  height: currentIndex === index ? "13px" : "13px",
-                  backgroundColor: "#f69322",
-                  marginRight: "10px",
-                  cursor: "pointer",
-                  borderRadius: currentIndex === index ? "5px" : "100px",
-                  transition: "width 0.3s ease, background-color 0.3s ease",
-                }}
-              />
-            ))}
+            <div className="circle-indicator">
+              {carouselItems.map((_, index) => (
+                <div
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  aria-label={`Slide ${index + 1}`}
+                  style={{
+                    width: currentIndex === index ? "50px" : "13px",
+                    height: currentIndex === index ? "13px" : "13px",
+                    backgroundColor: "#f69322",
+                    marginRight: "10px",
+                    cursor: "pointer",
+                    borderRadius: currentIndex === index ? "5px" : "100px",
+                    transition: "width 0.3s ease, background-color 0.3s ease",
+                  }}
+                />
+              ))}
+            </div>
+            {/* {carouselItems[currentIndex].ytLink && (
+              <a
+                href={carouselItems[currentIndex].ytLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="yt-link"
+              >
+                <img src="/assets/icons/brand-youtube.svg" alt="" /> Suivre le
+                direct
+              </a>
+            )} */}
           </div>
         </div>
       </section>

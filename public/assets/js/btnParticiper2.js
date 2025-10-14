@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
         icon: "warning",
         input: "select",
         inputOptions: {
-          membre: "Membre du GPMCI",
-          nonMembre: "Non membre du GPMCI",
+          membre: "Se connecter",
+          nonMembre: "S'inscrire",
         },
-        inputPlaceholder: "-- Choisissez votre profil --",
+        inputPlaceholder: "-- Choisissez une option --",
         showCancelButton: true,
         cancelButtonText: "Annuler",
         preConfirm: (value) => {

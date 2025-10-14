@@ -14,6 +14,7 @@ import logo from "../../images/gpmci.png";
 
 export default function (abonnement) {
   const [dateJour, setDateJour] = useState(new Date());
+  let montant = abonnement.abonnement.montant;
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -52,41 +53,46 @@ export default function (abonnement) {
       fontFamily: "Helvetica-Bold",
       marginTop: 20,
     },
-    entete: { borderBottom: 2, borderBottomColor: "orange" },
-    logo: { width: 150 },
+    entete: { width: "100%", alignItems: "center" },
+    // entete: { borderBottom: 2, borderBottomColor: "orange" },
+    logo: {
+      width: 150,
+    },
     date: {
       display: "grid",
       textAlign: "left",
       marginLeft: 300,
       fontSize: 11,
-      marginTop: 20,
+      marginTop: 50,
       fontWeight: 700,
     },
     attention: {
-      border: 1,
       marginTop: 15,
-      marginLeft: 250,
       fontSize: 12,
       paddingTop: 10,
-      paddingBottom: 10,
-      paddingLeft: 7,
-      paddingRight: 7,
+      paddingBottom: 15,
+      // paddingLeft: 7,
+      paddingRight: 10,
     },
     compagnie: {
       textTransform: "uppercase",
       marginBottom: 5,
       fontFamily: "Helvetica",
+      paddingLeft: 10,
+      marginLeft: 10,
     },
-    label: { fontSize: 10, marginRight: 3 },
+    label: { fontSize: 12, marginRight: 3, fontWeight: "bold" },
     representant: {
       fontWeight: "heavy",
       paddingLeft: 10,
       marginLeft: 10,
       fontFamily: "Times-BoldItalic",
     },
+    objetDiv: { marginTop: 10 },
+    objet: { fontWeight: "bold", paddingRight: 10 },
     reference: { fontSize: 13, marginBottom: 10, marginTop: 20 },
-    representantValeur: { fontFamily: "Times-Bold" },
-    tableau: { border: 1 },
+    representantValeur: { fontFamily: "Times-Bold", marginLeft: 10 },
+    tableau: { border: 1, borderColor: " #e2e8f0" },
     bgOrange: { backgroundColor: "darkorange", height: 15 },
     content: {
       paddingTop: 30,
@@ -119,12 +125,14 @@ export default function (abonnement) {
       fontSize: 13,
       textAlign: "right",
       paddingRight: 20,
-      backgroundColor: "darkorange",
+      backgroundColor: "#e2e8f0",
       paddingTop: 7,
       paddingBottom: 7,
       marginRight: 30,
       paddingLeft: 20,
     },
+    labelReglement: {},
+    client: { fontWeight: "bold", paddingRight: 10 },
     sectionReglement: {
       fontFamily: "Times-Roman",
       marginTop: 25,
@@ -136,26 +144,32 @@ export default function (abonnement) {
       fontSize: 10,
       paddingTop: 5,
     },
+    conditionCommerciale: {
+      fontFamily: "Times-Roman",
+      marginTop: 25,
+      fontSize: 12,
+      fontWeight: "bold",
+    },
     consigne: { fontFamily: "Times-Bold", marginTop: 15, fontSize: 10 },
     signature: {
       textAlign: "right",
       marginRight: 50,
       fontFamily: "Times-Bold",
       fontSize: 10,
-      marginTop: 25,
+      marginTop: 50,
+      textDecoration: "underline",
     },
     piedPage: {
       fontFamily: "Times-Bold",
       fontSize: 9,
-      color: "orange",
+      color: "black",
       bottom: 5,
       left: 30,
       right: 0,
       position: "absolute",
-      borderTop: 2,
-      borderColor: "orange",
       paddingTop: 7,
-      width: 200,
+      width: "100%",
+      textAlign: "center",
     },
   });
 
@@ -165,33 +179,40 @@ export default function (abonnement) {
         <View style={styles.entete}>
           <Image src={logo} style={styles.logo} />
         </View>
-        <Text style={styles.titre}>
+        {/* <Text style={styles.titre}>
           PARTICIPATION AUX MINING OLYMPIADES 2024
-        </Text>
+        </Text> */}
         <Text style={styles.date}>Abidjan, le {formatDate(dateJour)}</Text>
         <View style={styles.attention}>
           {abonnement.abonnement.compagnie && (
             <div>
-              <Text style={styles.compagnie}>
-                {abonnement.abonnement.compagnie.titre}
-              </Text>
               <Text>
-                <Text style={styles.label}>Att:</Text>
+                <Text style={{ marginRight: "3px" }}>Client :</Text>
+                <Text style={styles.compagnie}>
+                  {abonnement.abonnement.compagnie.titre}
+                </Text>
+              </Text>
+              <Text style={{ marginTop: 10 }}>
+                <Text style={styles.label}>Contact: </Text>
                 <Text style={styles.representant}>
                   {abonnement.abonnement.compagnie.representant}
                 </Text>
+              </Text>
+              <Text style={styles.objetDiv}>
+                <Text style={styles.objet}>Objet :</Text> PARTICIPATION AUX
+                MINING OLYMPIADES 2024
               </Text>
             </div>
           )}
         </View>
         <Text style={styles.reference}>
-          Facture N°:
+          Facture N°:{" "}
           <Text style={styles.representantValeur}>
             {abonnement.abonnement.reference}
           </Text>
         </Text>
         <View style={styles.tableau}>
-          <Text style={styles.bgOrange}></Text>
+          {/* <Text style={styles.bgOrange}></Text> */}
           <View style={styles.content}>
             <Text style={styles.liste}>Liste des disciplines choisies:</Text>
             {abonnement.abonnement.disciplines && (
@@ -204,6 +225,7 @@ export default function (abonnement) {
               </div>
             )}
           </View>
+
           <View style={styles.montantTotal}>
             <Text style={styles.colonne2}>
               <Text style={styles.labelMontantTotal}>
@@ -211,46 +233,53 @@ export default function (abonnement) {
               </Text>
             </Text>
             <Text style={styles.valeurMontantTotal}>
-              {abonnement.abonnement.montant}
+              {abonnement.abonnement.montant}{" "}
+              <Text style={{ paddingLeft: "10px" }}>FCFA</Text>
             </Text>
           </View>
-          <Text style={styles.bgOrange} />
+          {/* <Text style={styles.bgOrange} /> */}
         </View>
+
         <View style={styles.sectionReglement}>
-          <Text style={styles.labelReglement}>
-            Vous pouvez effectuer votre règlement:
+          {/* <Text style={styles.labelReglement}>Tarifs en FCFA XOF.</Text> */}
+          <Text style={styles.conditionCommerciale}>
+            Vous pouvez effectuer votre règlement :
           </Text>
           <Text style={styles.optionReglement}>
-            * par chèque à l'ordre de GPMCI ou Groupement Professionnel des
-            Miniers de Côte d'Ivoire
+            * par chèque à l'ordre de Groupement Professionnel des Miniers de
+            Côte d'Ivoire
           </Text>
           <Text style={styles.optionReglement}>
             * par virement bancaire : Groupement Professionnel des Miniers de
-            Côte d'Ivoire (GPMCI) sur le compte N° CI059 01004 120070130001 72 à
-            ECOBANK bd Latrille II Plateaux Vallons.
+            Côte d'Ivoire sous le numéro de compte #141207013901 à ECOBANK bd
+            Latrille II Plateaux.
+          </Text>
+          <Text style={styles.optionReglement}>
+            * par dépôt d'espèces au secrétariat permanent du GPMCI sis à
+            Cocody, 2 Plateaux 7ème Tranche, Rue J106.
           </Text>
         </View>
+
         <Text style={styles.consigne}>
           Quel que soit votre mode de règlement, prière contacter le service
           comptabilité pour la remise du reçu de paiement.
         </Text>
-        <Text style={styles.signature}>Le Trésorier Général</Text>
+
+        <Text style={styles.signature}>La comptabilité</Text>
+
         <View style={styles.piedPage} fixed>
-          <Text>Abidjan, Cocody Riviera 3 Bonoumin cité Zinsou</Text>
-          <Text>Villa Mining House, 08 BP 2194 ABJ 08</Text>
-          <Text>TEL. 27 22 409 366 / Cel : 07 87 755 337</Text>
+          <Text>Abidjan, Cocody II Plateaux 7ème Tranche, Rue J106.</Text>
+          <Text>Villa Mining House, 08 BP 2194 Abidjan 08</Text>
+          <Text>TEL. : 07 87 755 337</Text>
           <Text>info@chambredesmines.org</Text>
         </View>
       </Page>
     </Document>
   );
 
-  console.log("Dans le component Facture");
-  console.log(abonnement);
-
   return (
     <div>
-      <div className="annonce">
+      <div className="annonce" style={{ paddingTop: "75px" }}>
         <p>Félicitations vos participants ont été enregistrés avec succès!</p>
         <p>
           Voulez-vous choisir des disciplines supplémentaires ?{" "}
@@ -269,6 +298,9 @@ export default function (abonnement) {
             }
           </PDFDownloadLink>
         </p>
+        <a href="/membre/modification" className="lien-modification" style={{color:"#f39200 "}}>
+          Changer de discipline
+        </a>
       </div>
     </div>
   );

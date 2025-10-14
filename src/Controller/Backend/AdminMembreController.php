@@ -23,25 +23,23 @@ class AdminMembreController extends AbstractController
         private UserRepository $userRepository,
         private CompagnieRepository $compagnieRepository,
         private UserPasswordHasherInterface $passwordHasher
-    )
-    {
-    }
+    ) {}
 
     #[Route('/', name: 'app_admin_membre_index')]
     public function index()
     {
-        return $this->render('backend_membre/index.html.twig',[
-            'membres' => $this->membreRepository->findAll()
+        return $this->render('backend_membre/index.html.twig', [
+            'membres' => $this->membreRepository->findBy([], ["id" => "DESC"])
         ]);
     }
 
-    #[Route('/new', name: 'app_admin_membre_new', methods: ['GET','POST'])]
+    #[Route('/new', name: 'app_admin_membre_new', methods: ['GET', 'POST'])]
     public function new(Request $request)
     {
-        if ($this->isCsrfTokenValid('add-membre', $request->get('_csrf_token'))){
+        if ($this->isCsrfTokenValid('add-membre', $request->get('_csrf_token'))) {
 
             $traitement = $this->form($request);
-            if ($traitement){
+            if ($traitement) {
                 sweetalert()->addSuccess("Le membre a été ajouté avec succès!");
 
                 return $this->redirectToRoute('app_admin_membre_index');
@@ -49,12 +47,12 @@ class AdminMembreController extends AbstractController
 
             sweetalert()->addError("Echec! Associer une compagnie au membre");
 
-            return $this->render('backend_membre/new.html.twig',[
+            return $this->render('backend_membre/new.html.twig', [
                 'compagnies' => $this->compagnieRepository->findAll(),
                 'membre' => null
             ]);
         }
-        return $this->render('backend_membre/new.html.twig',[
+        return $this->render('backend_membre/new.html.twig', [
             'compagnies' => $this->compagnieRepository->findAll(),
             'membre' => null,
         ]);
@@ -63,10 +61,10 @@ class AdminMembreController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_membre_edit')]
     public function edit(Request $request, Membre $membre)
     {
-        if ($this->isCsrfTokenValid('add-membre', $request->get('_csrf_token'))){
+        if ($this->isCsrfTokenValid('add-membre', $request->get('_csrf_token'))) {
 
             $traitement = $this->form($request, $membre->getUser(), $membre);
-            if ($traitement){
+            if ($traitement) {
                 sweetalert()->addSuccess("Le membre a été ajouté avec succès!");
 
                 return $this->redirectToRoute('app_admin_membre_index');
@@ -74,13 +72,13 @@ class AdminMembreController extends AbstractController
 
             sweetalert()->addError("Echec! Associer une compagnie au membre");
 
-            return $this->render('backend_membre/new.html.twig',[
+            return $this->render('backend_membre/new.html.twig', [
                 'compagnies' => $this->compagnieRepository->findAll(),
                 'membre' => $membre
             ]);
         }
 
-        return $this->render('backend_membre/new.html.twig',[
+        return $this->render('backend_membre/new.html.twig', [
             'compagnies' => $this->compagnieRepository->findAll(),
             'membre' => $membre,
         ]);
@@ -95,7 +93,7 @@ class AdminMembreController extends AbstractController
 
         // Recherche de la compagnie
         $compagnie = $this->compagnieRepository->findOneBy(['id' => (int) $requestCompagnie]);
-        if (!$compagnie){
+        if (!$compagnie) {
             return false;
         }
 

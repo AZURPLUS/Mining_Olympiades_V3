@@ -104,6 +104,51 @@ class ApiDisciplineController extends AbstractController
         ]);
     }
 
+    // modification abonnement
+    #[Route('/abonnement/{id}', name: 'api_discipline_abonnement_update', methods: ['PUT'])]
+public function updateAbonnement(Request $request, Abonnement $abonnement): JsonResponse
+{
+    $datas = json_decode($request->getContent(), true);
+
+    // Vérifiez les données reçues
+    if (!$datas || empty($datas['disciplines'])) {
+        return $this->json([
+            'message' => "Echec, veuillez fournir des disciplines.",
+            'statut' => "Echec"
+        ], Response::HTTP_BAD_REQUEST);
+    }
+
+    // Vérification de l'utilisateur
+    $user = $this->getUser();
+    $membre = $this->membreRepository->findOneBy(['user' => $user]);
+    if (!$membre) {
+        return $this->json([
+            'message' => "Echec, votre compte ne vous autorise pas à modifier des disciplines",
+            'statut' => 'Echec'
+        ], Response::HTTP_FORBIDDEN);
+    }
+
+    // Mise à jour de l'abonnement
+    $abonnement->setRestantJoueur($datas['totalJoueurs']);
+    $abonnement->setTotalJoueur($datas['totalJoueurs']);
+    $abonnement->getDisciplines()->clear();
+
+    foreach ($datas['disciplines'] as $data) {
+        $discipline = $this->disciplineRepository->findOneBy(['id' => $data]);
+        if ($discipline) {
+            $abonnement->addDiscipline($discipline);
+        }
+    }
+
+    $this->entityManager->flush();
+
+    return $this->json([
+        'message' => 'L\'abonnement a été mis à jour avec succès !',
+        'statut' => "success",
+    ]);
+}
+
+
     #[Route('/participation', name: 'api_discipline_participation' ,methods: ['GET'])]
     public function participation(Request $request)
     {

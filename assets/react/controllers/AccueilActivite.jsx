@@ -2,26 +2,33 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const ReadMoreButton = styled.button`
+  display: block;
+  width: max-content;
   background-color: #1f884e;
   color: #fff;
   border: none;
   border-radius: 100px;
-  padding: 10px 20px;
+  padding: 7px 10px;
   margin-top: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   font-size: 0.9rem;
-  width: 9rem;
 
   @media (min-width: 768px) {
     font-size: 1rem;
   }
 
+  a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+  }
+
   span {
     background-color: #fff;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -39,7 +46,7 @@ export default function () {
       title: "Journée scientifique",
       description:
         "Organisée en marge du traditionnel weekend de la Sainte Barbe (la fête mondiale des Mineurs), les Mining Olympiades...",
-      img: "OLYMAPIADE.png",
+      img: "journeescientifique.jpg",
       bgColor: "#f68b2b",
       textColor: "#fff",
     },
@@ -47,7 +54,7 @@ export default function () {
       title: "Journée sportive",
       description:
         "Organisée en marge du traditionnel weekend de la Sainte Barbe (la fête mondiale des Mineurs), les Mining Olympiades...",
-      img: "OLYMAPIADE.png",
+      img: "sport.png",
       bgColor: "#f1f2f640",
       textColor: "#000",
     },
@@ -55,7 +62,7 @@ export default function () {
       title: "Soirée de récompense",
       description:
         "Organisée en marge du traditionnel weekend de la Sainte Barbe (la fête mondiale des Mineurs), les Mining Olympiades...",
-      img: "OLYMAPIADE.png",
+      img: "dine_gala.png",
       bgColor: "#f68b2b",
       textColor: "#fff",
     },
@@ -147,7 +154,7 @@ export default function () {
 
                 {/* Bouton Lire plus */}
                 <ReadMoreButton>
-                  Lire plus{" "}
+                  <a href="/programme/">Lire plus</a>
                   <span>
                     <svg
                       viewBox="0 0 24 24"
@@ -194,8 +201,8 @@ export default function () {
               style={{
                 backgroundColor: event.bgColor,
                 margin: "10px",
-                borderTopLeftRadius: "4rem",
-                borderTopRightRadius: "4rem",
+                borderTopLeftRadius: "20px",
+                borderTopRightRadius: "20px",
                 width: "100%",
                 boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
               }}
@@ -203,8 +210,8 @@ export default function () {
               {/* Image en haut */}
               <div
                 style={{
-                  borderTopLeftRadius: "4rem",
-                  borderTopRightRadius: "4rem",
+                  borderTopLeftRadius: "20px",
+                  borderTopRightRadius: "20px",
                   height: "17rem",
                   backgroundImage: `url(/assets/images/${event.img})`,
                   backgroundSize: "cover",
@@ -216,8 +223,9 @@ export default function () {
               <div
                 style={{
                   padding: "15px",
+                  paddingTop: "10px",
                   display: "flex",
-                  height: "17rem",
+                  height: "15rem",
                   flexDirection: "column",
                   justifyContent: "center",
                 }}
@@ -245,7 +253,7 @@ export default function () {
 
                 {/* Bouton Lire plus */}
                 <ReadMoreButton>
-                  Lire plus{" "}
+                  <a href="/programme/">Lire plus</a>
                   <span>
                     <svg
                       viewBox="0 0 24 24"

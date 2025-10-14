@@ -17,29 +17,29 @@ class ApiActiviteController extends AbstractController
                 'titre' => "Journée <span>scientifique</span>",
                 'resume' => '
                 <ul>
-                    <li><u>Thème</u>: <strong>«l’importance des politiques de santé et sécurité dans les mines»</strong></li>
-                    <li><u>Date</u>: 15 décembre 2023 de 14h00 - 17h00</li>
-                    <li><u>Lieu</u>: INPHB CENTRE</li>
+                    <li><u>Thème</u>: <strong>la chaine de valeur de l’activité minière et opportunités d’insertion professionnelles pour les jeunes (à confirmer)</strong></li>
+                    <li><u>Date</u>: 12 décembre 2025 de 14h00 - 17h00</li>
+                    <li><u>Lieu</u>: INPHB SUD</li>
                 </ul>
                 ',
                 'icon' => 'icon-scientific-o.png',
-                'media' => 'scientifique.png',
-                'date' => "vendredi 15 décembre 2023",
-                'lieu' => 'INPHB CENTRE',
+                'media' => 'journeescientifique.jpg',
+                'date' => "vendredi 12 décembre 2025",
+                'lieu' => 'INPHB SUD',
                 'heure' => "14h00 - 17h00"
             ],
             [
                 'titre' => "Journée <span>sportive</span>",
                 'resume' => '
                 <ul>
-                    <li><u>Discipline</u>: une trentaine de disciplines</li>
-                    <li><u>Date</u>: 16 décembre 2023 de 07h00 - 17h30</li>
+                    <li><u>Discipline</u>: 23 disciplines</li>
+                    <li><u>Date</u>: 13 décembre 2025 de 07h00 - 17h30</li>
                     <li><u>Lieu</u>: INPHB CENTRE & SUD</li>
                 </ul>
                 ',
                 'icon' => 'icon-sport.png',
-                'media' => 'sports.png',
-                'date' => "samedi 16 décembre 2023",
+                'media' => 'sport.png',
+                'date' => "samedi 13 décembre 2025",
                 'lieu' => 'INPHB CENTRE & SUD',
                 'heure' => "7h00 - 17h30"
             ],
@@ -47,15 +47,15 @@ class ApiActiviteController extends AbstractController
                 'titre' => "Soirée de <span>récompense</span>",
                 'resume' => '
                 <ul>
-                    <li><u>Dress code</u>: Valorisons nos régions</li>
-                    <li><u>Date</u>: 16 décembre 2023 de 19h30 - 23h00</li>
-                    <li><u>Lieu</u>: HÔTEL HP RESORT (Ex-Hôtel Parlementaire)</li>
+                    <li><u>Dress code</u>:<strong>Vivons la diversité culturelle</strong></li>
+                    <li><u>Date</u>: 13 décembre 2025 de 19h30 - 23h00</li>
+                    <li><u>Lieu</u>: HÔTEL HP RESORT </li>
                 </ul>
                 ',
                 'icon' => 'icon-gala.png',
-                'media' => 'gala.png',
-                'date' => "samedi 16 décembre 2023",
-                'lieu' => 'Hôtel HP RESORT (Ex-Hôtel Parlementaire)',
+                'media' => 'dine_gala.png',
+                'date' => "samedi 13 décembre 2025",
+                'lieu' => 'HÔTEL HP RESORT ',
                 'heure' => "19h30 - 23h00"
             ]
         ];
@@ -72,7 +72,7 @@ class ApiActiviteController extends AbstractController
 Le thème retenu de cette année est: <strong>« l’importance des politiques de santé et sécurité dans les mines ».</strong>",
                 'icon' => 'icon-scientific-o.png',
                 'media' => 'scientifique.png',
-                'date' => "vendredi 15 décembre 2023",
+                'date' => "vendredi 12 décembre 2025",
                 'lieu' => 'INPHB CENTRE',
                 'heure' => "14h00 - 17h00"
             ],
@@ -81,7 +81,7 @@ Le thème retenu de cette année est: <strong>« l’importance des politiques d
                 'resume' => "Moment clé des Mining Olympiades, la journée sportive mettra en confrontation des équipes hommes ou femmes dans une trentaine de disciplines.",
                 'icon' => 'icon-sport.png',
                 'media' => 'sports.png',
-                'date' => "samedi 16 décembre 2023",
+                'date' => "samedi 13 décembre 2025",
                 'lieu' => 'INPHB CENTRE & SUD',
                 'heure' => "7h00 - 17h30"
             ],
@@ -92,7 +92,7 @@ A cette occasion, il seta demandé aux participants d'arborer une tenue traditio
 Un hommage sera rendu à des personnalités du secteur minier qui l’ont impacté",
                 'icon' => 'icon-gala.png',
                 'media' => 'gala.png',
-                'date' => "samedi 16 décembre 2023",
+                'date' => "samedi 13 décembre 2025",
                 'lieu' => 'HÔTEL PRESIDENT',
                 'heure' => "19h30 - 23h00"
             ]

@@ -14,10 +14,11 @@ class ApiWebTVController extends AbstractController
     {
         $videos = [
             [
-                'titre' => "Cérémonie de lancement des Mining Olympiades 2023 ",
-                'url' => "https://www.youtube-nocookie.com/embed/qP7xU4f-rRg?si=4k0c9NFRj1R10cnC",
-                'media' => "20.jpg",
-                'slug' => 'lancement-2023'
+                'titre' => "Cérémonie de lancement des Mining Olympiades 2024 ",
+                'url' => "https://www.youtube.com/embed/O2ct62bSdAU?si=WyfW2pK96dKl6Klk",
+                'media' => "lancement.png",
+                'slug' => 'lancement-2024'
+                 // 'url' => "https://www.youtube-nocookie.com/embed/qP7xU4f-rRg?si=4k0c9NFRj1R10cnC",
             ]
         ];
 
@@ -28,10 +29,11 @@ class ApiWebTVController extends AbstractController
     public function show($slug)
     {
         $video = [
-            'titre' => "Cérémonie de lancement des Mining Olympiades 2023 ",
-            'url' => "https://www.youtube-nocookie.com/embed/qP7xU4f-rRg?si=4k0c9NFRj1R10cnC",
+            'titre' => "Cérémonie de lancement des Mining Olympiades 2024 ",
+            'url' => "https://www.youtube.com/embed/O2ct62bSdAU?si=WyfW2pK96dKl6Klk",
             'media' => "20.jpg",
-            'slug' => 'lancement-2023'
+            'slug' => 'lancement-2024'
+            // 'url' => "https://www.youtube-nocookie.com/embed/qP7xU4f-rRg?si=4k0c9NFRj1R10cnC",
         ];
 
         return $this->json($video);

@@ -1,0 +1,152 @@
+$couleur-orange: #f39200;
+$couleur-light-purple: #f6f4fe;
+$couleur-blanche: #fff;
+$couleur-verte: #0b8e36;
+
+.sponsor {
+  padding-top: 50px;
+
+  h1 {
+    font-weight: 700;
+    color: $couleur-verte;
+    margin-bottom: 40px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      color: $couleur-orange;
+    }
+  }
+
+  .logo-sponsors {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sponsor-argent {
+    padding-bottom: 30px;
+    .title {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 300;
+
+      .line {
+        content: "";
+        position: absolute;
+        width: 800px;
+        height: 1px;
+        background-color: gray;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+
+        @media screen and (max-width: 800px) {
+          width: 90vw;
+        }
+      }
+
+      .img-ctn {
+        width: 170px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+        }
+      }
+    }
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+
+      .img-ctn {
+        width: 105px;
+        height: 105px;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+  }
+
+  .sponsor-bronze {
+    padding-bottom: 30px;
+  }
+
+  .sponsor-bronze,
+  .partenaire {
+    .title {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 300;
+
+      .line {
+        content: "";
+        position: absolute;
+        width: 800px;
+        height: 1px;
+        background-color: rgb(151, 148, 148);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+
+        @media screen and (max-width: 800px) {
+          width: 90vw;
+        }
+      }
+
+      .img-ctn {
+        width: 170px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+        }
+      }
+    }
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+
+      .img-ctn {
+        width: 105px;
+        height: 105px;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+  }
+}

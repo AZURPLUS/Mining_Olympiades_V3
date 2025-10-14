@@ -45,25 +45,39 @@ class AppFormAuthenticator extends AbstractLoginFormAuthenticator
             ]
         );
     }
-
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        
         $user = $this->userRepository->findOneBy(['email' => $token->getUser()->getUserIdentifier()]);
-        if ($user){
+        if ($user) {
             $user->setConnexion($user->getConnexion() + 1);
-            $user->setLastConnectedAt(new \DateTime());
-
+            $user->setLastConnectedAt(new \DateTime('now', new \DateTimeZone('UTC')));
             $this->userRepository->save($user, true);
         }
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+    
+        $targetPath = $this->getTargetPath($request->getSession(), $firewallName);
+        
+        if ($targetPath) {
+            $request->getSession()->remove('_security_'.$firewallName); // Clean up
             return new RedirectResponse($targetPath);
         }
+    
+        if(in_array("ROLE_SUPER_ADMIN",$user-> getRoles()))
+        {
+            return new RedirectResponse($this->urlGenerator->generate('app_dashboard')); // Default redirect
+        }
+        
+        if(in_array("ROLE_ADMIN",$user-> getRoles()))
+        {
+            return new RedirectResponse($this->urlGenerator->generate('app_dashboard')); // Default redirect
+        }
 
-        // For example:
-        // return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        if(in_array("ROLE_USER",$user->getRoles())){
+            return new RedirectResponse($this->urlGenerator->generate('app_frontend_membre_index')); // Default redirect
+        }
+        
     }
-
+    
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
