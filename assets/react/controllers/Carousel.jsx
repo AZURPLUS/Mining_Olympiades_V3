@@ -20,10 +20,17 @@ export default function Carousel() {
       title: "DÉCOUVREZ LES NOUVELLES OPPORTUNITÉS",
       image: "/assets/images/img-slide-default.png",
     },
+
+    {
+      title: "",
+      image: "/assets/images/en_chiffres.png",
+    },
+    
     {
       title: "PARTICIPEZ À DES COMPÉTITIONS EXCITANTES",
       image: "/assets/images/img-slide-default.png",
     },
+    
   ];
 
   useEffect(() => {

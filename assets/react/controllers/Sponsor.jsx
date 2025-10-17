@@ -24,11 +24,11 @@ const Sponsor = () => {
         </div>
 
         {/* les logos des partenaires et sponsor */}
-        {/* <div className="logo-sponsors">
+        { <div className="logo-sponsors">
           <SponsorArgent />
           <SponsorBronze />
           <Partenaire />
-        </div> */}
+        </div>}
       </section>
     </ResponsiveContainer>
   );
