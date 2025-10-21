@@ -13,7 +13,7 @@ export default function () {
       <CountdownTimer targetDate="2025-12-12T00:00:00" />
       <AccueilPresentation />
       <AccueilActivite />
-      <AccueilDiscipline />
+      <AccueilDiscipline /> 
       <Sponsor />
     </div>
   );

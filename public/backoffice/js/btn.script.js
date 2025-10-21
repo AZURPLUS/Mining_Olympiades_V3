@@ -45,7 +45,3 @@ document.addEventListener("DOMContentLoaded", function() {
     var modal = new bootstrap.Modal(document.getElementById("primary-header-modal"));
     modal.show();
 });
-
-
-
-
