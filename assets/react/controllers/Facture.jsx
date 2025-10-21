@@ -180,7 +180,7 @@ export default function (abonnement) {
           <Image src={logo} style={styles.logo} />
         </View>
         {/* <Text style={styles.titre}>
-          PARTICIPATION AUX MINING OLYMPIADES 2024
+          PARTICIPATION AUX MINING OLYMPIADES 2025
         </Text> */}
         <Text style={styles.date}>Abidjan, le {formatDate(dateJour)}</Text>
         <View style={styles.attention}>
@@ -200,7 +200,7 @@ export default function (abonnement) {
               </Text>
               <Text style={styles.objetDiv}>
                 <Text style={styles.objet}>Objet :</Text> PARTICIPATION AUX
-                MINING OLYMPIADES 2024
+                MINING OLYMPIADES 2025
               </Text>
             </div>
           )}
