@@ -57,12 +57,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/JoCode-dev/mining-olympiades.git"
+        "url": "https://github.com/AZURPLUS/Mining_Olympiades_V3.git"
     },
     "keywords": [],
     "author": "",
     "bugs": {
-        "url": "https://github.com/JoCode-dev/mining-olympiades/issues"
+        "url": "https://github.com/AZURPLUS/Mining_Olympiades_V3/issues"
     },
-    "homepage": "https://github.com/JoCode-dev/mining-olympiades#readme"
+    "homepage": "https://github.com/AZURPLUS/Mining_Olympiades_V3#readme"
 }

@@ -25,7 +25,7 @@ export default function Carousel() {
       title: "",
       image: "/assets/images/en_chiffres.png",
     },
-    
+
     {
       title: "PARTICIPEZ À DES COMPÉTITIONS EXCITANTES",
       image: "/assets/images/img-slide-default.png",

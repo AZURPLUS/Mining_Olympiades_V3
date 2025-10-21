@@ -18,17 +18,20 @@ const ResponsiveContainer = styled.div`
 const Sponsor = () => {
   return (
     <ResponsiveContainer>
-      <section className="sponsor">
-        <div data-aos="fade-down" data-aos-duration="2000" data-aos-delay="100">
-          <h1>Nos Sponsors et Partenaires 2024 </h1>
-        </div>
+      <section id="sponsor">
+        <div className="sponsors">
+          <div data-aos="fade-down" data-aos-duration="2000" data-aos-delay="100">
+            <h1> Nos Sponsors et Partenaires 2024 </h1>
+          </div>
 
-        {/* les logos des partenaires et sponsor */}
-        { <div className="logo-sponsors">
-          <SponsorArgent />
-          <SponsorBronze />
-          <Partenaire />
-        </div>}
+          {/* les logos des partenaires et sponsor */}
+          { <div className="logo-sponsors">
+              <SponsorArgent />
+              <SponsorBronze />
+              <Partenaire />
+            </div>
+          }
+        </div>
       </section>
     </ResponsiveContainer>
   );

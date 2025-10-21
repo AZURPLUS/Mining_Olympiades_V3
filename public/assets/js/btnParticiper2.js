@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     boutonParticiper.addEventListener("click", async function () {
       const { value: profil } = await Swal.fire({
         title: "INSCRIPTION",
-        text: "Participer aux Mining Olympiades 2024 en tant que :",
+        text: "Participer aux Mining Olympiades 2025 en tant que :",
         icon: "warning",
         input: "select",
         inputOptions: {

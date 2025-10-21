@@ -1,6 +1,6 @@
 import React from "react";
 
- const sponsors = ["/assets/images/sponsors/argent/argent-1.png"]
+const sponsors = ["/assets/images/sponsors/argent/argent-1.png"];
 
 const SponsorArgent = () => {
   return (

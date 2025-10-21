@@ -24,7 +24,7 @@ export default function () {
             data-aos-delay="100"
           >
             {/*<h3 className="rubrique"><span>--</span> Compétitions <span>--</span></h3>*/}
-            <h1 className="titre">Les disciplines</h1>
+            <h1 className="titre">Les disciplines </h1>
           </div>
 
           <ImageDiscipline />
