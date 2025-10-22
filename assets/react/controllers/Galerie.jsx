@@ -75,6 +75,19 @@ export default function () {
     );
   }
 
+  const edition_2024 = [];
+  for (let i = 1; i <= 22; i++) {
+    edition_2024.push(
+      <img
+        key={i}
+        src={`/assets/images/edition_2024/${i}.jpg`}
+        alt=""
+        className="photo"
+        loading="lazy"
+      />
+    );
+  }
+
   return (
     <div>
       <section id="media">

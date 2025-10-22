@@ -232,7 +232,7 @@ export default function (abonnement) {
           <View style={styles.montantTotal}>
             <Text style={styles.colonne2}>
               <Text style={styles.labelMontantTotal}>
-                Montant total de la partication :
+                Montant total de la participation :
               </Text>
             </Text>
             <Text style={styles.valeurMontantTotal}>

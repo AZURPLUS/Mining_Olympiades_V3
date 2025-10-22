@@ -8,7 +8,7 @@ import withReactContent from "sweetalert2-react-content";
 import { Modal, Button } from "react-bootstrap";
 
 const MySwal = withReactContent(Swal);
-const docUrl = "/doc/plaquette-commerciale-2024.pdf";
+const docUrl = "/doc/Plaquette-commerciale-2025.pdf";
 
 export default function (props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,10 +39,11 @@ export default function (props) {
 
     // Set the corresponding amount based on the selected offer
     const amounts = {
-      OR: "20 000 000 Fcfa",
+      PLATINE: "25 000 000 Fcfa",
+      OR: "15 000 000 Fcfa",
       ARGENT: "10 000 000 Fcfa",
-      BRONZE: "5 000 000 Fcfa",
-      PARTENAIRE: "2 000 000 Fcfa",
+      BRONZE: "7 500 000 Fcfa",
+      PARTENAIRE: "3 500 000 Fcfa",
     };
 
     setOfferAmount(amounts[selectedOffer] || "");
@@ -291,6 +292,7 @@ export default function (props) {
                             onChange={(e) => handleOfferChange(e)}
                           >
                             <option value=""></option>
+                            <option value="PLATINE">Platine</option>
                             <option value="OR">Or</option>
                             <option value="ARGENT">Argent</option>
                             <option value="BRONZE">Bronze</option>

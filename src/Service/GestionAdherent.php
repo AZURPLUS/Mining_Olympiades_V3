@@ -55,7 +55,7 @@ class GestionAdherent
         <html>
         <body>
             <p>Bonjour $prenom,</p>
-            <p>Félicitations ! Votre inscription à <strong>Mining Olympiades 2024</strong> a été validée avec succès.</p>
+            <p>Félicitations ! Votre inscription à <strong>Mining Olympiades 2025</strong> a été validée avec succès.</p>
             <p>Nous sommes ravis de vous compter parmi les participants de cet événement.</p>
             <p>Pour accéder à votre espace personnel et choisir vos disciplines, voici vos identifiants de connexion :</p>
             <ul>
@@ -64,7 +64,7 @@ class GestionAdherent
             </ul>
             <p>Veuillez vous connecter dès maintenant sur <a href='https://miningolympiades.org/login'>votre espace personnel</a>.</p>
             <p>Cordialement !</p>
-            <p><strong>Contacts :</strong> (+225) 27 22 403 966 / 05 76 126 645</p>
+            <p><strong>Contacts :</strong> (+225) 07 47 558 867 / 07 87 75 53 37 </p>
         </body>
         </html>
     ";
@@ -94,8 +94,7 @@ class GestionAdherent
         $requestPassword = $this->motDePasse;
 
 	$listeEntreprise = [
-	        "STRATEVENT&CO",
-            "HIRÉ GOLD MINE",
+	        "HIRÉ GOLD MINE",
             "BONIKRO GOLD MINE",
             "AGBAOU GOLD",
             "SOCIÉTÉ DES MINES D'ITY",

@@ -17,7 +17,7 @@ class ApiActiviteController extends AbstractController
                 'titre' => "Journée <span>scientifique</span>",
                 'resume' => '
                 <ul>
-                    <li><u>Thème</u>: <strong>la chaine de valeur de l’activité minière et opportunités d’insertion professionnelles pour les jeunes (à confirmer)</strong></li>
+                    <li><u>Thème</u>: <strong> A définir </strong></li>
                     <li><u>Date</u>: 12 décembre 2025 de 14h00 - 17h00</li>
                     <li><u>Lieu</u>: INPHB SUD</li>
                 </ul>
@@ -32,7 +32,7 @@ class ApiActiviteController extends AbstractController
                 'titre' => "Journée <span>sportive</span>",
                 'resume' => '
                 <ul>
-                    <li><u>Discipline</u>: 23 disciplines</li>
+                    <li><u>Discipline</u>: 24 disciplines</li>
                     <li><u>Date</u>: 13 décembre 2025 de 07h00 - 17h30</li>
                     <li><u>Lieu</u>: INPHB CENTRE & SUD</li>
                 </ul>
@@ -47,9 +47,9 @@ class ApiActiviteController extends AbstractController
                 'titre' => "Soirée de <span>récompense</span>",
                 'resume' => '
                 <ul>
-                    <li><u>Dress code</u>:<strong>Vivons la diversité culturelle</strong></li>
+                    <li><u>Dress code</u>:<strong>A confirmer </strong></li>
                     <li><u>Date</u>: 13 décembre 2025 de 19h30 - 23h00</li>
-                    <li><u>Lieu</u>: HÔTEL HP RESORT </li>
+                    <li><u>Lieu</u>: A confirmer </li>
                 </ul>
                 ',
                 'icon' => 'icon-gala.png',
@@ -93,7 +93,7 @@ Un hommage sera rendu à des personnalités du secteur minier qui l’ont impact
                 'icon' => 'icon-gala.png',
                 'media' => 'gala.png',
                 'date' => "samedi 13 décembre 2025",
-                'lieu' => 'HÔTEL PRESIDENT',
+                'lieu' => 'A confirmer ',
                 'heure' => "19h30 - 23h00"
             ]
         ];
