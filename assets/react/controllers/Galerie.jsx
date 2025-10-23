@@ -107,7 +107,7 @@ export default function () {
           <div className="galerie">
             {selectedBtnIndex == 0 && images}
             {selectedBtnIndex == 1 && edition_2023}
-            {selectedBtnIndex == 2 && "Pas d'image"}
+            {selectedBtnIndex == 2 && edition_2024}
           </div>
           <div className="modal" id="modal">
             <div className="modal-nav">
