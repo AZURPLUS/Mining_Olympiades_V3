@@ -72,7 +72,7 @@ function CountdownTimer({ targetDate }) {
           >
             <div style={{ marginTop: "8px", fontSize: "24px" }}>
               <strong style={{ marginRight: "5px", fontSize: "24px" }}>
-                Olympiades des Mines 2025.
+               Mining Olympiades 2025 : 
               </strong>
               12 - 14 Dec. 2025
             </div>
@@ -164,7 +164,7 @@ function CountdownTimer({ targetDate }) {
           >
             <div style={{ marginTop: "8px" }}>
               <strong style={{ marginRight: "5px" }}>
-                Olympiades des Mines 2025.
+                Mining Olympiades 2025 : 
               </strong>
               12 - 14 Dec. 2025
             </div>

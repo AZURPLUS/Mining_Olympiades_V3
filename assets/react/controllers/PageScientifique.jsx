@@ -123,9 +123,7 @@ export default function () {
                       :{" "}
                       <strong>
                         <em>
-                          « la chaine de valeur de l’activité minière et
-                          opportunités d’insertion professionnelles pour les
-                          jeunes (à confirmer) »
+                          « A définir  »
                         </em>
                       </strong>
                       .

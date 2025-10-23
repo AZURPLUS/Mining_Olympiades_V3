@@ -8,7 +8,7 @@ import withReactContent from "sweetalert2-react-content";
 import { Modal, Button } from "react-bootstrap";
 
 const MySwal = withReactContent(Swal);
-const docUrl = "/doc/plaquette-commerciale-2024.pdf";
+const docUrl = "/doc/plaquette-commerciale-2025.pdf";
 
 export default function (props) {
   const [isLoading, setIsLoading] = useState(false);
