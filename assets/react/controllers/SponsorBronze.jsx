@@ -4,10 +4,10 @@ const SponsorBronze = () => {
   const sponsors = [
     "/assets/images/sponsors/bronze/bronze-logo-1.png",
     "/assets/images/sponsors/bronze/bronze-logo-2.png",
-    "/assets/images/sponsors/bronze/bronze-logo-3.png",
-    "/assets/images/sponsors/bronze/bronze-logo-4.png",
-    "/assets/images/sponsors/bronze/bronze-logo-5.png",
-    "/assets/images/sponsors/bronze/bronze-logo-6.png",
+    //"/assets/images/sponsors/bronze/bronze-logo-3.png",
+    //"/assets/images/sponsors/bronze/bronze-logo-4.png",
+    //"/assets/images/sponsors/bronze/bronze-logo-5.png",
+    //"/assets/images/sponsors/bronze/bronze-logo-6.png",
   ];
 
   return (

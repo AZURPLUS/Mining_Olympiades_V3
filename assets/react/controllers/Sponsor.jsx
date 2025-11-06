@@ -1,6 +1,8 @@
 import React from "react";
 import "./../../styles/sponsor.scss";
 import styled from "styled-components";
+import SponsorPlatine from "./SponsorPlatine.jsx";
+import SponsorOr from "./SponsorOr.jsx";
 import SponsorArgent from "./SponsorArgent.jsx";
 import SponsorBronze from "./SponsorBronze.jsx";
 import Partenaire from "./Partenaire.jsx";
@@ -20,14 +22,16 @@ const Sponsor = () => {
     <ResponsiveContainer>
       <section className="sponsor">
         <div data-aos="fade-down" data-aos-duration="2000" data-aos-delay="100">
-          <h1> Nos Sponsors et Partenaires 2024 </h1>
+          <h1> Nos Sponsors et Partenaires </h1>
         </div>
 
         {/* les logos des partenaires et sponsor */}
         {<div className="logo-sponsors">
-          <SponsorArgent />
-          <SponsorBronze />
-          <Partenaire />
+            <SponsorPlatine /> 
+            <SponsorOr /> 
+            <SponsorArgent />
+            <SponsorBronze />
+            <Partenaire />
         </div> }
       </section>
     </ResponsiveContainer>

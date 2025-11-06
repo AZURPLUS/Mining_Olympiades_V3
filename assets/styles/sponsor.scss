@@ -85,6 +85,126 @@ $couleur-verte: #0b8e36;
     }
   }
 
+  .sponsor-or {
+    padding-bottom: 30px;
+    .title {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 300;
+
+      .line {
+        content: "";
+        position: absolute;
+        width: 800px;
+        height: 1px;
+        background-color: gray;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+
+        @media screen and (max-width: 800px) {
+          width: 90vw;
+        }
+      }
+
+      .img-ctn {
+        width: 170px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+        }
+      }
+    }
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+
+      .img-ctn {
+        width: 105px;
+        height: 105px;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+  }
+
+  .sponsor-platine {
+    padding-bottom: 30px;
+    .title {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 300;
+
+      .line {
+        content: "";
+        position: absolute;
+        width: 800px;
+        height: 1px;
+        background-color: gray;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+
+        @media screen and (max-width: 800px) {
+          width: 90vw;
+        }
+      }
+
+      .img-ctn {
+        width: 170px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+        }
+      }
+    }
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+
+      .img-ctn {
+        width: 105px;
+        height: 105px;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+  }
+
   .sponsor-bronze {
     padding-bottom: 30px;
   }

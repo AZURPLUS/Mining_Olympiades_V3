@@ -1,24 +1,25 @@
 import React from "react";
 
 const sponsors = [
-  "/assets/images/sponsors/argent/argent-1.png", 
-  "/assets/images/sponsors/argent/argent-2.png", 
-  "/assets/images/sponsors/argent/argent-3.png",
+  "/assets/images/sponsors/or/or-1.png", 
+  "/assets/images/sponsors/or/or-2.png", 
+  "/assets/images/sponsors/or/or-4.png",
+  //"/assets/images/sponsors/or/or-3.png",
 ];
 
-const SponsorArgent = () => {
+const SponsorOr = () => {
   return (
-    <div className="sponsor-argent">
+    <div className="sponsor-or">
       <div className="title">
         <div className="line"></div>
         <div className="img-ctn">
-          <img src="/assets/images/argent-0.png" alt="" />
+          <img src="/assets/images/or-0.png" alt="" />
         </div>
       </div>
       <div className="logos">
         {sponsors.map((image, index) => (
           <div key={index} className="img-ctn">
-            <img src={image} alt={`Sponsor argent ${index + 1}`} />
+            <img src={image} alt={`Sponsor or ${index + 1}`} />
           </div>
         ))}
       </div>
@@ -26,4 +27,4 @@ const SponsorArgent = () => {
   );
 };
 
-export default SponsorArgent;
+export default SponsorOr;
