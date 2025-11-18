@@ -4,6 +4,7 @@ const sponsors = [
   "/assets/images/sponsors/argent/argent-1.png", 
   "/assets/images/sponsors/argent/argent-2.png", 
   "/assets/images/sponsors/argent/argent-3.png",
+  "/assets/images/sponsors/argent/argent-4.png",
 ];
 
 const SponsorArgent = () => {

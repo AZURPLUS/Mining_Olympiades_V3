@@ -4,8 +4,10 @@ const Partenaire = () => {
     "/assets/images/partenaires/partenaire-1.png",
     "/assets/images/partenaires/partenaire-2.png",
     "/assets/images/partenaires/partenaire-3.png",
-    //"/assets/images/partenaires/partenaire-4.png",
-    //"/assets/images/partenaires/partenaire-5.png",
+    "/assets/images/partenaires/partenaire-4.png",
+    "/assets/images/partenaires/partenaire-5.png",
+    "/assets/images/partenaires/partenaire-6.png",
+    "/assets/images/partenaires/partenaire-7.png"
   ];
 
   return (
