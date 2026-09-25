@@ -1,0 +1,1082 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace Membre{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5 pt-4">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="fw-bold" style="color: #0e9346;">Espace Membre</h2>
+                    <p class="text-muted">Gérez vos disciplines et participants</p>
+                </div>
+            </div>
+
+            <ul class="nav nav-tabs mb-4" id="membreTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="disciplines-tab" data-bs-toggle="tab" data-bs-target="#disciplines" type="button" role="tab" aria-controls="disciplines" aria-selected="true">
+                        <i class="bi bi-trophy"></i> Vos Disciplines
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="participants-tab" data-bs-toggle="tab" data-bs-target="#participants" type="button" role="tab" aria-controls="participants" aria-selected="false">
+                        <i class="bi bi-people"></i> Vos Participants
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="membreTabContent">
+                <div class="tab-pane fade show active" id="disciplines" role="tabpanel" aria-labelledby="disciplines-tab">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Disciplines souscrites</h5>
+                            <div class="d-flex gap-2">
+                                <div class="btn-group">
+                                    <button class="btn btn-outline-success btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                        <i class="bi bi-download"></i> Exporter
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_membre_export_disciplines', {format: 'csv'})) }}"><i class="bi bi-filetype-csv"></i> CSV</a></li>
+                                        <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_membre_export_disciplines', {format: 'xlsx'})) }}"><i class="bi bi-file-earmark-excel"></i> Excel</a></li>
+                                        <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_membre_export_disciplines', {format: 'pdf'})) }}"><i class="bi bi-filetype-pdf"></i> PDF</a></li>
+                                    </ul>
+                                </div>
+                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addDisciplineModal"
+                                        {% if not canAddMore %}disabled{% endif %}>
+                                    <i class="bi bi-plus-circle"></i> Ajouter une discipline
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {% if disciplines is empty %}
+                                <div class="text-center py-4">
+                                    <i class="bi bi-trophy" style="font-size: 3rem; color: #ddd;"></i>
+                                    <p class="mt-2 text-muted">Aucune discipline sélectionnée.</p>
+                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addDisciplineModal">
+                                        Choisir des disciplines
+                                    </button>
+                                </div>
+                            {% else %}
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle" id="disciplinesTable">
+                                        <thead class="table-light">
+                                        <tr>
+                                            <th>Titre</th>
+                                            <th class="text-center">Inscrits</th>
+                                            <th class="text-center">Requis</th>
+                                            <th class="text-center">Restant</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for discipline in disciplines %}
+                                            {% set stats = disciplineStats[discipline.id] ?? {count: 0, required: 0, remaining: 0} %}
+                                            <tr id="discipline-row-{{ discipline.id }}">
+                                                <td class="fw-medium">{{ discipline.titre }}</td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-primary rounded-pill">{{ stats.count }}</span>
+                                                </td>
+                                                <td class="text-center">{{ stats.required }}</td>
+                                                <td class="text-center">
+                                                    {% if stats.remaining > 0 %}
+                                                        <span class="badge bg-warning text-dark">{{ stats.remaining }}</span>
+                                                    {% else %}
+                                                        <span class="badge bg-success">Complet</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-info voir-participants"
+                                                                data-discipline-id="{{ discipline.id }}"
+                                                                data-discipline-titre="{{ discipline.titre }}"
+                                                                title="Voir participants">
+                                                            <i class="bi bi-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-success ajouter-participant"
+                                                                data-discipline-id="{{ discipline.id }}"
+                                                                title="Ajouter participant">
+                                                            <i class="bi bi-person-plus"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-warning modifier-discipline"
+                                                                data-discipline-id="{{ discipline.id }}"
+                                                                title="Modifier (changer de discipline)">
+                                                            <i class="bi bi-arrow-repeat"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-danger supprimer-discipline"
+                                                                data-discipline-id="{{ discipline.id }}"
+                                                                data-discipline-titre="{{ discipline.titre }}"
+                                                                title="Supprimer">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="participants" role="tabpanel" aria-labelledby="participants-tab">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-white d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <h5 class="mb-0">Liste des participants</h5>
+                            <div class="d-flex gap-2">
+                                <div class="btn-group">
+                                    <button class="btn btn-outline-success btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                        <i class="bi bi-download"></i> Exporter
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_membre_export_participants', {format: 'csv'})) }}"><i class="bi bi-filetype-csv"></i> CSV</a></li>
+                                        <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_membre_export_participants', {format: 'xlsx'})) }}"><i class="bi bi-file-earmark-excel"></i> Excel</a></li>
+                                        <li><a class="dropdown-item" href="{{ absolute_url(path('app_frontend_membre_export_participants', {format: 'pdf'})) }}"><i class="bi bi-filetype-pdf"></i> PDF (avec photos)</a></li>
+                                    </ul>
+                                </div>
+                                <select id="filterDiscipline" class="form-select form-select-sm" style="width: auto;">
+                                    <option value="0">Toutes les disciplines</option>
+                                    {% for discipline in disciplines %}
+                                        <option value="{{ discipline.id }}">{{ discipline.titre }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addParticipantModal">
+                                    <i class="bi bi-person-plus"></i> Ajouter
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle" id="participantsTable">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>Photo</th>
+                                        <th>Carte</th>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>Email</th>
+                                        <th>Téléphone</th>
+                                        <th>Matricule</th>
+                                        <th>Licence</th>
+                                        <th>Discipline(s)</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="participantsBody">
+                                    <tr id="participantsLoading">
+                                        <td colspan="10" class="text-center py-4">
+                                            <div class="spinner-border text-success" role="status">
+                                                <span class="visually-hidden">Chargement...</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav id="participantsPagination" class="mt-3"></nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="addDisciplineModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter des disciplines</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-3">Sélectionnez une ou plusieurs disciplines (maximum 4 au total).</p>
+                    <div id="maxLimitMessage" class="alert d-none mb-3" style="background:#fff3e0;color:#ed741f;border:1px solid #ed741f;border-radius:8px;font-size:0.9rem;">
+                        <i class="bi bi-exclamation-triangle"></i> Maximum de <strong>4 disciplines</strong> atteint
+                    </div>
+                    <div class="row g-3" id="disciplineCheckboxList">
+                        {% set existingCount = selectedDisciplineIds|length %}
+                        {% set maxSelectable = 4 - existingCount %}
+                        {% for d in allDisciplines %}
+                            {% set in = d.id in selectedDisciplineIds %}
+                            <div class="col-md-6">
+                                <label class="discipline-card {{ in ? 'already-selected' : '' }}">
+                                    <input type="checkbox" class="discipline-checkbox"
+                                           value="{{ d.id }}" {{ in ? 'disabled' : '' }}
+                                           data-titre="{{ d.titre }}" data-joueur="{{ d.joueur }}"
+                                           data-max="{{ maxSelectable }}">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-medium">{{ d.titre }}</span>
+                                            <span class="badge" style="background:#468f34;border-radius:50px;">{{ d.joueur }} joueur(s)</span>
+                                        </div>
+                                        {% if in %}
+                                            <small class="text-success mt-1 d-block"><i class="bi bi-check-circle"></i> Déjà sélectionnée</small>
+                                        {% endif %}
+                                    </div>
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <span id="selectedCountBadge" class="text-muted">0 discipline(s) sélectionnée(s)</span>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-success" id="confirmAddDiscipline">Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modifyDisciplineModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modifier la discipline</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Choisissez une nouvelle discipline pour remplacer <strong id="oldDisciplineName"></strong></p>
+                    <div class="mb-3">
+                        <label class="form-label">Nouvelle discipline</label>
+                        <select id="modifyDisciplineSelect" class="form-select">
+                            <option value="">Choisir...</option>
+                            {% for d in allDisciplines %}
+                                {% if d.id not in selectedDisciplineIds %}
+                                    <option value="{{ d.id }}">{{ d.titre }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-warning" id="confirmModifyDiscipline">Modifier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="participantDisciplineModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter une discipline au participant</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Discipline</label>
+                        <select id="participantDisciplineSelect" class="form-select">
+                            <option value="">Choisir...</option>
+                            {% for discipline in disciplines %}
+                                <option value="{{ discipline.id }}">{{ discipline.titre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-success" id="confirmParticipantDiscipline">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Changer la photo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nouvelle photo</label>
+                        <input type="file" id="photoInput" class="form-control" accept="image/*">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirmPhoto">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="carteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Changer la carte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nouvelle carte</label>
+                        <input type="file" id="carteInput" class="form-control" accept="image/*">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirmCarte">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modifier les informations</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label class="form-label">Nom</label>
+                        <input type="text" id="infoNom" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Prénom</label>
+                        <input type="text" id="infoPrenoms" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Matricule</label>
+                        <input type="text" id="infoMatricule" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Contact</label>
+                        <input type="text" id="infoContact" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="infoEmail" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirmInfo">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addParticipantModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius:16px;border:none;">
+                <div class="modal-header" style="border:none;padding-bottom:0;">
+                    <h5 class="modal-title fw-bold" style="color:#468f34;">Ajouter un participant</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <a href="{{ absolute_url(path('app_frontend_membre_import')) }}" class="text-decoration-none">
+                                <div class="choice-card p-4" style="border:2px solid #e0e0e0;border-radius:12px;cursor:pointer;transition:all 0.2s;">
+                                    <div style="font-size:3rem;color:#468f34;margin-bottom:12px;">
+                                        <i class="bi bi-file-earmark-spreadsheet"></i>
+                                    </div>
+                                    <h6 class="fw-bold mb-1" style="color:#468f34;">Import Excel</h6>
+                                    <small class="text-muted">Ajouter plusieurs participants<br>via un fichier Excel</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{ absolute_url(path('app_frontend_membre_add_participant')) }}" class="text-decoration-none">
+                                <div class="choice-card p-4" style="border:2px solid #e0e0e0;border-radius:12px;cursor:pointer;transition:all 0.2s;">
+                                    <div style="font-size:3rem;color:#ed741f;margin-bottom:12px;">
+                                        <i class="bi bi-person-plus"></i>
+                                    </div>
+                                    <h6 class="fw-bold mb-1" style="color:#ed741f;">Ajout manuel</h6>
+                                    <small class="text-muted">Ajouter un participant<br>via un formulaire</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center" style="border:none;padding-top:0;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius:50px;padding:8px 32px;">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="detailParticipantsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailParticipantsTitle">Participants</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle" id="detailParticipantsTable">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Photo</th>
+                                <th>Carte</th>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Matricule</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Licence</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody id="detailParticipantsBody">
+                            <tr><td colspan="9" class="text-center py-3"><div class="spinner-border text-success"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block breadcrumb %}
+    <div class="zoneBreadcrumb">
+        <section id="breadcrumb">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ absolute_url(path('app_home')) }}"><i class="bi bi-house-fill"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#">Espace membre</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Tableau de bord</li>
+                </ol>
+            </nav>
+        </section>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .nav-tabs .nav-link { color: #495057; font-weight: 500; }
+        .nav-tabs .nav-link.active { color: #0e9346; border-bottom: 3px solid #0e9346; font-weight: 600; }
+        .card { border: none; border-radius: 12px; }
+        .card-header { border-radius: 12px 12px 0 0 !important; border-bottom: 2px solid #f0f0f0; }
+        .table th { font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: #6c757d; }
+        .btn-group .btn { border-radius: 4px !important; margin: 0 2px; }
+        .media-thumb { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 2px solid #f0f0f0; }
+        .media-thumb-sm { width: 35px; height: 35px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd; }
+        .pagination .page-link { color: #0e9346; }
+        .pagination .page-item.active .page-link { background-color: #0e9346; border-color: #0e9346; color: #fff; }
+
+        .discipline-card {
+            display: block;
+            cursor: pointer;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            transition: all 0.2s ease;
+            background: #fff;
+            margin: 0;
+        }
+        .discipline-card:hover {
+            border-color: #468f34;
+            background: #fffdfa;
+        }
+        .discipline-card input[type="checkbox"] {
+            display: none;
+        }
+        .discipline-card input[type="checkbox"]:checked + .card-body {
+            border-color: #468f34;
+        }
+        .discipline-card input[type="checkbox"]:checked + .card-body .fw-medium {
+            color: #468f34;
+        }
+        .discipline-card input[type="checkbox"]:checked + .card-body::before {
+            content: "✓";
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 1.2rem;
+            color: #468f34;
+            font-weight: bold;
+        }
+        .discipline-card .card-body {
+            position: relative;
+            padding: 0;
+        }
+        .discipline-card.already-selected {
+            border-color: #468f34;
+            background: #fffdfa;
+            opacity: 0.85;
+            cursor: not-allowed;
+        }
+        .discipline-card.already-selected .card-body::before {
+            content: "✓";
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 1.2rem;
+            color: #468f34;
+            font-weight: bold;
+        }
+        .discipline-card.selected {
+            border-color: #468f34;
+            background: #fffdfa;
+        }
+        .btn-success {
+            background: #468f34 !important;
+            border-color: #468f34 !important;
+        }
+        .btn-success:hover {
+            background: #3a7a2b !important;
+            border-color: #3a7a2b !important;
+        }
+        .btn-outline-success {
+            color: #468f34 !important;
+            border-color: #468f34 !important;
+        }
+        .btn-outline-success:hover {
+            background: #468f34 !important;
+            color: #fff !important;
+        }
+        .badge-success-custom {
+            background: #468f34 !important;
+        }
+        .text-success-custom {
+            color: #468f34 !important;
+        }
+        .nav-tabs .nav-link.active {
+            color: #468f34 !important;
+            border-bottom: 3px solid #468f34 !important;
+        }
+        .btn-outline-warning {
+            color: #ed741f !important;
+            border-color: #ed741f !important;
+        }
+        .btn-outline-warning:hover {
+            background: #ed741f !important;
+            color: #fff !important;
+        }
+
+        .choice-card:hover {
+            border-color: #468f34 !important;
+            background: #fffdfa !important;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(70, 143, 52, 0.15);
+        }
+        .choice-card a { text-decoration: none; }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let currentParticipantId = null;
+        let currentPage = 1;
+        let currentDisciplineFilter = 0;
+        let currentModifyDisciplineId = null;
+        let currentDetailDisciplineId = null;
+        const MEDIA_PATH = '{{ absolute_url(asset('upload/participant/' ~ compagnieSlug ~ '/')) }}';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadParticipants(1);
+
+            document.querySelectorAll('.voir-participants').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const disciplineId = this.dataset.disciplineId;
+                    const disciplineTitre = this.dataset.disciplineTitre;
+                    currentDetailDisciplineId = disciplineId;
+                    document.getElementById('detailParticipantsTitle').textContent =
+                        'Participants - ' + disciplineTitre;
+                    loadDetailParticipants(disciplineId);
+                    new bootstrap.Modal(document.getElementById('detailParticipantsModal')).show();
+                });
+            });
+
+            document.querySelectorAll('.supprimer-discipline').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const id = this.dataset.disciplineId;
+                    const titre = this.dataset.disciplineTitre;
+                    Swal.fire({
+                        title: 'Supprimer la discipline ?',
+                        text: `Voulez-vous retirer "${titre}" de votre abonnement ?`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Oui, supprimer',
+                        cancelButtonText: 'Annuler'
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            fetch(`{{ absolute_url(path('app_frontend_membre_api_discipline_remove', {id: 0})) }}`.replace('0', id), {
+                                method: 'DELETE',
+                            }).then(r => r.json()).then(data => {
+                                if (data.success) {
+                                    Swal.fire('Supprimé', data.message, 'success');
+                                    location.reload();
+                                } else {
+                                    Swal.fire('Erreur', data.error, 'error');
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+
+            document.querySelectorAll('.modifier-discipline').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    currentModifyDisciplineId = this.dataset.disciplineId;
+                    const options = document.getElementById('modifyDisciplineSelect');
+                    document.getElementById('oldDisciplineName').textContent =
+                        this.closest('tr').querySelector('td:first-child').textContent.trim();
+                    new bootstrap.Modal(document.getElementById('modifyDisciplineModal')).show();
+                });
+            });
+
+            document.querySelectorAll('.ajouter-participant').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    currentParticipantId = null;
+                    document.getElementById('participantDisciplineSelect').value = '';
+                    new bootstrap.Modal(document.getElementById('participantDisciplineModal')).show();
+                });
+            });
+
+            document.getElementById('confirmAddDiscipline').addEventListener('click', function () {
+                const checked = document.querySelectorAll('.discipline-checkbox:checked:not(:disabled)');
+                if (checked.length === 0) {
+                    Swal.fire('Erreur', 'Veuillez cocher au moins une discipline', 'warning');
+                    return;
+                }
+                const totalAdding = checked.length;
+                const formData = new FormData();
+                checked.forEach(cb => formData.append('disciplines[]', cb.value));
+                fetch('{{ absolute_url(path('app_frontend_membre_api_discipline_add')) }}', {
+                    method: 'POST',
+                    body: formData,
+                }).then(r => r.json()).then(data => {
+                    if (data.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('addDisciplineModal')).hide();
+                        Swal.fire('Ajouté', data.message, 'success');
+                        location.reload();
+                    } else {
+                        Swal.fire('Erreur', data.error, 'error');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.discipline-checkbox:not(:disabled)').forEach(cb => {
+                cb.addEventListener('change', function () {
+                    const existing = {{ selectedDisciplineIds|length }};
+                    const maxSelectable = parseInt(this.dataset.max);
+                    const checked = document.querySelectorAll('.discipline-checkbox:checked:not(:disabled)').length;
+                    const msg = document.getElementById('maxLimitMessage');
+
+                    if (this.checked && checked > maxSelectable) {
+                        this.checked = false;
+                        msg.classList.remove('d-none');
+                        setTimeout(() => msg.classList.add('d-none'), 3000);
+                        return;
+                    }
+
+                    this.closest('.discipline-card').classList.toggle('selected', this.checked);
+                    msg.classList.add('d-none');
+                    const count = document.querySelectorAll('.discipline-checkbox:checked:not(:disabled)').length;
+                    document.getElementById('selectedCountBadge').textContent = count + ' discipline(s) sélectionnée(s)';
+                });
+            });
+
+            document.getElementById('confirmModifyDiscipline').addEventListener('click', function () {
+                const select = document.getElementById('modifyDisciplineSelect');
+                const newDisciplineId = select.value;
+                if (!newDisciplineId) {
+                    Swal.fire('Erreur', 'Veuillez choisir une discipline', 'warning');
+                    return;
+                }
+                fetch(`{{ absolute_url(path('app_frontend_membre_api_discipline_update', {id: 0})) }}`.replace('0', currentModifyDisciplineId), {
+                    method: 'PUT',
+                    body: JSON.stringify({discipline: parseInt(newDisciplineId)}),
+                    headers: {'Content-Type': 'application/json'},
+                }).then(r => r.json()).then(data => {
+                    if (data.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('modifyDisciplineModal')).hide();
+                        Swal.fire('Modifié', data.message, 'success');
+                        location.reload();
+                    } else {
+                        Swal.fire('Erreur', data.error, 'error');
+                    }
+                });
+            });
+
+            document.getElementById('confirmParticipantDiscipline').addEventListener('click', function () {
+                const select = document.getElementById('participantDisciplineSelect');
+                const disciplineId = select.value;
+                if (!disciplineId) {
+                    Swal.fire('Erreur', 'Veuillez choisir une discipline', 'warning');
+                    return;
+                }
+                if (!currentParticipantId) {
+                    Swal.fire('Erreur', 'Participant non identifié', 'error');
+                    return;
+                }
+                fetch(`{{ absolute_url(path('app_frontend_membre_api_participant_discipline', {id: 0})) }}`.replace('0', currentParticipantId), {
+                    method: 'PUT',
+                    body: JSON.stringify({discipline: parseInt(disciplineId)}),
+                    headers: {'Content-Type': 'application/json'},
+                }).then(r => r.json()).then(data => {
+                    if (data.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('participantDisciplineModal')).hide();
+                        Swal.fire('Ajouté', data.message, 'success');
+                        loadParticipants(currentPage);
+                        loadDetailParticipants(currentDetailDisciplineId);
+                    } else {
+                        Swal.fire('Erreur', data.error, 'error');
+                    }
+                });
+            });
+
+            document.getElementById('confirmPhoto').addEventListener('click', function () {
+                const fileInput = document.getElementById('photoInput');
+                if (!fileInput.files.length) {
+                    Swal.fire('Erreur', 'Veuillez choisir une photo', 'warning');
+                    return;
+                }
+                const formData = new FormData();
+                formData.append('media', fileInput.files[0]);
+                fetch(`{{ absolute_url(path('app_frontend_membre_api_participant_photo', {id: 0})) }}`.replace('0', currentParticipantId), {
+                    method: 'POST',
+                    body: formData,
+                }).then(r => r.json()).then(data => {
+                    if (data.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('photoModal')).hide();
+                        Swal.fire('OK', data.message, 'success');
+                        loadParticipants(currentPage);
+                        loadDetailParticipants(currentDetailDisciplineId);
+                    } else {
+                        Swal.fire('Erreur', data.error, 'error');
+                    }
+                });
+            });
+
+            document.getElementById('confirmCarte').addEventListener('click', function () {
+                const fileInput = document.getElementById('carteInput');
+                if (!fileInput.files.length) {
+                    Swal.fire('Erreur', 'Veuillez choisir une carte', 'warning');
+                    return;
+                }
+                const formData = new FormData();
+                formData.append('carte', fileInput.files[0]);
+                fetch(`{{ absolute_url(path('app_frontend_membre_api_participant_carte', {id: 0})) }}`.replace('0', currentParticipantId), {
+                    method: 'POST',
+                    body: formData,
+                }).then(r => r.json()).then(data => {
+                    if (data.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('carteModal')).hide();
+                        Swal.fire('OK', data.message, 'success');
+                        loadParticipants(currentPage);
+                        loadDetailParticipants(currentDetailDisciplineId);
+                    } else {
+                        Swal.fire('Erreur', data.error, 'error');
+                    }
+                });
+            });
+
+            document.getElementById('confirmInfo').addEventListener('click', function () {
+                const data = {
+                    nom: document.getElementById('infoNom').value,
+                    prenoms: document.getElementById('infoPrenoms').value,
+                    matricule: document.getElementById('infoMatricule').value,
+                    contact: document.getElementById('infoContact').value,
+                    email: document.getElementById('infoEmail').value,
+                };
+                fetch(`{{ absolute_url(path('app_frontend_membre_api_participant_info', {id: 0})) }}`.replace('0', currentParticipantId), {
+                    method: 'PUT',
+                    body: JSON.stringify(data),
+                    headers: {'Content-Type': 'application/json'},
+                }).then(r => r.json()).then(data => {
+                    if (data.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('infoModal')).hide();
+                        Swal.fire('OK', data.message, 'success');
+                        loadParticipants(currentPage);
+                        loadDetailParticipants(currentDetailDisciplineId);
+                    } else {
+                        Swal.fire('Erreur', data.error, 'error');
+                    }
+                });
+            });
+
+            document.getElementById('filterDiscipline').addEventListener('change', function () {
+                currentDisciplineFilter = parseInt(this.value);
+                loadParticipants(1);
+            });
+        });
+
+        function loadParticipants(page) {
+            currentPage = page;
+            const tbody = document.getElementById('participantsBody');
+            tbody.innerHTML = '<tr><td colspan="10" class="text-center py-4"><div class="spinner-border text-success"></div></td></tr>';
+
+            let url = `{{ absolute_url(path('app_frontend_membre_api_participants')) }}?page=${page}&limit=10`;
+            if (currentDisciplineFilter > 0) {
+                url += `&discipline=${currentDisciplineFilter}`;
+            }
+
+            fetch(url)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.data.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="10" class="text-center py-4 text-muted">Aucun participant trouvé</td></tr>';
+                    } else {
+                        tbody.innerHTML = '';
+                        data.data.forEach(p => {
+                            const mediaUrl = p.media
+                                ? MEDIA_PATH + p.media
+                                : `{{ absolute_url(asset('assets/images/avatar.png')) }}`;
+                            const carteUrl = p.carte
+                                ? MEDIA_PATH + p.carte
+                                : `{{ absolute_url(asset('assets/images/avatar.png')) }}`;
+                            const disciplines = p.disciplines.map(d => d.titre).join(', ') || 'Aucune';
+
+                            tbody.innerHTML += `
+                                <tr id="participant-row-${p.id}">
+                                    <td><img src="${mediaUrl}" class="media-thumb" alt="photo" onerror="this.src='{{ absolute_url(asset('assets/images/avatar.png')) }}'"></td>
+                                    <td><img src="${carteUrl}" class="media-thumb-sm" alt="carte" onerror="this.src='{{ absolute_url(asset('assets/images/avatar.png')) }}'"></td>
+                                    <td>${escapeHtml(p.nom || '')}</td>
+                                    <td>${escapeHtml(p.prenoms || '')}</td>
+                                    <td>${escapeHtml(p.email || '')}</td>
+                                    <td>${escapeHtml(p.contact || '')}</td>
+                                    <td>${escapeHtml(p.matricule || '')}</td>
+                                    <td>${escapeHtml(p.licence || '')}</td>
+                                    <td>${escapeHtml(disciplines)}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group btn-group-sm">
+                                            <button class="btn btn-outline-warning modifier-participant-discipline" data-id="${p.id}" title="Modifier discipline"><i class="bi bi-arrow-repeat"></i></button>
+                                            <button class="btn btn-outline-danger supprimer-participant" data-id="${p.id}" data-nom="${escapeHtml(p.nom || '')} ${escapeHtml(p.prenoms || '')}" title="Supprimer"><i class="bi bi-trash"></i></button>
+                                            <button class="btn btn-outline-primary changer-photo" data-id="${p.id}" title="Photo"><i class="bi bi-camera"></i></button>
+                                            <button class="btn btn-outline-info changer-carte" data-id="${p.id}" title="Carte"><i class="bi bi-card-image"></i></button>
+                                            <button class="btn btn-outline-secondary modifier-infos" data-id="${p.id}" data-nom="${escapeHtml(p.nom || '')}" data-prenoms="${escapeHtml(p.prenoms || '')}" data-matricule="${escapeHtml(p.matricule || '')}" data-contact="${escapeHtml(p.contact || '')}" data-email="${escapeHtml(p.email || '')}" title="Infos"><i class="bi bi-pencil"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+
+                        attachParticipantEvents();
+                    }
+
+                    renderPagination(data.page, data.pages, data.total);
+                });
+        }
+
+        function loadDetailParticipants(disciplineId) {
+            const tbody = document.getElementById('detailParticipantsBody');
+            tbody.innerHTML = '<tr><td colspan="9" class="text-center py-3"><div class="spinner-border text-success"></div></td></tr>';
+
+            fetch(`{{ absolute_url(path('app_frontend_membre_api_participants')) }}?limit=1000&discipline=${disciplineId}`)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.data.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="9" class="text-center py-3 text-muted">Aucun participant dans cette discipline</td></tr>';
+                    } else {
+                        tbody.innerHTML = '';
+                        data.data.forEach(p => {
+                            const hasDiscipline = p.disciplines.some(d => d.id == disciplineId);
+                            const mediaUrl = p.media
+                                ? MEDIA_PATH + p.media
+                                : `{{ absolute_url(asset('assets/images/avatar.png')) }}`;
+                            const carteUrl = p.carte
+                                ? MEDIA_PATH + p.carte
+                                : `{{ absolute_url(asset('assets/images/avatar.png')) }}`;
+
+                            tbody.innerHTML += `
+                                <tr>
+                                    <td><img src="${mediaUrl}" class="media-thumb" alt="photo" onerror="this.src='{{ absolute_url(asset('assets/images/avatar.png')) }}'"></td>
+                                    <td><img src="${carteUrl}" class="media-thumb-sm" alt="carte" onerror="this.src='{{ absolute_url(asset('assets/images/avatar.png')) }}'"></td>
+                                    <td>${escapeHtml(p.nom || '')}</td>
+                                    <td>${escapeHtml(p.prenoms || '')}</td>
+                                    <td>${escapeHtml(p.matricule || '')}</td>
+                                    <td>${escapeHtml(p.contact || '')}</td>
+                                    <td>${escapeHtml(p.email || '')}</td>
+                                    <td>${escapeHtml(p.licence || '')}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group btn-group-sm">
+                                            <button class="btn btn-outline-primary changer-photo" data-id="${p.id}" title="Modifier media"><i class="bi bi-camera"></i></button>
+                                            <button class="btn btn-outline-secondary modifier-infos" data-id="${p.id}" data-nom="${escapeHtml(p.nom || '')}" data-prenoms="${escapeHtml(p.prenoms || '')}" data-matricule="${escapeHtml(p.matricule || '')}" data-contact="${escapeHtml(p.contact || '')}" data-email="${escapeHtml(p.email || '')}" title="Modifier info"><i class="bi bi-pencil"></i></button>
+                                            ${hasDiscipline ? `<button class="btn btn-outline-danger retirer-discipline" data-id="${p.id}" data-discipline-id="${disciplineId}" title="Retirer"><i class="bi bi-x-circle"></i></button>` : ''}
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                    }
+
+                    document.querySelectorAll('.retirer-discipline').forEach(btn => {
+                        btn.addEventListener('click', function () {
+                            const pid = this.dataset.id;
+                            const did = this.dataset.disciplineId;
+                            Swal.fire({
+                                title: 'Retirer ?',
+                                text: 'Retirer ce participant de la discipline ?',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#d33',
+                                confirmButtonText: 'Retirer',
+                                cancelButtonText: 'Annuler'
+                            }).then(r => {
+                                if (r.isConfirmed) {
+                                    fetch(`{{ absolute_url(path('app_frontend_membre_api_participant_discipline_remove', {id: 0, disciplineId: 0})) }}`.replace('/0/discipline/0', `/${pid}/discipline/${did}`), {
+                                        method: 'DELETE',
+                                    }).then(res => res.json()).then(data => {
+                                        if (data.success) {
+                                            Swal.fire('Retiré', data.message, 'success');
+                                            loadDetailParticipants(disciplineId);
+                                            loadParticipants(currentPage);
+                                        } else {
+                                            Swal.fire('Erreur', data.error, 'error');
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    });
+
+                    attachDetailEvents();
+                });
+        }
+
+        function attachParticipantEvents() {
+            document.querySelectorAll('.modifier-participant-discipline').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    currentParticipantId = parseInt(this.dataset.id);
+                    document.getElementById('participantDisciplineSelect').value = '';
+                    new bootstrap.Modal(document.getElementById('participantDisciplineModal')).show();
+                });
+            });
+
+            document.querySelectorAll('.supprimer-participant').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const id = this.dataset.id;
+                    const nom = this.dataset.nom;
+                    Swal.fire({
+                        title: 'Supprimer ?',
+                        text: `Supprimer définitivement ${nom} ?`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Supprimer',
+                        cancelButtonText: 'Annuler'
+                    }).then(r => {
+                        if (r.isConfirmed) {
+                            fetch(`{{ absolute_url(path('app_frontend_membre_api_participant_delete', {id: 0})) }}`.replace('0', id), {
+                                method: 'DELETE',
+                            }).then(res => res.json()).then(data => {
+                                if (data.success) {
+                                    Swal.fire('Supprimé', data.message, 'success');
+                                    loadParticipants(currentPage);
+                                } else {
+                                    Swal.fire('Erreur', data.error, 'error');
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+
+            document.querySelectorAll('.changer-photo').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    currentParticipantId = parseInt(this.dataset.id);
+                    document.getElementById('photoInput').value = '';
+                    new bootstrap.Modal(document.getElementById('photoModal')).show();
+                });
+            });
+
+            document.querySelectorAll('.changer-carte').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    currentParticipantId = parseInt(this.dataset.id);
+                    document.getElementById('carteInput').value = '';
+                    new bootstrap.Modal(document.getElementById('carteModal')).show();
+                });
+            });
+
+            document.querySelectorAll('.modifier-infos').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    currentParticipantId = parseInt(this.dataset.id);
+                    document.getElementById('infoNom').value = this.dataset.nom;
+                    document.getElementById('infoPrenoms').value = this.dataset.prenoms;
+                    document.getElementById('infoMatricule').value = this.dataset.matricule;
+                    document.getElementById('infoContact').value = this.dataset.contact;
+                    document.getElementById('infoEmail').value = this.dataset.email;
+                    new bootstrap.Modal(document.getElementById('infoModal')).show();
+                });
+            });
+        }
+
+        function attachDetailEvents() {
+            document.querySelectorAll('#detailParticipantsBody .changer-photo').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    currentParticipantId = parseInt(this.dataset.id);
+                    document.getElementById('photoInput').value = '';
+                    new bootstrap.Modal(document.getElementById('photoModal')).show();
+                });
+            });
+
+            document.querySelectorAll('#detailParticipantsBody .modifier-infos').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    currentParticipantId = parseInt(this.dataset.id);
+                    document.getElementById('infoNom').value = this.dataset.nom;
+                    document.getElementById('infoPrenoms').value = this.dataset.prenoms;
+                    document.getElementById('infoMatricule').value = this.dataset.matricule;
+                    document.getElementById('infoContact').value = this.dataset.contact;
+                    document.getElementById('infoEmail').value = this.dataset.email;
+                    new bootstrap.Modal(document.getElementById('infoModal')).show();
+                });
+            });
+        }
+
+        function renderPagination(current, total, count) {
+            const nav = document.getElementById('participantsPagination');
+            if (total <= 1) {
+                nav.innerHTML = count > 0
+                    ? `<p class="text-muted small mb-0">${count} participant(s)</p>`
+                    : '';
+                return;
+            }
+
+            let html = `<p class="text-muted small mb-2">${count} participant(s) - Page ${current}/${total}</p>`;
+            html += '<ul class="pagination pagination-sm justify-content-center mb-0">';
+
+            if (current > 1) {
+                html += `<li class="page-item"><a class="page-link" href="#" data-page="1">&laquo;</a></li>`;
+                html += `<li class="page-item"><a class="page-link" href="#" data-page="${current - 1}">&lsaquo;</a></li>`;
+            }
+
+            const start = Math.max(1, current - 2);
+            const end = Math.min(total, current + 2);
+            for (let i = start; i <= end; i++) {
+                html += `<li class="page-item ${i === current ? 'active' : ''}"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
+            }
+
+            if (current < total) {
+                html += `<li class="page-item"><a class="page-link" href="#" data-page="${current + 1}">&rsaquo;</a></li>`;
+                html += `<li class="page-item"><a class="page-link" href="#" data-page="${total}">&raquo;</a></li>`;
+            }
+
+            html += '</ul>';
+            nav.innerHTML = html;
+
+            nav.querySelectorAll('.page-link').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    loadParticipants(parseInt(this.dataset.page));
+                });
+            });
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+    </script>
+{% endblock %}

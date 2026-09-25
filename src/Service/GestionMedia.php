@@ -48,7 +48,7 @@ class GestionMedia
      * @param $media
      * @return string
      */
-    public function upload(UploadedFile $file, $media = null): string
+    public function upload(UploadedFile $file, $media = null, ?string $companySlug = null): string
     {
         // Initialisation du slug
         $slugify = new AsciiSlugger();

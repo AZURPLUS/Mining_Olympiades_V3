@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body { font-family: 'Helvetica', 'Arial', sans-serif; margin: 20px; }
+        h2 { color: #468f34; text-align: center; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; font-size: 11px; }
+        th { background: #468f34; color: #fff; padding: 8px 4px; text-align: left; font-weight: bold; }
+        td { padding: 4px; border-bottom: 1px solid #ddd; vertical-align: middle; }
+        tr:nth-child(even) td { background: #f9f9f9; }
+        .img-cell { text-align: center; }
+        .img-cell img { width: 35px; height: 35px; object-fit: cover; border-radius: 4px; }
+        .footer { text-align: center; margin-top: 20px; font-size: 10px; color: #999; }
+    </style>
+</head>
+<body>
+    <h2>{{ title }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Carte</th>
+                <th>Nom</th>
+                <th>Prénom(s)</th>
+                <th>Matricule</th>
+                <th>Téléphone</th>
+                <th>Email</th>
+                <th>Licence</th>
+                <th>Discipline(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td class="img-cell">
+                        {% if row.photo %}
+                            <img src="{{ row.photo }}" alt="photo">
+                        {% else %}
+                            <span style="color:#ccc">—</span>
+                        {% endif %}
+                    </td>
+                    <td class="img-cell">
+                        {% if row.carte %}
+                            <img src="{{ row.carte }}" alt="carte">
+                        {% else %}
+                            <span style="color:#ccc">—</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ row.nom }}</td>
+                    <td>{{ row.prenoms }}</td>
+                    <td>{{ row.matricule }}</td>
+                    <td>{{ row.contact }}</td>
+                    <td>{{ row.email }}</td>
+                    <td>{{ row.licence }}</td>
+                    <td>{{ row.disciplines }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="footer">Généré depuis Mining Olympiades</div>
+</body>
+</html>

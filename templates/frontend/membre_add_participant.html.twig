@@ -1,0 +1,241 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter des participants{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5 pt-4">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <a href="{{ absolute_url(path('app_frontend_membre_index')) }}" class="btn btn-sm btn-outline-secondary mb-2">
+                        <i class="bi bi-arrow-left"></i> Retour
+                    </a>
+                    <h2 class="fw-bold" style="color:#468f34;">Ajouter des participants</h2>
+                    <p class="text-muted">Ajoutez un ou plusieurs participants</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card shadow-sm" style="border:none;border-radius:12px;">
+                        <div class="card-body p-4">
+                            <form id="manualForm">
+                                <div id="participantsContainer">
+                                    <div class="participant-block" data-index="0">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h6 class="fw-bold mb-0" style="color:#468f34;">Participant <span class="block-number">1</span></h6>
+                                            <button type="button" class="btn btn-sm btn-outline-danger remove-block d-none">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <label class="form-label fw-medium small">Nom <span class="text-danger">*</span></label>
+                                                <input type="text" name="participants[0][nom]" class="form-control form-control-sm text-uppercase" required style="text-transform:uppercase">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label fw-medium small">Prénom(s) <span class="text-danger">*</span></label>
+                                                <input type="text" name="participants[0][prenoms]" class="form-control form-control-sm text-uppercase" required style="text-transform:uppercase">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label fw-medium small">Téléphone <span class="text-danger">*</span></label>
+                                                <input type="text" name="participants[0][contact]" class="form-control form-control-sm" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label fw-medium small">Email <span class="text-danger">*</span></label>
+                                                <input type="email" name="participants[0][email]" class="form-control form-control-sm" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label fw-medium small">Matricule <span class="text-danger">*</span></label>
+                                                <input type="text" name="participants[0][matricule]" class="form-control form-control-sm" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="my-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button type="button" class="btn btn-outline-success" id="duplicateBtn" style="border-radius:50px;">
+                                        <i class="bi bi-plus-circle"></i> Ajouter un autre participant
+                                    </button>
+                                    <div>
+                                        <a href="{{ absolute_url(path('app_frontend_membre_index')) }}" class="btn btn-outline-secondary me-2" style="border-radius:50px;padding:8px 24px;">Annuler</a>
+                                        <button type="submit" class="btn btn-success" id="submitManualBtn" style="border-radius:50px;padding:8px 32px;background:#468f34;border-color:#468f34;">
+                                            <i class="bi bi-save"></i> Enregistrer tout
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block breadcrumb %}
+    <div class="zoneBreadcrumb">
+        <section id="breadcrumb">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ absolute_url(path('app_home')) }}"><i class="bi bi-house-fill"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{{ absolute_url(path('app_frontend_membre_index')) }}">Espace membre</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Ajout manuel</li>
+                </ol>
+            </nav>
+        </section>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let blockIndex = 0;
+
+        function getBlockHtml(index) {
+            return `
+                <div class="participant-block mt-4 pt-3" data-index="${index}" style="border-top:1px dashed #ddd;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="fw-bold mb-0" style="color:#468f34;">Participant <span class="block-number">${index + 1}</span></h6>
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-block">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-medium small">Nom <span class="text-danger">*</span></label>
+                            <input type="text" name="participants[${index}][nom]" class="form-control form-control-sm text-uppercase" required style="text-transform:uppercase">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-medium small">Prénom(s) <span class="text-danger">*</span></label>
+                            <input type="text" name="participants[${index}][prenoms]" class="form-control form-control-sm text-uppercase" required style="text-transform:uppercase">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-medium small">Téléphone <span class="text-danger">*</span></label>
+                            <input type="text" name="participants[${index}][contact]" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-medium small">Email <span class="text-danger">*</span></label>
+                            <input type="email" name="participants[${index}][email]" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-medium small">Matricule <span class="text-danger">*</span></label>
+                            <input type="text" name="participants[${index}][matricule]" class="form-control form-control-sm" required>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById('duplicateBtn').addEventListener('click', function () {
+            blockIndex++;
+            const container = document.getElementById('participantsContainer');
+            const div = document.createElement('div');
+            div.innerHTML = getBlockHtml(blockIndex);
+            container.appendChild(div.firstElementChild);
+            updateRemoveButtons();
+            updateNumbers();
+        });
+
+        document.addEventListener('click', function (e) {
+            if (e.target.closest('.remove-block')) {
+                const block = e.target.closest('.participant-block');
+                if (block && document.querySelectorAll('.participant-block').length > 1) {
+                    block.remove();
+                    updateNumbers();
+                    updateRemoveButtons();
+                }
+            }
+        });
+
+        function updateNumbers() {
+            const blocks = document.querySelectorAll('.participant-block');
+            blocks.forEach((b, i) => {
+                b.querySelector('.block-number').textContent = i + 1;
+                const inputs = b.querySelectorAll('input');
+                inputs.forEach(inp => {
+                    const name = inp.getAttribute('name');
+                    if (name) {
+                        inp.setAttribute('name', name.replace(/\[\d+\]/, `[${i}]`));
+                    }
+                });
+            });
+        }
+
+        function updateRemoveButtons() {
+            const blocks = document.querySelectorAll('.participant-block');
+            const btns = document.querySelectorAll('.remove-block');
+            btns.forEach(b => {
+                b.classList.toggle('d-none', blocks.length <= 1);
+            });
+        }
+
+        document.getElementById('manualForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const blocks = document.querySelectorAll('.participant-block');
+            let valid = true;
+            blocks.forEach(b => {
+                const inputs = b.querySelectorAll('input[required]');
+                inputs.forEach(inp => {
+                    if (!inp.value.trim()) {
+                        inp.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        inp.classList.remove('is-invalid');
+                    }
+                });
+            });
+
+            if (!valid) {
+                Swal.fire('Champs requis', 'Veuillez remplir tous les champs obligatoires.', 'warning');
+                return;
+            }
+
+            const btn = document.getElementById('submitManualBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Enregistrement...';
+
+            const participants = [];
+            blocks.forEach(b => {
+const inputs = b.querySelectorAll('input');
+                    const p = {};
+                    inputs.forEach(inp => {
+                        const name = inp.getAttribute('name');
+                        if (name) {
+                            const match = name.match(/\[(\w+)\]$/);
+                            if (match) p[match[1]] = inp.value.trim();
+                        }
+                    });
+                    participants.push(p);
+            });
+
+            fetch('{{ absolute_url(path('app_frontend_membre_api_add_participant_manual')) }}', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({participants: participants}),
+            }).then(r => r.json()).then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Ajouté !',
+                        text: data.message,
+                        timer: 2000,
+                        showConfirmButton: false,
+                    }).then(() => {
+                        window.location.href = '{{ absolute_url(path('app_frontend_membre_index')) }}';
+                    });
+                } else {
+                    Swal.fire('Erreur', data.error, 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="bi bi-save"></i> Enregistrer tout';
+                }
+            }).catch(() => {
+                Swal.fire('Erreur', 'Une erreur est survenue', 'error');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="bi bi-save"></i> Enregistrer tout';
+            });
+        });
+    </script>
+{% endblock %}

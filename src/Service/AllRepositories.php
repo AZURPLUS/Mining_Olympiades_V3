@@ -30,9 +30,9 @@ class AllRepositories
     {
         do{
             $lettre_aleatoire = chr(random_int(0,25) + ord('A'));
-            $nombre_aleatoire = random_int(10000,99999);
+            $nombre_aleatoire = random_int(100000,999999);
 
-            $licence = date('y').'-'.$nombre_aleatoire.' '.$lettre_aleatoire;
+            $licence = date('Y').'-'.$nombre_aleatoire.' '.$lettre_aleatoire;
 
             $verifLicence = $this->joueurRepository->findOneBy(['licence' => $licence]);
 

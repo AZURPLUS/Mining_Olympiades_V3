@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body { font-family: 'Helvetica', 'Arial', sans-serif; margin: 20px; }
+        h2 { color: #468f34; text-align: center; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        th { background: #468f34; color: #fff; padding: 8px 6px; text-align: left; font-weight: bold; }
+        td { padding: 6px; border-bottom: 1px solid #ddd; }
+        tr:nth-child(even) td { background: #f9f9f9; }
+        .footer { text-align: center; margin-top: 20px; font-size: 10px; color: #999; }
+    </style>
+</head>
+<body>
+    <h2>{{ title }}</h2>
+    <table>
+        <thead>
+            <tr>
+                {% for h in headers %}
+                    <th>{{ h }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    {% for cell in row %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="footer">Généré depuis Mining Olympiades</div>
+</body>
+</html>

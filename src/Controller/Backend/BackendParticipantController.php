@@ -63,8 +63,9 @@ class BackendParticipantController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_backend_participant_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Joueur $joueur, EntityManagerInterface $entityManager): Response
-    { dd($joueur);
-        $form = $this->createForm(ParticipantType::class, $participant);
+    { 
+        
+        $form = $this->createForm(ParticipantType::class, $joueur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -74,7 +75,7 @@ class BackendParticipantController extends AbstractController
         }
 
         return $this->render('backend_participant/edit.html.twig', [
-            'participant' => $participant,
+            'participant' => $joueur,
             'form' => $form,
         ]);
     }
