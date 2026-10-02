@@ -111,6 +111,7 @@ class AllRepositories
             'matricule' => $joueur->getMatricule(),
             'licence' => $joueur->getLicence(),
             'entreprise' => $joueur->getAbonnement()->getCompagnie()->getTitre(),
+            'compagnieSlug' => $joueur->getAbonnement()->getCompagnie()->getSlug(),
             'email' => $joueur->getEmail(),
             'contact' => $joueur->getContact(),
             'discipline' => $jeu,

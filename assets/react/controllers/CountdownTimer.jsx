@@ -40,7 +40,7 @@ function CountdownTimer({ targetDate }) {
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-  const currentDate = new Date("2025-09-12T00:00:00");
+  const currentDate = new Date();
   const currentDateTms = currentDate.getTime();
 
   const eventDate = new Date(targetDate);
@@ -72,9 +72,9 @@ function CountdownTimer({ targetDate }) {
           >
             <div style={{ marginTop: "8px", fontSize: "24px" }}>
               <strong style={{ marginRight: "5px", fontSize: "24px" }}>
-               Mining Olympiades 2025 : 
+               Mining Olympiades 2026 : 
               </strong>
-              12 - 14 Dec. 2025
+              11 - 12 Dec. 2026
             </div>
 
             <div
@@ -164,9 +164,9 @@ function CountdownTimer({ targetDate }) {
           >
             <div style={{ marginTop: "8px" }}>
               <strong style={{ marginRight: "5px" }}>
-                Mining Olympiades 2025 : 
+                Mining Olympiades 2026 : 
               </strong>
-              12 - 14 Dec. 2025
+              11 - 12 Dec. 2026
             </div>
 
             <div

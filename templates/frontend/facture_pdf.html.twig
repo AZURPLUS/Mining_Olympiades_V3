@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Facture {{ abonnement.reference }}</title>
+    <style>
+        @page { margin: 20mm 15mm; }
+        body { font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; font-size: 10pt; color: #333; line-height: 1.5; }
+
+        .header { width: 100%; margin-bottom: 25px; }
+        .header-table { width: 100%; }
+        .header-table td { vertical-align: middle; }
+        .header-table td:last-child { text-align: right; }
+
+        h1 { color: #468f34; font-size: 22pt; margin: 0 0 2px 0; letter-spacing: 1px; }
+        .subtitle { color: #999; font-size: 8pt; margin: 0; }
+        .facture-ref { font-size: 14pt; color: #468f34; margin: 5px 0 0 0; font-weight: bold; }
+
+        hr { border: none; border-top: 2px solid #468f34; margin: 15px 0; }
+
+        .info-box { width: 100%; margin-bottom: 20px; }
+        .info-box td { vertical-align: top; width: 50%; }
+        .info-box td:last-child { text-align: right; }
+        .info-label { font-size: 7pt; text-transform: uppercase; color: #999; letter-spacing: 1px; margin: 0 0 3px 0; }
+        .info-content { font-size: 9pt; margin: 0; }
+        .info-content strong { font-size: 10pt; }
+
+        table.items { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 9pt; }
+        table.items th { background: #468f34; color: #fff; padding: 8px 6px; text-align: left; font-weight: bold; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.5px; }
+        table.items th.center { text-align: center; }
+        table.items td { padding: 7px 6px; border-bottom: 1px solid #e0e0e0; }
+        table.items td.center { text-align: center; }
+        table.items tr:nth-child(even) td { background: #f8fbf8; }
+        table.items tr:last-child td { border-bottom: 2px solid #468f34; }
+
+        .badge { display: inline-block; padding: 1px 8px; border-radius: 8px; font-size: 8pt; font-weight: bold; }
+        .badge-base { background: #e8e8e8; color: #666; }
+        .badge-supp { background: #d4edda; color: #468f34; }
+
+        .total-box { width: 100%; margin-top: 20px; }
+        .total-box td { vertical-align: top; }
+        .total-box td:last-child { text-align: right; }
+        .total-label { font-size: 9pt; color: #666; margin: 0; }
+        .total-amount { font-size: 18pt; color: #468f34; font-weight: bold; margin: 5px 0 0 0; }
+        .formule-label { font-size: 8pt; color: #999; margin: 0; }
+
+        .footer { position: fixed; bottom: 0; left: 0; right: 0; text-align: center; font-size: 7pt; color: #ccc; border-top: 1px solid #eee; padding-top: 8px; }
+        .conditions { margin-top: 25px; font-size: 7.5pt; color: #999; line-height: 1.6; }
+        .conditions strong { color: #666; }
+    </style>
+</head>
+<body>
+    <table class="header">
+        <tr>
+            <td>
+                <img src="{{ absolute_url(asset('assets/images/Olympiade-logo.png')) }}" alt="Mining Olympiades" style="max-height:55px;">
+            </td>
+            <td>
+                <h1>MINING OLYMPIADES</h1>
+                <p class="subtitle">Chambre des Mines de Côte d'Ivoire (GPMCI)</p>
+                <p class="subtitle">Abidjan, Côte d'Ivoire &mdash; RC: CI-ABJ-2024-xxx</p>
+            </td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <p style="text-align:right;font-size:8pt;color:#999;margin:0 0 5px 0;">Date d'émission : {{ abonnement.createdAt|date('d/m/Y') }}</p>
+    <p class="facture-ref">FACTURE N° {{ abonnement.reference }}</p>
+
+    <table class="info-box">
+        <tr>
+            <td>
+                <p class="info-label">Société</p>
+                <p class="info-content"><strong>{{ compagnie.titre }}</strong></p>
+                <p class="info-content">{{ compagnie.dg }}</p>
+                <p class="info-content">{{ compagnie.representant }}</p>
+                <p class="info-content">{{ compagnie.contact }}</p>
+                <p class="info-content">{{ compagnie.email }}</p>
+            </td>
+            <td>
+                <p class="info-label">Référence abonnement</p>
+                <p class="info-content"><strong>{{ abonnement.reference }}</strong></p>
+                <p class="info-label" style="margin-top:8px;">Année</p>
+                <p class="info-content">{{ abonnement.annee }}</p>
+            </td>
+        </tr>
+    </table>
+
+    <table class="items">
+        <thead>
+            <tr>
+                <th style="width:5%;">#</th>
+                <th>Désignation</th>
+                <th class="center" style="width:12%;">Places</th>
+                <th class="center" style="width:12%;">Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in disciplines %}
+            {% set idx = loop.index %}
+            <tr>
+                <td>{{ idx }}</td>
+                <td>{{ d.titre }}</td>
+                <td class="center">{{ d.joueur }}</td>
+                <td class="center">
+                    {% if idx > 4 %}
+                        <span class="badge badge-supp">Suppl.</span>
+                    {% else %}
+                        <span class="badge badge-base">Base</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="total-box">
+        <tr>
+            <td>
+                <p class="formule-label">{{ totalDisciplines > 4 ? 'Formule avec disciplines supplémentaires' : 'Formule de base (jusqu\'à 4 disciplines)' }}</p>
+            </td>
+            <td>
+                <p class="total-label">Montant total TTC</p>
+                <p class="total-amount">{{ montant|number_format(0, ',', ' ') }} F CFA</p>
+            </td>
+        </tr>
+    </table>
+
+    <div class="conditions">
+        <p><strong>Conditions de paiement :</strong> Le paiement doit être effectué au plus tard le {{ abonnement.createdAt|date_modify('+30 days')|date('d/m/Y') }}.</p>
+        <p><strong>Mode de paiement :</strong> Virement bancaire ou dépôt mobile money sur le compte de la GPMCI. Joindre le reçu de paiement à la comptabilité.</p>
+    </div>
+
+    <div class="footer">
+        <p>Mining Olympiades — GPMCI — {{ "now"|date('d/m/Y H:i') }} — Facture {{ abonnement.reference }}</p>
+    </div>
+</body>
+</html>

@@ -57,7 +57,7 @@ export default function () {
               {mediaUrl && (
                 <img
                   src={mediaUrl}
-                  alt="Mining Olympiades 2025"
+                  alt="Mining Olympiades 2026"
                   className="img-fluid"
                 />
               )}

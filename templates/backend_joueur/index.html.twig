@@ -50,6 +50,7 @@
                                         <th class="text-center text-uppercase">EMAIL</th>
                                         <th class="text-center text-uppercase">LICENCE</th>
                                         <th class="text-center text-uppercase">DISCIPLINE</th>
+                                        <th class="text-center text-uppercase">STATUT</th>
                                         <th class="text-center text-uppercase">ACTIONS</th>
                                     </tr>
                                     </thead>
@@ -69,13 +70,28 @@
                                                 {% endfor %}
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ path('app_backend_joueur_show', {'id': participant.id}) }}"><i class="ti-user"></i></a> &nbsp; | &nbsp;
+                                                {% if participant.status == 'validated' %}
+                                                    <span class="badge bg-success">Validé</span>
+                                                {% elseif participant.status == 'rejected' %}
+                                                    <span class="badge bg-danger badge-rejete" style="cursor:pointer" data-msg="{{ participant.rejectMessage|e('html_attr') }}">Rejeté <i class="ti-info-alt"></i></span>
+                                                {% else %}
+                                                    <span class="badge bg-warning text-dark">En attente</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ path('app_backend_joueur_show', {'id': participant.id}) }}" class="me-2"><i class="ti-user"></i></a>
                                                 <a href="{{ path('app_backend_joueur_edit', {'id': participant.id}) }}"><i class="ti-pencil-alt"></i></a>
+                                                {% if participant.status != 'validated' %}
+                                                    <button class="btn btn-sm btn-success btn-valider ms-1" data-id="{{ participant.id }}" data-nom="{{ participant.nom }} {{ participant.prenoms }}" data-token="{{ csrf_token('valider' ~ participant.id) }}"><i class="ti-check"></i></button>
+                                                {% endif %}
+                                                {% if participant.status != 'rejected' %}
+                                                    <button class="btn btn-sm btn-danger btn-rejeter ms-1" data-id="{{ participant.id }}" data-nom="{{ participant.nom }} {{ participant.prenoms }}" data-token="{{ csrf_token('rejeter' ~ participant.id) }}"><i class="ti-close"></i></button>
+                                                {% endif %}
                                             </td>
                                         </tr>
                                     {% else %}
                                         <tr>
-                                            <td class="text-center" colspan="9">Aucun participant trouvé</td>
+                                            <td class="text-center" colspan="10">Aucun participant trouvé</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -101,13 +117,69 @@
     {{ parent() }}
     <script src="{{ absolute_url(asset('backoffice/vendor/js/prism.js')) }}"></script>
     <script src="{{ absolute_url(asset('backoffice/vendor/DataTables/datatables.min.js')) }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $('#listes').DataTable( {
-            dom: 'Bfrtip',
-            scrollX: true,
-            buttons: [
-                'copy', 'excel', 'pdf'
-            ]
-        } );
+        const table = $('#listes').DataTable({dom:'Bfrtip',scrollX:true,buttons:['copy','excel','pdf']});
+
+        document.querySelectorAll('.badge-rejete').forEach(el => {
+            el.addEventListener('click', function () {
+                Swal.fire('Motif du rejet', this.dataset.msg, 'info');
+            });
+        });
+
+        document.querySelectorAll('.btn-valider').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const nom = this.dataset.nom;
+                const token = this.dataset.token;
+                Swal.fire({
+                    title: 'Valider ' + nom + ' ?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Oui, valider',
+                    cancelButtonText: 'Annuler',
+                    confirmButtonColor: '#468f34',
+                }).then(result => {
+                    if (!result.isConfirmed) return;
+                    const formData = new FormData();
+                    formData.append('_token', token);
+                    fetch('{{ absolute_url(path('app_backend_joueur_valider', {id: 0})) }}'.replace('0', id), {
+                        method: 'POST', body: formData
+                    }).then(r => r.json()).then(data => {
+                        if (data.success) { Swal.fire('Validé !', data.message, 'success').then(() => location.reload()); }
+                        else { Swal.fire('Erreur', data.error, 'error'); }
+                    });
+                });
+            });
+        });
+
+        document.querySelectorAll('.btn-rejeter').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const nom = this.dataset.nom;
+                const token = this.dataset.token;
+                Swal.fire({
+                    title: 'Rejeter ' + nom + ' ?',
+                    input: 'textarea',
+                    inputLabel: 'Motif du rejet',
+                    inputPlaceholder: 'Saisissez le motif...',
+                    showCancelButton: true,
+                    confirmButtonText: 'Rejeter',
+                    cancelButtonText: 'Annuler',
+                    confirmButtonColor: '#d33',
+                }).then(result => {
+                    if (!result.isConfirmed || !result.value) return;
+                    const formData = new FormData();
+                    formData.append('_token', token);
+                    formData.append('motif', result.value);
+                    fetch('{{ absolute_url(path('app_backend_joueur_rejeter', {id: 0})) }}'.replace('0', id), {
+                        method: 'POST', body: formData
+                    }).then(r => r.json()).then(data => {
+                        if (data.success) { Swal.fire('Rejeté !', data.message, 'success').then(() => location.reload()); }
+                        else { Swal.fire('Erreur', data.error, 'error'); }
+                    });
+                });
+            });
+        });
     </script>
 {% endblock %}

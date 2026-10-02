@@ -1,20 +1,18 @@
 {% extends 'backend_layout.html.twig' %}
 
-{% block title %}{{ parent() }} Gestion des compagnies{% endblock %}
+{% block title %}{{ parent() }} {{ compagnie.titre }}{% endblock %}
 
 {% block body %}
-
     <div class="container-fluid">
         <div class="card bg-light-info shadow-none position-relative overflow-hidden">
             <div class="card-body px-4 py-3">
                 <div class="row align-items-center">
                     <div class="col-9">
-                        <h4 class="fw-semibold mb-8">Gestion des compagnies</h4>
+                        <h4 class="fw-semibold mb-8">{{ compagnie.titre }}</h4>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a class="text-muted" href="#">Modules</a></li>
-                                <li class="breadcrumb-item"><a class="text-muted" href="#">Société</a></li>
-                                <li class="breadcrumb-item" aria-current="page">compagnies</li>
+                                <li class="breadcrumb-item"><a class="text-muted" href="{{ path('app_backend_compagnie_index') }}">Sociétés</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ compagnie.titre }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -26,120 +24,168 @@
                 </div>
             </div>
         </div>
+
+        {% if abonnement and abonnement.justificatif %}
+        <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between">
+                <h5 class="mb-0">Reçu de paiement</h5>
+                <span class="badge {% if abonnement.solde %}bg-success{% else %}bg-warning{% endif %}">
+                    {{ abonnement.solde ? 'Payée' : 'Impayée' }}
+                </span>
+            </div>
+            <div class="card-body">
+                <a href="{{ absolute_url(asset('upload/justificatifs/' ~ abonnement.justificatif)) }}" target="_blank" class="btn btn-success">
+                    <i class="ti-eye"></i> Voir le reçu
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
         <section>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Profile</h5></div>
+                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Participants (Joueurs)</h5></div>
                                 <div class="col text-end">
-                                    <a href="{{ path('app_backend_compagnie_index') }}" class="btn btn-outline-primary">Retour à la liste</a>
+                                    <a href="{{ path('app_backend_compagnie_index') }}" class="btn btn-outline-primary">Retour</a>
                                 </div>
                             </div>
-
                         </div>
                         <div class="card-body">
-
-                            <div class="row justify-content-center align-content-center">
-                                <div class="col-md-8" style="border: solid 1px #ccc; font-size: 1.1rem; padding: 10px 20px;">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="row">
-                                                <div class="col-12"><strong>Entreprise :</strong> {{ compagnie.titre }}</div>
-                                                <div class="col-12 mt-3"><strong>DG :</strong> {{ compagnie.dg }}</div>
-                                                <div class="col-12 mt-3"><strong>Representant :</strong> {{ compagnie.representant }}</div>
-                                                <div class="col-12 mt-3"><strong>Email :</strong> {{ compagnie.email }}</div>
-                                                <div class="col-12 mt-3"><strong>Contact :</strong> {{ compagnie.contact }}</div>
-                                                <div class="col-12 mt-3"><strong>Participants :</strong> {{ compagnie.participant }}</div>
-                                                {% if compagnie.abonnement %}
-                                                    <div class="col-12 mt-3"><strong>Participants restants à inscrire :</strong> {{ compagnie.abonnement.restantJoueur ? compagnie.abonnement.restantJoeur : '' }}</div>
-                                                    <div class="col-12 mt-3">
-                                                        <strong>Montant participation :</strong> {{ compagnie.abonnement.montant|number_format('0',' ','.') }} FCFA
-                                                    </div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% if compagnie.participants %}
-                                <div class="row mt-5">
-                                    <div class="col-12 mt-5">
-                                        <h4 class="text-center">Liste des participants</h4>
-                                        <div class="table-responsive">
-                                            <table id="listes" class="table  border table-striped table-bordered display text-nowrap" style="width: 100%;">
-                                                <thead>
-                                                <tr>
-                                                    <th class="text-center text-uppercase">#</th>
-                                                    <th class="text-center text-uppercase">SOCIETE</th>
-                                                    <th class="text-center text-uppercase">NOM & PRENOMS</th>
-                                                    <th class="text-center text-uppercase">MATRICULE</th>
-                                                    <th class="text-center text-uppercase">CONTACT</th>
-                                                    <th class="text-center text-uppercase">EMAIL</th>
-                                                    <th class="text-center text-uppercase">LICENCE</th>
-                                                    <th class="text-center text-uppercase">DISCIPLINE</th>
-                                                    <th class="text-center text-uppercase">ACTIONS</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for participant in compagnie.participants %}
-                                                    <tr>
-                                                        <td>{{ loop.index }}</td>
-                                                        <td>{{ participant.abonnement.compagnie.titre }}</td>
-                                                        <td>{{ participant.nom }} {{ participant.prenoms }}</td>
-                                                        <td>{{ participant.matricule }}</td>
-                                                        <td>{{ participant.contact }}</td>
-                                                        <td>{{ participant.email }}</td>
-                                                        <td>{{ participant.licence }}</td>
-                                                        <td>
-                                                            {% for competir in participant.discipline %}
-                                                                {{ competir.titre }}
-                                                            {% endfor %}
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <a href="{{ path('app_backend_participant_show', {'id': participant.id}) }}"><i class="ti-user"></i></a> &nbsp; | &nbsp;
-                                                            <a href="{{ path('app_backend_participant_edit', {'id': participant.id}) }}"><i class="ti-pencil-alt"></i></a>
-                                                        </td>
-                                                    </tr>
+                            <div class="table-responsive">
+                                <table id="listes" class="table border table-striped table-bordered display text-nowrap" style="width:100%;">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th>NOM & PRÉNOMS</th>
+                                        <th>MATRICULE</th>
+                                        <th>CONTACT</th>
+                                        <th>EMAIL</th>
+                                        <th>LICENCE</th>
+                                        <th>DISCIPLINE(S)</th>
+                                        <th>STATUT</th>
+                                        <th class="text-center">ACTIONS</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for joueur in joueurs %}
+                                        <tr>
+                                            <td class="text-center">{{ loop.index }}</td>
+                                            <td>{{ joueur.nom }} {{ joueur.prenoms }}</td>
+                                            <td>{{ joueur.matricule }}</td>
+                                            <td>{{ joueur.contact }}</td>
+                                            <td>{{ joueur.email }}</td>
+                                            <td>{{ joueur.licence }}</td>
+                                            <td>
+                                                {% for d in joueur.discipline %}
+                                                    {{ d.titre }}{% if not loop.last %}, {% endif %}
                                                 {% else %}
-                                                    <tr>
-                                                        <td class="text-center" colspan="9">Aucun participant trouvé</td>
-                                                    </tr>
+                                                    <span class="text-muted">—</span>
                                                 {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-
+                                            </td>
+                                            <td>
+                                                {% if joueur.status == 'validated' %}
+                                                    <span class="badge bg-success">Validé</span>
+                                                {% elseif joueur.status == 'rejected' %}
+                                                    <span class="badge bg-danger badge-rejete" style="cursor:pointer" data-msg="{{ joueur.rejectMessage|e('html_attr') }}">Rejeté <i class="ti-info-alt"></i></span>
+                                                {% else %}
+                                                    <span class="badge bg-warning text-dark">En attente</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                {% if joueur.status != 'validated' %}
+                                                    <button class="btn btn-sm btn-success btn-valider" data-id="{{ joueur.id }}" data-nom="{{ joueur.nom }} {{ joueur.prenoms }}" data-token="{{ csrf_token('valider' ~ joueur.id) }}" title="Valider"><i class="ti-check"></i></button>
+                                                {% endif %}
+                                                {% if joueur.status != 'rejected' %}
+                                                    <button class="btn btn-sm btn-danger btn-rejeter ms-1" data-id="{{ joueur.id }}" data-nom="{{ joueur.nom }} {{ joueur.prenoms }}" data-token="{{ csrf_token('rejeter' ~ joueur.id) }}" title="Rejeter"><i class="ti-close"></i></button>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr><td class="text-center" colspan="9">Aucun joueur pour cette société</td></tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-
     </div>
-
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/vendor/css/prism.min.css')) }}">
     <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/vendor/DataTables/datatables.min.css')) }}">
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ absolute_url(asset('backoffice/vendor/js/prism.js')) }}"></script>
     <script src="{{ absolute_url(asset('backoffice/vendor/DataTables/datatables.min.js')) }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $('#listes').DataTable( {
-            dom: 'Bfrtip',
-            scrollX: true,
-            buttons: [
-                'copy', 'excel', 'pdf'
-            ]
-        } );
+        const table = $('#listes').DataTable({dom:'Bfrtip',scrollX:true,buttons:['copy','excel','pdf']});
+
+        document.querySelectorAll('.badge-rejete').forEach(el => {
+            el.addEventListener('click', function () {
+                Swal.fire('Motif du rejet', this.dataset.msg, 'info');
+            });
+        });
+
+        document.querySelectorAll('.btn-valider').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const nom = this.dataset.nom;
+                const token = this.dataset.token;
+                Swal.fire({
+                    title: 'Valider ' + nom + ' ?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Oui, valider',
+                    cancelButtonText: 'Annuler',
+                    confirmButtonColor: '#468f34',
+                }).then(result => {
+                    if (!result.isConfirmed) return;
+                    const formData = new FormData();
+                    formData.append('_token', token);
+                    fetch('{{ absolute_url(path('app_backend_joueur_valider', {id: 0})) }}'.replace('0', id), {
+                        method: 'POST', body: formData
+                    }).then(r => r.json()).then(data => {
+                        if (data.success) { Swal.fire('Validé !', data.message, 'success').then(() => location.reload()); }
+                        else { Swal.fire('Erreur', data.error, 'error'); }
+                    });
+                });
+            });
+        });
+
+        document.querySelectorAll('.btn-rejeter').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const nom = this.dataset.nom;
+                const token = this.dataset.token;
+                Swal.fire({
+                    title: 'Rejeter ' + nom + ' ?',
+                    input: 'textarea',
+                    inputLabel: 'Motif du rejet',
+                    inputPlaceholder: 'Saisissez le motif...',
+                    showCancelButton: true,
+                    confirmButtonText: 'Rejeter',
+                    cancelButtonText: 'Annuler',
+                    confirmButtonColor: '#d33',
+                }).then(result => {
+                    if (!result.isConfirmed || !result.value) return;
+                    const formData = new FormData();
+                    formData.append('_token', token);
+                    formData.append('motif', result.value);
+                    fetch('{{ absolute_url(path('app_backend_joueur_rejeter', {id: 0})) }}'.replace('0', id), {
+                        method: 'POST', body: formData
+                    }).then(r => r.json()).then(data => {
+                        if (data.success) { Swal.fire('Rejeté !', data.message, 'success').then(() => location.reload()); }
+                        else { Swal.fire('Erreur', data.error, 'error'); }
+                    });
+                });
+            });
+        });
     </script>
 {% endblock %}

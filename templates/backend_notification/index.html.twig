@@ -1,0 +1,81 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ parent() }} Notifications{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="card bg-light-info shadow-none position-relative overflow-hidden">
+            <div class="card-body px-4 py-3">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <h4 class="fw-semibold mb-8">Notifications</h4>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class="text-muted" href="#">Modules</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Notifications</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-center mb-n5">
+                            <span class="head-icon"><i class="ti-announcement"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col"><h5 class="mb-2 fw-semibold fs-4">Liste des notifications</h5></div>
+                                <div class="col text-end">
+                                    <a href="{{ path('app_backend_notification_new') }}" class="btn btn-success"><i class="ti-plus"></i> Nouvelle notification</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="listes" class="table border table-striped table-bordered display text-nowrap" style="width:100%;">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th>Titre</th>
+                                        <th>Message</th>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-center">Vues</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for n in notifications %}
+                                        <tr>
+                                            <td class="text-center">{{ loop.index }}</td>
+                                            <td>{{ n.title }}</td>
+                                            <td>{{ n.message }}</td>
+                                            <td class="text-center">{{ n.createdAt|date('d/m/Y H:i') }}</td>
+                                            <td class="text-center">{{ n.readBy|length }}</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr><td class="text-center" colspan="5">Aucune notification</td></tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ absolute_url(asset('backoffice/vendor/DataTables/datatables.min.css')) }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('backoffice/vendor/DataTables/datatables.min.js')) }}"></script>
+    <script>$('#listes').DataTable({dom:'Bfrtip',scrollX:true,buttons:['copy','excel','pdf']});</script>
+{% endblock %}

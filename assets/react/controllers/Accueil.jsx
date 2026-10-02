@@ -10,7 +10,7 @@ export default function () {
   return (
     <div>
       <Carousel />
-      <CountdownTimer targetDate="2025-12-12T00:00:00" />
+      <CountdownTimer targetDate="2026-12-12T00:00:00" />
       <AccueilPresentation />
       <AccueilActivite />
       <AccueilDiscipline /> 

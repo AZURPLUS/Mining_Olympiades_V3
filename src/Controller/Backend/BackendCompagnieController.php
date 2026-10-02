@@ -4,7 +4,9 @@ namespace App\Controller\Backend;
 
 use App\Entity\Compagnie;
 use App\Form\CompagnieType;
+use App\Repository\AbonnementRepository;
 use App\Repository\CompagnieRepository;
+use App\Repository\JoueurRepository;
 use App\Service\AllRepositories;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +17,11 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/backend/compagnie')]
 class BackendCompagnieController extends AbstractController
 {
-    public function __construct(private AllRepositories $allRepositories)
+    public function __construct(
+        private AllRepositories $allRepositories,
+        private JoueurRepository $joueurRepository,
+        private AbonnementRepository $abonnementRepository,
+    )
     {
     }
 
@@ -80,8 +86,13 @@ class BackendCompagnieController extends AbstractController
     #[Route('/{id}', name: 'app_backend_compagnie_show', methods: ['GET'])]
     public function show(Compagnie $compagnie): Response
     {
+        $abonnement = $this->abonnementRepository->findOneBy(['compagnie' => $compagnie], ['id' => 'DESC']);
+        $joueurs = $abonnement ? $this->joueurRepository->getJoueursByAbonnement($abonnement->getId()) : [];
+
         return $this->render('backend_compagnie/show.html.twig', [
             'compagnie' => $this->allRepositories->getOneCompagnieWithParticipants($compagnie->getId()),
+            'joueurs' => $joueurs,
+            'abonnement' => $abonnement,
         ]);
     }
 

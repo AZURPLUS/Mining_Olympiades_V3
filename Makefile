@@ -37,7 +37,7 @@ prod-deploy: prod-build prod-up
 prod-down:
 	docker compose -f compose.prod.yml down
 
-APP_CONTAINER = kani_app
+APP_CONTAINER = miningolympiades_app
 
 # Commande pour exécuter une migration
 migration:

@@ -55,7 +55,7 @@ class GestionAdherent
         <html>
         <body>
             <p>Bonjour $prenom,</p>
-            <p>Félicitations ! Votre inscription à <strong>Mining Olympiades 2025</strong> a été validée avec succès.</p>
+            <p>Félicitations ! Votre inscription à <strong>Mining Olympiades 2026</strong> a été validée avec succès.</p>
             <p>Nous sommes ravis de vous compter parmi les participants de cet événement.</p>
             <p>Pour accéder à votre espace personnel et choisir vos disciplines, voici vos identifiants de connexion :</p>
             <ul>

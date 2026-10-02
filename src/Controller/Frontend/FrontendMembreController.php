@@ -4,10 +4,12 @@ namespace App\Controller\Frontend;
 
 use App\Entity\Discipline;
 use App\Entity\Joueur;
+use App\Entity\Notification;
 use App\Repository\AbonnementRepository;
 use App\Repository\DisciplineRepository;
 use App\Repository\JoueurRepository;
 use App\Repository\MembreRepository;
+use App\Repository\NotificationRepository;
 use App\Service\AllRepositories;
 use App\Service\GestionMedia;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,6 +36,7 @@ class FrontendMembreController extends AbstractController
         private AllRepositories        $allRepositories,
         private GestionMedia           $gestionMedia,
         private SerializerInterface    $serializer,
+        private NotificationRepository $notificationRepository,
     )
     {
     }
@@ -67,7 +70,7 @@ class FrontendMembreController extends AbstractController
     #[Route('/', name: 'app_frontend_membre_index')]
     public function index(): Response
     {
-        $membre = $this->membreRepository->findOneBy(['user' => $this->getUser()->getId()]);
+$membre = $this->membreRepository->findOneBy(['user' => $this->getUser()->getId()]);
         if (!$membre) {
             return $this->redirectToRoute('app_frontend_participation_non_membre');
         }
@@ -78,11 +81,18 @@ class FrontendMembreController extends AbstractController
             ['compagnie' => $membre->getCompagnie()],
             ['id' => 'DESC']
         );
-        $disciplines = [];
+
+$disciplines = [];
         $disciplineStats = [];
+        $hasComplementaire = false;
         if ($abonnement) {
+            $i = 0;
             foreach ($abonnement->getDisciplines() as $d) {
+                $i++;
                 $disciplines[] = $d;
+                if ($i > 4) {
+                    $hasComplementaire = true;
+                }
                 $count = count($this->joueurRepository->getNombreJoueurByAbonnementAndDiscipline(
                     $d->getId(), $abonnement->getId()
                 ));
@@ -95,16 +105,29 @@ class FrontendMembreController extends AbstractController
         }
 
         $allDisciplines = $this->allRepositories->getAllDiscipline();
-        $canAddMore = $abonnement ? count($disciplines) < 4 : true;
+        $totalDisciplines = $abonnement ? count($disciplines) : 0;
+        $montantAbonnement = $abonnement ? ($totalDisciplines > 4 ? 5000000 : 2500000) : 0;
+
+        $montantAbonnement = $abonnement ? (count($disciplines) > 4 ? 5000000 : 2500000) : 0;
+
+        $totalDisciplines = $abonnement ? count($disciplines) : 0;
+        $montantAbonnement = $abonnement ? ($totalDisciplines > 4 ? 5000000 : 2500000) : 0;
+
+        $unreadCount = $this->notificationRepository->countUnreadByUser($this->getUser()->getId());
+        $notifications = $this->notificationRepository->findAllOrdered();
 
         return $this->render('frontend/membre_index.html.twig', [
             'abonnement' => $abonnement,
             'disciplines' => $disciplines,
             'disciplineStats' => $disciplineStats,
             'allDisciplines' => $allDisciplines,
-            'canAddMore' => $canAddMore,
             'selectedDisciplineIds' => array_map(fn($d) => $d->getId(), $disciplines),
             'compagnieSlug' => $compagnieSlug,
+            'hasComplementaire' => $hasComplementaire,
+            'montantAbonnement' => $montantAbonnement,
+            'totalDisciplines' => $totalDisciplines,
+            'unreadCount' => $unreadCount,
+            'notifications' => $notifications,
         ]);
     }
 
@@ -140,7 +163,6 @@ class FrontendMembreController extends AbstractController
 
         return $this->json([
             'disciplines' => $data,
-            'canAddMore' => $abonnement ? count($data) < 4 : true,
             'abonnementId' => $abonnement?->getId(),
         ]);
     }
@@ -216,6 +238,8 @@ class FrontendMembreController extends AbstractController
                 'media' => $joueur->getMedia(),
                 'carte' => $joueur->getCarte(),
                 'slug' => $joueur->getSlug(),
+                'status' => $joueur->getStatus(),
+                'rejectMessage' => $joueur->getRejectMessage(),
                 'disciplines' => $disciplines,
             ];
         }
@@ -262,15 +286,6 @@ class FrontendMembreController extends AbstractController
         }
 
         $existingCount = count($abonnement->getDisciplines());
-        $maxToAdd = 4 - $existingCount;
-
-        if ($maxToAdd <= 0) {
-            return $this->json(['error' => 'Maximum de 4 disciplines atteint'], Response::HTTP_BAD_REQUEST);
-        }
-
-        if (count($disciplineIds) > $maxToAdd) {
-            return $this->json(['error' => "Vous ne pouvez ajouter que {$maxToAdd} discipline(s) supplémentaire(s)"], Response::HTTP_BAD_REQUEST);
-        }
 
         $added = [];
         foreach ($disciplineIds as $did) {
@@ -357,6 +372,19 @@ class FrontendMembreController extends AbstractController
             return $this->json(['error' => 'Cette discipline est déjà selectionnée'], Response::HTTP_BAD_REQUEST);
         }
 
+        $currentJoueurs = $this->joueurRepository->getNombreJoueurByAbonnementAndDiscipline(
+            $oldDiscipline->getId(), $abonnement->getId()
+        );
+        $maxNew = (int) $newDiscipline->getJoueur();
+
+        if (count($currentJoueurs) > $maxNew) {
+            return $this->json([
+                'error' => "La discipline « {$newDiscipline->getTitre()} » n'accepte que {$maxNew} joueur(s). " .
+                    "Vous avez actuellement " . count($currentJoueurs) . " joueur(s) dans « {$oldDiscipline->getTitre()} ». " .
+                    "Veuillez retirer " . (count($currentJoueurs) - $maxNew) . " joueur(s) d'abord."
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         $abonnement->removeDiscipline($oldDiscipline);
         $abonnement->addDiscipline($newDiscipline);
         $this->em->flush();
@@ -390,6 +418,16 @@ class FrontendMembreController extends AbstractController
 
         if ($joueur->getDiscipline()->contains($newDiscipline)) {
             return $this->json(['error' => 'Ce participant est déjà inscrit à cette discipline'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $currentCount = count($this->joueurRepository->getNombreJoueurByAbonnementAndDiscipline(
+            $newDiscipline->getId(), $abonnement->getId()
+        ));
+        $max = (int) $newDiscipline->getJoueur();
+        if ($currentCount >= $max) {
+            return $this->json([
+                'error' => "La discipline « {$newDiscipline->getTitre()} » est complète ({$currentCount}/{$max} joueurs)."
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         $joueur->getDiscipline()->clear();
@@ -545,6 +583,85 @@ class FrontendMembreController extends AbstractController
         return $this->json(['disciplines' => $disponibles]);
     }
 
+    #[Route('/api/participants/sans-discipline', name: 'app_frontend_membre_api_participants_sans_discipline', methods: ['GET'])]
+    public function apiParticipantsSansDiscipline(): JsonResponse
+    {
+        $abonnement = $this->getAbonnement();
+        if (!$abonnement) {
+            return $this->json(['data' => []]);
+        }
+
+        $joueurs = $this->em->createQueryBuilder()
+            ->select('j')
+            ->from(Joueur::class, 'j')
+            ->leftJoin('j.discipline', 'd')
+            ->where('j.abonnement = :abonnement')
+            ->andWhere('d.id IS NULL')
+            ->setParameter('abonnement', $abonnement)
+            ->orderBy('j.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        $data = [];
+        foreach ($joueurs as $j) {
+            $data[] = [
+                'id' => $j->getId(),
+                'nom' => $j->getNom() . ' ' . $j->getPrenoms(),
+                'matricule' => $j->getMatricule(),
+            ];
+        }
+
+        return $this->json(['data' => $data]);
+    }
+
+    #[Route('/api/discipline/{id}/assign-participants', name: 'app_frontend_membre_api_participants_assign_discipline', methods: ['POST'])]
+    public function assignParticipantsToDiscipline(Request $request, Discipline $discipline): JsonResponse
+    {
+        $membre = $this->getMembre();
+        $abonnement = $this->getAbonnement();
+        if (!$membre || !$abonnement) {
+            return $this->json(['error' => 'Accès refusé'], Response::HTTP_FORBIDDEN);
+        }
+
+        if (!$abonnement->getDisciplines()->contains($discipline)) {
+            return $this->json(['error' => 'Cette discipline n\'est pas dans votre abonnement'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $participantIds = $data['participants'] ?? [];
+        if (empty($participantIds)) {
+            return $this->json(['error' => 'Aucun participant sélectionné'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $count = 0;
+        foreach ($participantIds as $pid) {
+            $joueur = $this->em->find(Joueur::class, (int) $pid);
+            if (!$joueur || $joueur->getAbonnement()->getId() !== $abonnement->getId()) {
+                continue;
+            }
+            if ($joueur->getDiscipline()->contains($discipline)) {
+                continue;
+            }
+            $joueur->addDiscipline($discipline);
+            $count++;
+        }
+
+        $this->em->flush();
+
+        return $this->json([
+            'success' => $count > 0,
+            'message' => "$count participant(s) assigné(s) à la discipline",
+        ]);
+    }
+
+    #[Route('/api/notifications/marque-lue/{id}', name: 'app_frontend_membre_api_notification_read', methods: ['POST'])]
+    public function markNotificationRead(Notification $notification): JsonResponse
+    {
+        $notification->markReadBy($this->getUser()->getId());
+        $this->em->flush();
+        return $this->json(['success' => true]);
+    }
+
     private function genererReference(): string
     {
         $last = $this->abonnementRepository->findOneBy([], ['id' => 'DESC']);
@@ -569,6 +686,104 @@ class FrontendMembreController extends AbstractController
             'compagnieSlug' => $membre?->getCompagnie()?->getSlug() ?? 'inconnu',
         ]);
     }
+
+    #[Route('/facture', name: 'app_frontend_membre_facture')]
+    public function facture(): Response
+    {
+        $membre = $this->getMembre();
+        $abonnement = $this->getAbonnement();
+        if (!$membre || !$abonnement) {
+            return $this->redirectToRoute('app_frontend_membre_index');
+        }
+
+        $disciplines = $abonnement->getDisciplines();
+        $total = count($disciplines);
+        $montant = $total > 4 ? 5000000 : 2500000;
+
+        return $this->render('frontend/membre_facture.html.twig', [
+            'abonnement' => $abonnement,
+            'membre' => $membre,
+            'compagnie' => $membre->getCompagnie(),
+            'disciplines' => $disciplines,
+            'montant' => $montant,
+            'totalDisciplines' => $total,
+            'joueurs' => $this->joueurRepository->getJoueursByAbonnement($abonnement->getId()),
+        ]);
+    }
+
+    #[Route('/facture/pdf', name: 'app_frontend_membre_facture_pdf')]
+    public function facturePdf(): Response
+    {
+        $membre = $this->getMembre();
+        $abonnement = $this->getAbonnement();
+        if (!$membre || !$abonnement) {
+            throw $this->createNotFoundException();
+        }
+
+        $disciplines = $abonnement->getDisciplines();
+        $total = count($disciplines);
+        $montant = $total > 4 ? 5000000 : 2500000;
+
+        $html = $this->renderView('frontend/facture_pdf.html.twig', [
+            'abonnement' => $abonnement,
+            'compagnie' => $membre->getCompagnie(),
+            'disciplines' => $disciplines,
+            'montant' => $montant,
+            'totalDisciplines' => $total,
+        ]);
+
+        $dompdf = new Dompdf();
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+
+        return new Response($dompdf->output(), Response::HTTP_OK, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => HeaderUtils::makeDisposition(
+                HeaderUtils::DISPOSITION_ATTACHMENT,
+                'facture_' . $abonnement->getReference() . '.pdf'
+            ),
+        ]);
+    }
+
+    #[Route('/facture/reçu', name: 'app_frontend_membre_facture_recu', methods: ['POST'])]
+    public function uploadRecu(Request $request): JsonResponse
+    {
+        $membre = $this->getMembre();
+        $abonnement = $this->getAbonnement();
+        if (!$membre || !$abonnement) {
+            return $this->json(['error' => 'Accès refusé'], Response::HTTP_FORBIDDEN);
+        }
+
+        $file = $request->files->get('recu');
+        if (!$file) {
+            return $this->json(['error' => 'Aucun fichier fourni'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $dir = $this->getParameter('kernel.project_dir') . '/public/upload/justificatifs';
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        if ($abonnement->getJustificatif()) {
+            $oldPath = $dir . '/' . $abonnement->getJustificatif();
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
+            }
+        }
+
+        $filename = 'recu-' . $abonnement->getReference() . '-' . time() . '.' . $file->guessExtension();
+        $file->move($dir, $filename);
+        $abonnement->setJustificatif($filename);
+        $abonnement->setSolde(true);
+        $this->em->flush();
+
+        sweetalert()->addSuccess('Reçu de paiement envoyé avec succès!');
+
+        return $this->json(['success' => true, 'message' => 'Reçu envoyé']);
+    }
+
+    #[Route('/ajouter-participant', name: 'app_frontend_membre_add_participant')]
 
     #[Route('/ajouter-participant', name: 'app_frontend_membre_add_participant')]
     public function addParticipant(): Response

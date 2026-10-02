@@ -124,7 +124,7 @@
 				<!-- Logo centré -->
 				<div style="text-align: center; padding: 10px 0;" id="logo">
 					<a href="{{ absolute_url(path('app_home')) }}">
-						<img src="{{ absolute_url(asset('assets/images/Olympiade-logo.png')) }}" alt="Logo" style="max-width: 200px; @media (min-width: 768px) {max-width: 50vw }">
+						<img src="{{ absolute_url(asset('default/fichiers/logo.png')) }}" alt="Logo" style="max-width: 200px; @media (min-width: 768px) {max-width: 50vw }">
 					</a>
 				</div>
 
@@ -185,6 +185,19 @@
 										<li class="nav-item">
 											<a class="nav-link" href="{{ absolute_url(path('app_frontend_contact_index')) }}" style="color: #ffffff; font-size: 0.8rem; padding: 8px 15px; border-radius: 20px; background-color: #6b7280;">Contact</a>
 										</li>
+										{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+										<li class="nav-item">
+											<a class="nav-link" href="{{ absolute_url(path('app_frontend_membre_index')) }}" style="color: #ffffff; font-size: 0.8rem; padding: 8px 15px; border-radius: 20px; background-color: #6b7280; margin-left: 10px;">
+												<i class="bi bi-person-circle"></i> Mon espace
+											</a>
+										</li>
+										{% else %}
+										<li class="nav-item">
+											<a class="nav-link" href="{{ absolute_url(path('app_login')) }}" style="color: #ffffff; font-size: 0.8rem; padding: 8px 15px; border-radius: 20px; background-color: #6b7280; margin-left: 10px;">
+												<i class="bi bi-box-arrow-in-right"></i> Connexion
+											</a>
+										</li>
+										{% endif %}
 									</ul>
 								</div>
 							</div>
@@ -304,7 +317,7 @@
 								<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 									<div class="offcanvas-header">
 										<a class="navbar-brand" href="{{ absolute_url(path('app_home')) }}">
-											<img src="{{ absolute_url(asset('assets/images/Olympiade-logo.png')) }}" alt="" width="75">
+											<img src="{{ absolute_url(asset('default/fichiers/logo.png')) }}" alt="" width="75">
 										</a>
 										<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 									</div>
@@ -350,11 +363,24 @@
 											<li class="nav-item">
 												<a class="nav-link" href="{{ absolute_url(path('app_frontendwebtv_show',{slug: 'live'})) }}">WebTV</a>
 											</li>
-											<li class="nav-item">
+<li class="nav-item">
 												<a class="nav-link" href="{{ absolute_url(path('app_frontend_contact_index')) }}">Contact</a>
 											</li>
 										</ul>
-
+										<div class="d-grid gap-2 px-3 mt-2 mb-3">
+											{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+												<a href="{{ absolute_url(path('app_frontend_membre_index')) }}" class="btn btn-success btn-sm" style="background:#468f34;border-radius:50px;">
+													<i class="bi bi-person-circle"></i> Mon espace
+												</a>
+												<a href="{{ absolute_url(path('app_logout')) }}" class="btn btn-outline-danger btn-sm" style="border-radius:50px;">
+													<i class="bi bi-unlock"></i> Déconnexion
+												</a>
+											{% else %}
+												<a href="{{ absolute_url(path('app_login')) }}" class="btn btn-warning btn-sm" style="background:#ed741f;border-color:#ed741f;color:#fff;border-radius:50px;">
+													<i class="bi bi-box-arrow-in-right"></i> Connexion
+												</a>
+											{% endif %}
+										</div>
 										<div class="row liens">
 											<div class="col-12 mb-3 mt-5">
 												<a href="tel:+2252722403966">
@@ -372,17 +398,7 @@
 													<i class="bi bi-person-add"></i>
 													Participer</a>
 											</div>
-
-											{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-												<a href="{{ absolute_url(path('app_logout')) }}" class="deconnexion mt-3">
-													<i class="bi bi-unlock"></i>
-													<span>Déconnexion</span>
-												</a>
-											{% endif %}
 										</div>
-									</div>
-
-								</div>
 							</div>
 
 							<div

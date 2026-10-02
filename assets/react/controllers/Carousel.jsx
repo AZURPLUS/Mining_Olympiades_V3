@@ -8,29 +8,24 @@ export default function Carousel() {
   const carouselItems = [
     {
       title: "",
-      image: "/assets/images/visuel.png",
-      ytLink: " https://youtube.com/live/t02cjVmsv-Q?feature=share",
+      image: "/default/fichiers/visuel-site-02.png",
     },
-    
     {
-      title: "SOYEZ PRÊT POUR LES OLYMPIADES DES MINES 2025",
-      image: "/assets/images/img-slide-default.png",
+      title: "",
+      image: "/default/fichiers/visuel-site-03.png",
     },
     {
       title: "DÉCOUVREZ LES NOUVELLES OPPORTUNITÉS",
-      image: "/assets/images/img-slide-default.png",
+      image: "/default/fichiers/visuel-site-04.png",
     },
-
     {
       title: "",
-      image: "/assets/images/en_chiffres.png",
+      image: "/default/fichiers/visuel-site-05.png",
     },
-
     {
       title: "PARTICIPEZ À DES COMPÉTITIONS EXCITANTES",
-      image: "/assets/images/img-slide-default.png",
+      image: "/default/fichiers/visuel-site-06.png",
     },
-    
   ];
 
   useEffect(() => {

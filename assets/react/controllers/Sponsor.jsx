@@ -22,7 +22,7 @@ const Sponsor = () => {
     <ResponsiveContainer>
       <section className="sponsor">
         <div data-aos="fade-down" data-aos-duration="2000" data-aos-delay="100">
-          <h1> Nos Sponsors et Partenaires </h1>
+          <h1> Nos Sponsors et Partenaires  2025</h1>
         </div>
 
         {/* les logos des partenaires et sponsor */}

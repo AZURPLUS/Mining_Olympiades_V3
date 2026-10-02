@@ -79,7 +79,7 @@
                                 <div class="row">
                                     <div class="col-12 mb-3 licence"> {{ joueur.licence }} </div>
                                     <div class="col-12 photo d-flex justify-content-center align-content-center align-items-center">
-                                        <img src="{{ absolute_url(asset('upload/participants/' ~ joueur.media)) }}" alt="" class="img-fluid">
+                                        <img src="{{ joueur.media ? absolute_url(asset('upload/participant/' ~ joueur.compagnieSlug ~ '/' ~ joueur.media)) : absolute_url(asset('assets/images/avatar.png')) }}" alt="" class="img-fluid">
                                     </div>
                                     <div class="col-12 mt-3">
                                         <div class="label">Entreprise</div>

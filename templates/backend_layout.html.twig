@@ -38,7 +38,7 @@
         <div>
             <div class="brand-logo d-flex align-items-center justify-content-between">
                 <a href="{{ absolute_url(path('app_dashboard')) }}" class="text-nowrap logo-img">
-                    <img src="{{ absolute_url(asset('assets/images/Olympiade-logo.png')) }}" class="dark-logo" width="150" alt="" />
+                    <img src="{{ absolute_url(asset('default/fichiers/logo.png')) }}" class="dark-logo" width="150" alt="" />
                 </a>
                 <div class="close-btn d-lg-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                     <i class="ti ti-x fs-8"></i>
@@ -258,6 +258,14 @@
                                 <i class="ti-id-badge"></i>
                               </span>
                             <span class="hide-menu">Tous les badges</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ path('app_backend_notification_index') }}" aria-expanded="false">
+                              <span>
+                                <i class="ti-announcement"></i>
+                              </span>
+                            <span class="hide-menu">Notifications</span>
                         </a>
                     </li>
                     <!-- Paramètres -->

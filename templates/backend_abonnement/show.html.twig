@@ -10,6 +10,9 @@
                 <div class="row align-items-center">
                     <div class="col-9">
                         <h4 class="fw-semibold mb-8">{{ abonnement.compagnie.titre }}</h4>
+                        <p class="mb-0 small">Réf: {{ abonnement.reference }} | Montant: {{ abonnement.montant|number_format(0,',',' ') }} F | 
+                            {% if abonnement.solde %}<span class="badge bg-success">Payée</span>{% else %}<span class="badge bg-warning">Impayée</span>{% endif %}
+                        </p>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class="text-muted" href="#">Modules</a></li>
@@ -26,6 +29,20 @@
                 </div>
             </div>
         </div>
+
+        {% if abonnement.justificatif %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">Reçu de paiement</h5>
+            </div>
+            <div class="card-body">
+                <a href="{{ absolute_url(asset('upload/justificatifs/' ~ abonnement.justificatif)) }}" target="_blank" class="btn btn-success">
+                    <i class="ti-eye"></i> Voir le reçu
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
         <section>
             <div class="row">
                 <div class="col-12">

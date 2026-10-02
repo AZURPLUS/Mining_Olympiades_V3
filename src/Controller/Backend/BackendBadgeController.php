@@ -31,7 +31,8 @@ class BackendBadgeController extends AbstractController
 
 //        dd($participants);
         return $this->render('backend/badges.html.twig',[
-            'joueurs' =>$participants
+            'joueurs' =>$participants,
+            'flag' => true,
         ]);
     }
 

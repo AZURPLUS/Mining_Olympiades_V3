@@ -203,7 +203,7 @@ export default function (abonnement) {
               </Text>
               <Text style={styles.objetDiv}>
                 <Text style={styles.objet}>Objet :</Text> PARTICIPATION AUX
-                MINING OLYMPIADES 2025
+                Mining Olympiades 2026
               </Text>
             </div>
           )}

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\JoueurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: JoueurRepository::class)]
@@ -47,6 +48,12 @@ class Joueur  implements \JsonSerializable
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $carte = null;
+
+    #[ORM\Column(length: 50, nullable: true, options: ['default' => 'pending'])]
+    private ?string $status = 'pending';
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $rejectMessage = null;
 
     public function __construct()
     {
@@ -210,10 +217,31 @@ class Joueur  implements \JsonSerializable
         return $this->carte;
     }
 
-    public function setCarte(?string $carte): static
+public function setCarte(?string $carte): static
     {
         $this->carte = $carte;
+        return $this;
+    }
 
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): static
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    public function getRejectMessage(): ?string
+    {
+        return $this->rejectMessage;
+    }
+
+    public function setRejectMessage(?string $rejectMessage): static
+    {
+        $this->rejectMessage = $rejectMessage;
         return $this;
     }
 }
