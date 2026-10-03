@@ -4,7 +4,10 @@ namespace App\Controller\Backend;
 
 use App\Entity\Joueur;
 use App\Entity\Notification;
+use App\Entity\Participant;
+use App\Form\ParticipantType;
 use App\Repository\JoueurRepository;
+use App\Service\AllRepositories;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -64,5 +67,41 @@ class BackendJoueurController extends AbstractController
         sweetalert()->addSuccess("Participant {$joueur->getNom()} {$joueur->getPrenoms()} rejeté.");
 
         return $this->json(['success' => true, 'message' => 'Participant rejeté']);
+    }
+
+    #[Route('/{id}', name: 'app_backend_joueur_show', methods: ['GET'])]
+    public function show(Joueur $joueur, AllRepositories $allRepositories): Response
+    {
+        return $this->render('backend_joueur/show.html.twig', [
+            'participant' => $allRepositories->getProfileJoueur($joueur->getId()),
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_backend_joueur_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Joueur $joueur, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(ParticipantType::class, $joueur);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            return $this->redirectToRoute('app_backend_joueur_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('backend_joueur/edit.html.twig', [
+            'joueur' => $joueur,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_backend_joueur_delete', methods: ['POST'])]
+    public function delete(Request $request, Joueur $joueur, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $joueur->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($joueur);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_backend_joueur_index', [], Response::HTTP_SEE_OTHER);
     }
 }
