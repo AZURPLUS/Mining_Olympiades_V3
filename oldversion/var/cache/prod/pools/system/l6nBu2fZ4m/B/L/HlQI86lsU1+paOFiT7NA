@@ -1,0 +1,60 @@
+<?php //App_Entity_Abonnement
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Serializer\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Serializer\\Mapping\\ClassMetadata')),
+        clone ($p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata')),
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Abonnement',
+                'id',
+                'reference',
+                'annee',
+                'montant',
+                'media',
+                'justificatif',
+                'compagnie',
+                'disciplines',
+                'solde',
+                'joueurs',
+                'totalJoueur',
+                'restantJoueur',
+                'createdAt',
+            ],
+            'attributesMetadata' => [
+                [
+                    'id' => $o[1],
+                    'reference' => $o[2],
+                    'annee' => $o[3],
+                    'montant' => $o[4],
+                    'media' => $o[5],
+                    'justificatif' => $o[6],
+                    'compagnie' => $o[7],
+                    'disciplines' => $o[8],
+                    'solde' => $o[9],
+                    'joueurs' => $o[10],
+                    'totalJoueur' => $o[11],
+                    'restantJoueur' => $o[12],
+                    'createdAt' => $o[13],
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

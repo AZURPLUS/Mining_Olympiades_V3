@@ -1,0 +1,122 @@
+<?php //f81e075854b949f5db4b013581f1c123
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT m0_.id AS id_0, m0_.participation AS participation_1, u1_.id AS id_2, u1_.email AS email_3, u1_.roles AS roles_4, u1_.password AS password_5, u1_.connexion AS connexion_6, u1_.last_connected_at AS last_connected_at_7, c2_.id AS id_8, c2_.titre AS titre_9, c2_.dg AS dg_10, c2_.representant AS representant_11, c2_.contact AS contact_12, c2_.slug AS slug_13, c2_.email AS email_14, m0_.compagnie_id AS compagnie_id_15, m0_.user_id AS user_id_16 FROM membre m0_ LEFT JOIN user u1_ ON m0_.user_id = u1_.id LEFT JOIN compagnie c2_ ON m0_.compagnie_id = c2_.id ORDER BY u1_.last_connected_at DESC',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'm' => 'App\\Entity\\Membre',
+                    'u' => 'App\\Entity\\User',
+                    'c' => 'App\\Entity\\Compagnie',
+                ],
+            ],
+            'relationMap' => [
+                2 => [
+                    'u' => 'user',
+                    'c' => 'compagnie',
+                ],
+            ],
+            'parentAliasMap' => [
+                2 => [
+                    'u' => 'm',
+                    'c' => 'm',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'participation_1' => 'participation',
+                    'id_2' => 'id',
+                    'email_3' => 'email',
+                    'roles_4' => 'roles',
+                    'password_5' => 'password',
+                    'connexion_6' => 'connexion',
+                    'last_connected_at_7' => 'lastConnectedAt',
+                    'id_8' => 'id',
+                    'titre_9' => 'titre',
+                    'dg_10' => 'dg',
+                    'representant_11' => 'representant',
+                    'contact_12' => 'contact',
+                    'slug_13' => 'slug',
+                    'email_14' => 'email',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'compagnie_id_15' => 'integer',
+                    'user_id_16' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'm' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'compagnie_id_15' => 'compagnie_id',
+                    'user_id_16' => 'user_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'm',
+                    'participation_1' => 'm',
+                    'id_2' => 'u',
+                    'email_3' => 'u',
+                    'roles_4' => 'u',
+                    'password_5' => 'u',
+                    'connexion_6' => 'u',
+                    'last_connected_at_7' => 'u',
+                    'id_8' => 'c',
+                    'titre_9' => 'c',
+                    'dg_10' => 'c',
+                    'representant_11' => 'c',
+                    'contact_12' => 'c',
+                    'slug_13' => 'c',
+                    'email_14' => 'c',
+                    'compagnie_id_15' => 'm',
+                    'user_id_16' => 'm',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Membre',
+                    'participation_1' => 'App\\Entity\\Membre',
+                    'id_2' => 'App\\Entity\\User',
+                    'email_3' => 'App\\Entity\\User',
+                    'roles_4' => 'App\\Entity\\User',
+                    'password_5' => 'App\\Entity\\User',
+                    'connexion_6' => 'App\\Entity\\User',
+                    'last_connected_at_7' => 'App\\Entity\\User',
+                    'id_8' => 'App\\Entity\\Compagnie',
+                    'titre_9' => 'App\\Entity\\Compagnie',
+                    'dg_10' => 'App\\Entity\\Compagnie',
+                    'representant_11' => 'App\\Entity\\Compagnie',
+                    'contact_12' => 'App\\Entity\\Compagnie',
+                    'slug_13' => 'App\\Entity\\Compagnie',
+                    'email_14' => 'App\\Entity\\Compagnie',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    [
+        [
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'sqlExecutor' => $o[1],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'resultSetMapping' => $o[2],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'parameterMappings' => [],
+        ],
+    ]
+); }];

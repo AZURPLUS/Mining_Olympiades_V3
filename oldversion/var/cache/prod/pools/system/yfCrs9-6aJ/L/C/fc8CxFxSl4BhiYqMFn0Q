@@ -1,0 +1,90 @@
+<?php //a3b77423862266922d212e5c45fe2187
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT a0_.id AS id_0, a0_.reference AS reference_1, a0_.annee AS annee_2, a0_.montant AS montant_3, a0_.media AS media_4, a0_.justificatif AS justificatif_5, a0_.solde AS solde_6, a0_.total_joueur AS total_joueur_7, a0_.restant_joueur AS restant_joueur_8, a0_.created_at AS created_at_9, a0_.compagnie_id AS compagnie_id_10 FROM abonnement a0_ WHERE a0_.total_joueur <> a0_.restant_joueur',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'a' => 'App\\Entity\\Abonnement',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'reference_1' => 'reference',
+                    'annee_2' => 'annee',
+                    'montant_3' => 'montant',
+                    'media_4' => 'media',
+                    'justificatif_5' => 'justificatif',
+                    'solde_6' => 'solde',
+                    'total_joueur_7' => 'totalJoueur',
+                    'restant_joueur_8' => 'restantJoueur',
+                    'created_at_9' => 'createdAt',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'compagnie_id_10' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'a' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'compagnie_id_10' => 'compagnie_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'a',
+                    'reference_1' => 'a',
+                    'annee_2' => 'a',
+                    'montant_3' => 'a',
+                    'media_4' => 'a',
+                    'justificatif_5' => 'a',
+                    'solde_6' => 'a',
+                    'total_joueur_7' => 'a',
+                    'restant_joueur_8' => 'a',
+                    'created_at_9' => 'a',
+                    'compagnie_id_10' => 'a',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Abonnement',
+                    'reference_1' => 'App\\Entity\\Abonnement',
+                    'annee_2' => 'App\\Entity\\Abonnement',
+                    'montant_3' => 'App\\Entity\\Abonnement',
+                    'media_4' => 'App\\Entity\\Abonnement',
+                    'justificatif_5' => 'App\\Entity\\Abonnement',
+                    'solde_6' => 'App\\Entity\\Abonnement',
+                    'total_joueur_7' => 'App\\Entity\\Abonnement',
+                    'restant_joueur_8' => 'App\\Entity\\Abonnement',
+                    'created_at_9' => 'App\\Entity\\Abonnement',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    [
+        [
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'sqlExecutor' => $o[1],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'resultSetMapping' => $o[2],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'parameterMappings' => [],
+        ],
+    ]
+); }];
