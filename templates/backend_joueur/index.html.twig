@@ -80,7 +80,6 @@
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{ path('app_backend_joueur_show', {'id': participant.id}) }}" class="me-2"><i class="ti-user"></i></a>
-                                                <a href="{{ path('app_backend_joueur_edit', {'id': participant.id}) }}"><i class="ti-pencil-alt"></i></a>
                                                 {% if participant.status != 'validated' %}
                                                     <button class="btn btn-sm btn-success btn-valider ms-1" data-id="{{ participant.id }}" data-nom="{{ participant.nom }} {{ participant.prenoms }}" data-token="{{ csrf_token('valider' ~ participant.id) }}"><i class="ti-check"></i></button>
                                                 {% endif %}

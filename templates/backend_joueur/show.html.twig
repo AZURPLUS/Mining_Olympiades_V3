@@ -48,7 +48,7 @@
                                             <div class="row">
                                                 <div class="col-12 mb-3 licence"> {{ participant['licence'] }} </div>
                                                 <div class="col-12 photo d-flex justify-content-center align-content-center align-items-center">
-                                                    {% set mediaPath = absolute_url(asset('upload/participant/' ~ participant.companieSlug ~ '/')) %}
+                                                    {% set mediaPath = absolute_url(asset('upload/participant/' ~ participant['compagnieSlug'] ~ '/')) %}
                                                     {% if participant.media %}
                                                         <img src="{{ mediaPath ~ participant.media }}" alt="" class="img-fluid">
                                                     {% else %}
