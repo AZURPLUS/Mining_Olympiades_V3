@@ -48,7 +48,12 @@
                                             <div class="row">
                                                 <div class="col-12 mb-3 licence"> {{ participant['licence'] }} </div>
                                                 <div class="col-12 photo d-flex justify-content-center align-content-center align-items-center">
-                                                    <img src="{{ absolute_url(asset('upload/participants/' ~ participant.media)) }}" alt="" class="img-fluid">
+                                                    {% set mediaPath = absolute_url(asset('upload/participant/' ~ participant.companieSlug ~ '/')) %}
+                                                    {% if participant.media %}
+                                                        <img src="{{ mediaPath ~ participant.media }}" alt="" class="img-fluid">
+                                                    {% else %}
+                                                        <img src="{{ absolute_url(asset('assets/images/avatar.png')) }}" alt="" class="img-fluid">
+                                                    {% endif %}
                                                 </div>
                                                 <div class="col-12 mt-3">
                                                     <div class="label">Entreprise</div>
@@ -86,7 +91,7 @@
                                     <button class="btn btn-primary" id="btnImprimer">Imprimer</button>
                                 </div>
                                 <div class="col-12 text-start mt-5">
-                                    {{ include('backend_joueur/_delete_form.html.twig') }}
+                                    {{ include('backend_joueur/_delete_form.html.twig', {'joueur': participant}) }}
                                 </div>
                             </div>
 
