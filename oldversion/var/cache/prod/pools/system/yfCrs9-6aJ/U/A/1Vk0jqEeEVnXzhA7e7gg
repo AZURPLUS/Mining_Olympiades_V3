@@ -1,0 +1,120 @@
+<?php //d842fd89e7c2e1a89efc16b04245e77b
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT j0_.id AS id_0, j0_.nom AS nom_1, j0_.prenoms AS prenoms_2, j0_.matricule AS matricule_3, j0_.contact AS contact_4, j0_.email AS email_5, j0_.licence AS licence_6, j0_.media AS media_7, j0_.slug AS slug_8, j0_.carte AS carte_9, d1_.id AS id_10, d1_.titre AS titre_11, d1_.slug AS slug_12, d1_.joueur AS joueur_13, d1_.complementaire AS complementaire_14, j0_.abonnement_id AS abonnement_id_15 FROM joueur j0_ LEFT JOIN joueur_discipline j2_ ON j0_.id = j2_.joueur_id LEFT JOIN discipline d1_ ON d1_.id = j2_.discipline_id WHERE d1_.id = ? GROUP BY j0_.abonnement_id',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'j' => 'App\\Entity\\Joueur',
+                    'd' => 'App\\Entity\\Discipline',
+                ],
+            ],
+            'relationMap' => [
+                2 => [
+                    'd' => 'discipline',
+                ],
+            ],
+            'parentAliasMap' => [
+                2 => [
+                    'd' => 'j',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'nom_1' => 'nom',
+                    'prenoms_2' => 'prenoms',
+                    'matricule_3' => 'matricule',
+                    'contact_4' => 'contact',
+                    'email_5' => 'email',
+                    'licence_6' => 'licence',
+                    'media_7' => 'media',
+                    'slug_8' => 'slug',
+                    'carte_9' => 'carte',
+                    'id_10' => 'id',
+                    'titre_11' => 'titre',
+                    'slug_12' => 'slug',
+                    'joueur_13' => 'joueur',
+                    'complementaire_14' => 'Complementaire',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'abonnement_id_15' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'j' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'abonnement_id_15' => 'abonnement_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'j',
+                    'nom_1' => 'j',
+                    'prenoms_2' => 'j',
+                    'matricule_3' => 'j',
+                    'contact_4' => 'j',
+                    'email_5' => 'j',
+                    'licence_6' => 'j',
+                    'media_7' => 'j',
+                    'slug_8' => 'j',
+                    'carte_9' => 'j',
+                    'id_10' => 'd',
+                    'titre_11' => 'd',
+                    'slug_12' => 'd',
+                    'joueur_13' => 'd',
+                    'complementaire_14' => 'd',
+                    'abonnement_id_15' => 'j',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Joueur',
+                    'nom_1' => 'App\\Entity\\Joueur',
+                    'prenoms_2' => 'App\\Entity\\Joueur',
+                    'matricule_3' => 'App\\Entity\\Joueur',
+                    'contact_4' => 'App\\Entity\\Joueur',
+                    'email_5' => 'App\\Entity\\Joueur',
+                    'licence_6' => 'App\\Entity\\Joueur',
+                    'media_7' => 'App\\Entity\\Joueur',
+                    'slug_8' => 'App\\Entity\\Joueur',
+                    'carte_9' => 'App\\Entity\\Joueur',
+                    'id_10' => 'App\\Entity\\Discipline',
+                    'titre_11' => 'App\\Entity\\Discipline',
+                    'slug_12' => 'App\\Entity\\Discipline',
+                    'joueur_13' => 'App\\Entity\\Discipline',
+                    'complementaire_14' => 'App\\Entity\\Discipline',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    [
+        [
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'sqlExecutor' => $o[1],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'resultSetMapping' => $o[2],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'parameterMappings' => [
+                'discipline' => [
+                    0,
+                ],
+            ],
+        ],
+    ]
+); }];

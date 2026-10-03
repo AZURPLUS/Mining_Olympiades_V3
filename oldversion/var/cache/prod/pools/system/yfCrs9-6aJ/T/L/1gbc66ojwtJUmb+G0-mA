@@ -1,0 +1,68 @@
+<?php //ab6dcd0fadc6fa40ce2326a5b0502186
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT d0_.id AS id_0, d0_.titre AS titre_1, d0_.slug AS slug_2, d0_.joueur AS joueur_3, d0_.complementaire AS complementaire_4 FROM discipline d0_ WHERE d0_.complementaire = ? ORDER BY d0_.titre ASC',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'd' => 'App\\Entity\\Discipline',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'titre_1' => 'titre',
+                    'slug_2' => 'slug',
+                    'joueur_3' => 'joueur',
+                    'complementaire_4' => 'Complementaire',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'd' => null,
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'd',
+                    'titre_1' => 'd',
+                    'slug_2' => 'd',
+                    'joueur_3' => 'd',
+                    'complementaire_4' => 'd',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Discipline',
+                    'titre_1' => 'App\\Entity\\Discipline',
+                    'slug_2' => 'App\\Entity\\Discipline',
+                    'joueur_3' => 'App\\Entity\\Discipline',
+                    'complementaire_4' => 'App\\Entity\\Discipline',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    [
+        [
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'sqlExecutor' => $o[1],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'resultSetMapping' => $o[2],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'parameterMappings' => [
+                'complementaire' => [
+                    0,
+                ],
+            ],
+        ],
+    ]
+); }];

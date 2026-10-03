@@ -1,1 +1,5 @@
 [26-Sep-2023 15:41:14 Africa/Abidjan] 2023-09-26T15:41:14+00:00 [critical] Uncaught Error: Class "Flasher\Symfony\FlasherSymfonyBundle" not found
+[03-Oct-2026 00:31:39 Africa/Abidjan] PHP Fatal error:  Uncaught LogicException: Symfony Runtime is missing. Try running "composer require symfony/runtime". in /home/c2205194c/public_html/bin/console:8
+Stack trace:
+#0 {main}
+  thrown in /home/c2205194c/public_html/bin/console on line 8

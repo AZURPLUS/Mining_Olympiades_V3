@@ -1,0 +1,122 @@
+<?php //1d7d26ebc35e8fb1f5fc9d09aaf28b54
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT a0_.id AS id_0, a0_.reference AS reference_1, a0_.annee AS annee_2, a0_.montant AS montant_3, a0_.media AS media_4, a0_.justificatif AS justificatif_5, a0_.solde AS solde_6, a0_.total_joueur AS total_joueur_7, a0_.restant_joueur AS restant_joueur_8, a0_.created_at AS created_at_9, c1_.id AS id_10, c1_.titre AS titre_11, c1_.dg AS dg_12, c1_.representant AS representant_13, c1_.contact AS contact_14, c1_.slug AS slug_15, c1_.email AS email_16, a0_.compagnie_id AS compagnie_id_17 FROM abonnement a0_ LEFT JOIN compagnie c1_ ON a0_.compagnie_id = c1_.id ORDER BY a0_.total_joueur DESC',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'a' => 'App\\Entity\\Abonnement',
+                    'c' => 'App\\Entity\\Compagnie',
+                ],
+            ],
+            'relationMap' => [
+                2 => [
+                    'c' => 'compagnie',
+                ],
+            ],
+            'parentAliasMap' => [
+                2 => [
+                    'c' => 'a',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'reference_1' => 'reference',
+                    'annee_2' => 'annee',
+                    'montant_3' => 'montant',
+                    'media_4' => 'media',
+                    'justificatif_5' => 'justificatif',
+                    'solde_6' => 'solde',
+                    'total_joueur_7' => 'totalJoueur',
+                    'restant_joueur_8' => 'restantJoueur',
+                    'created_at_9' => 'createdAt',
+                    'id_10' => 'id',
+                    'titre_11' => 'titre',
+                    'dg_12' => 'dg',
+                    'representant_13' => 'representant',
+                    'contact_14' => 'contact',
+                    'slug_15' => 'slug',
+                    'email_16' => 'email',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'compagnie_id_17' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'a' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'compagnie_id_17' => 'compagnie_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'a',
+                    'reference_1' => 'a',
+                    'annee_2' => 'a',
+                    'montant_3' => 'a',
+                    'media_4' => 'a',
+                    'justificatif_5' => 'a',
+                    'solde_6' => 'a',
+                    'total_joueur_7' => 'a',
+                    'restant_joueur_8' => 'a',
+                    'created_at_9' => 'a',
+                    'id_10' => 'c',
+                    'titre_11' => 'c',
+                    'dg_12' => 'c',
+                    'representant_13' => 'c',
+                    'contact_14' => 'c',
+                    'slug_15' => 'c',
+                    'email_16' => 'c',
+                    'compagnie_id_17' => 'a',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Abonnement',
+                    'reference_1' => 'App\\Entity\\Abonnement',
+                    'annee_2' => 'App\\Entity\\Abonnement',
+                    'montant_3' => 'App\\Entity\\Abonnement',
+                    'media_4' => 'App\\Entity\\Abonnement',
+                    'justificatif_5' => 'App\\Entity\\Abonnement',
+                    'solde_6' => 'App\\Entity\\Abonnement',
+                    'total_joueur_7' => 'App\\Entity\\Abonnement',
+                    'restant_joueur_8' => 'App\\Entity\\Abonnement',
+                    'created_at_9' => 'App\\Entity\\Abonnement',
+                    'id_10' => 'App\\Entity\\Compagnie',
+                    'titre_11' => 'App\\Entity\\Compagnie',
+                    'dg_12' => 'App\\Entity\\Compagnie',
+                    'representant_13' => 'App\\Entity\\Compagnie',
+                    'contact_14' => 'App\\Entity\\Compagnie',
+                    'slug_15' => 'App\\Entity\\Compagnie',
+                    'email_16' => 'App\\Entity\\Compagnie',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    [
+        [
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'sqlExecutor' => $o[1],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'resultSetMapping' => $o[2],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'parameterMappings' => [],
+        ],
+    ]
+); }];

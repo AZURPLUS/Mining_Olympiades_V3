@@ -1,0 +1,156 @@
+<?php //eeedb57726390d2674f20e4e23a6789a
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT j0_.id AS id_0, j0_.nom AS nom_1, j0_.prenoms AS prenoms_2, j0_.matricule AS matricule_3, j0_.contact AS contact_4, j0_.email AS email_5, j0_.licence AS licence_6, j0_.media AS media_7, j0_.slug AS slug_8, j0_.carte AS carte_9, a1_.id AS id_10, a1_.reference AS reference_11, a1_.annee AS annee_12, a1_.montant AS montant_13, a1_.media AS media_14, a1_.justificatif AS justificatif_15, a1_.solde AS solde_16, a1_.total_joueur AS total_joueur_17, a1_.restant_joueur AS restant_joueur_18, a1_.created_at AS created_at_19, d2_.id AS id_20, d2_.titre AS titre_21, d2_.slug AS slug_22, d2_.joueur AS joueur_23, d2_.complementaire AS complementaire_24, j0_.abonnement_id AS abonnement_id_25, a1_.compagnie_id AS compagnie_id_26 FROM joueur j0_ LEFT JOIN abonnement a1_ ON j0_.abonnement_id = a1_.id LEFT JOIN joueur_discipline j3_ ON j0_.id = j3_.joueur_id LEFT JOIN discipline d2_ ON d2_.id = j3_.discipline_id WHERE j0_.id = ?',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'j' => 'App\\Entity\\Joueur',
+                    'a' => 'App\\Entity\\Abonnement',
+                    'd' => 'App\\Entity\\Discipline',
+                ],
+            ],
+            'relationMap' => [
+                2 => [
+                    'a' => 'abonnement',
+                    'd' => 'discipline',
+                ],
+            ],
+            'parentAliasMap' => [
+                2 => [
+                    'a' => 'j',
+                    'd' => 'j',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'nom_1' => 'nom',
+                    'prenoms_2' => 'prenoms',
+                    'matricule_3' => 'matricule',
+                    'contact_4' => 'contact',
+                    'email_5' => 'email',
+                    'licence_6' => 'licence',
+                    'media_7' => 'media',
+                    'slug_8' => 'slug',
+                    'carte_9' => 'carte',
+                    'id_10' => 'id',
+                    'reference_11' => 'reference',
+                    'annee_12' => 'annee',
+                    'montant_13' => 'montant',
+                    'media_14' => 'media',
+                    'justificatif_15' => 'justificatif',
+                    'solde_16' => 'solde',
+                    'total_joueur_17' => 'totalJoueur',
+                    'restant_joueur_18' => 'restantJoueur',
+                    'created_at_19' => 'createdAt',
+                    'id_20' => 'id',
+                    'titre_21' => 'titre',
+                    'slug_22' => 'slug',
+                    'joueur_23' => 'joueur',
+                    'complementaire_24' => 'Complementaire',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'abonnement_id_25' => 'integer',
+                    'compagnie_id_26' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'j' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'abonnement_id_25' => 'abonnement_id',
+                    'compagnie_id_26' => 'compagnie_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'j',
+                    'nom_1' => 'j',
+                    'prenoms_2' => 'j',
+                    'matricule_3' => 'j',
+                    'contact_4' => 'j',
+                    'email_5' => 'j',
+                    'licence_6' => 'j',
+                    'media_7' => 'j',
+                    'slug_8' => 'j',
+                    'carte_9' => 'j',
+                    'id_10' => 'a',
+                    'reference_11' => 'a',
+                    'annee_12' => 'a',
+                    'montant_13' => 'a',
+                    'media_14' => 'a',
+                    'justificatif_15' => 'a',
+                    'solde_16' => 'a',
+                    'total_joueur_17' => 'a',
+                    'restant_joueur_18' => 'a',
+                    'created_at_19' => 'a',
+                    'id_20' => 'd',
+                    'titre_21' => 'd',
+                    'slug_22' => 'd',
+                    'joueur_23' => 'd',
+                    'complementaire_24' => 'd',
+                    'abonnement_id_25' => 'j',
+                    'compagnie_id_26' => 'a',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Joueur',
+                    'nom_1' => 'App\\Entity\\Joueur',
+                    'prenoms_2' => 'App\\Entity\\Joueur',
+                    'matricule_3' => 'App\\Entity\\Joueur',
+                    'contact_4' => 'App\\Entity\\Joueur',
+                    'email_5' => 'App\\Entity\\Joueur',
+                    'licence_6' => 'App\\Entity\\Joueur',
+                    'media_7' => 'App\\Entity\\Joueur',
+                    'slug_8' => 'App\\Entity\\Joueur',
+                    'carte_9' => 'App\\Entity\\Joueur',
+                    'id_10' => 'App\\Entity\\Abonnement',
+                    'reference_11' => 'App\\Entity\\Abonnement',
+                    'annee_12' => 'App\\Entity\\Abonnement',
+                    'montant_13' => 'App\\Entity\\Abonnement',
+                    'media_14' => 'App\\Entity\\Abonnement',
+                    'justificatif_15' => 'App\\Entity\\Abonnement',
+                    'solde_16' => 'App\\Entity\\Abonnement',
+                    'total_joueur_17' => 'App\\Entity\\Abonnement',
+                    'restant_joueur_18' => 'App\\Entity\\Abonnement',
+                    'created_at_19' => 'App\\Entity\\Abonnement',
+                    'id_20' => 'App\\Entity\\Discipline',
+                    'titre_21' => 'App\\Entity\\Discipline',
+                    'slug_22' => 'App\\Entity\\Discipline',
+                    'joueur_23' => 'App\\Entity\\Discipline',
+                    'complementaire_24' => 'App\\Entity\\Discipline',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    [
+        [
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'sqlExecutor' => $o[1],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'resultSetMapping' => $o[2],
+            "\0".'Doctrine\\ORM\\Query\\ParserResult'."\0".'parameterMappings' => [
+                'joueur' => [
+                    0,
+                ],
+            ],
+        ],
+    ]
+); }];
