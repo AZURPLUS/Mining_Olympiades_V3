@@ -31,6 +31,9 @@ class Etudiant
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $niveau = null;
 
+    #[ORM\Column(length: 255, nullable: true, options: ['default' => 'inconnu'])]
+    private ?string $etablissement = 'inconnu';
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $reference = null;
 
@@ -134,6 +137,18 @@ class Etudiant
     public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getEtablissement(): ?string
+    {
+        return $this->etablissement;
+    }
+
+    public function setEtablissement(?string $etablissement): static
+    {
+        $this->etablissement = $etablissement;
 
         return $this;
     }

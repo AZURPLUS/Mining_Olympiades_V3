@@ -54,6 +54,7 @@ class ApiScientifiqueController extends AbstractController
         $etudiant->setContact(htmlspecialchars($request->get('contact')));
         $etudiant->setNiveau(htmlspecialchars($request->get('niveau')));
         $etudiant->setFiliere(htmlspecialchars($request->get('filiere')));
+        $etudiant->setEtablissement(htmlspecialchars($request->get('etablissement', 'inconnu')));
         $etudiant->setSlug($slug);
 
         $this->entityManager->persist($etudiant);

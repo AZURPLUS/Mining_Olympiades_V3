@@ -16,6 +16,7 @@ export default function () {
   const [contact, setContact] = useState("");
   const [niveau, setNiveau] = useState("");
   const [filiere, setFiliere] = useState("");
+  const [etablissement, setEtablissement] = useState("");
   const [isCheckedImage, setIsCheckedImage] = useState(false);
 
   // Verifions si toutes les cases sont cochées
@@ -254,6 +255,26 @@ export default function () {
                           />
                           <label htmlFor="_niveau">
                             Niveau d'étude <span>*</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div className="col">
+                        <div className="form-floating">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="_etablissement"
+                            name="etablissement"
+                            placeholder="Établissement"
+                            autoComplete="off"
+                            required
+                            value={etablissement}
+                            onChange={(e) =>
+                              setEtablissement(e.target.value.toUpperCase())
+                            }
+                          />
+                          <label htmlFor="_etablissement">
+                            Établissement <span>*</span>
                           </label>
                         </div>
                       </div>

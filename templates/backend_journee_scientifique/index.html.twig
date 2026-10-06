@@ -49,6 +49,7 @@
                                         <th class="text-center text-uppercase">EMAIL</th>
                                         <th class="text-center text-uppercase">FILIERE</th>
                                         <th class="text-center text-uppercase">NIVEAU</th>
+                                        <th class="text-center text-uppercase">ÉTABLISSEMENT</th>
                                         <th class="text-center text-uppercase">ACTIONS</th>
                                     </tr>
                                     </thead>
@@ -62,13 +63,14 @@
                                             <td>{{ etudiant.email }}</td>
                                             <td>{{ etudiant.filiere }}</td>
                                             <td>{{ etudiant.niveau }}</td>
+                                            <td>{{ etudiant.etablissement }}</td>
                                             <td class="text-center">
                                                 <a href="{{ path('app_backend_journee_scientifique_show', {'id': etudiant.id}) }}"><i class="ti-eye"></i></a>
                                             </td>
                                         </tr>
                                     {% else %}
                                         <tr>
-                                            <td class="text-center" colspan="8">Aucun etudiant trouvé</td>
+                                            <td class="text-center" colspan="9">Aucun etudiant trouvé</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

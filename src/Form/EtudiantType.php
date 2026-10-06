@@ -18,6 +18,7 @@ class EtudiantType extends AbstractType
             ->add('email')
             ->add('filiere')
             ->add('niveau')
+            ->add('etablissement')
             ->add('reference')
             ->add('slug')
         ;

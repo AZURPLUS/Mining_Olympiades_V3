@@ -8,7 +8,7 @@ import withReactContent from "sweetalert2-react-content";
 import { Modal, Button } from "react-bootstrap";
 
 const MySwal = withReactContent(Swal);
-const docUrl = "/default/fichiers/2026_Plaquette_Olympiades_0110.pdf";
+const docUrl = "/default/fichiers/Plaquette_Mining_Olympiades_2026.pdf";
 
 export default function (props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -130,7 +130,7 @@ export default function (props) {
                             className="form-control"
                             id="_prenoms"
                             name="prenoms"
-                            placeholder="nom"
+                            placeholder="prénoms"
                             autoComplete="off"
                             required
                             value={prenoms}
