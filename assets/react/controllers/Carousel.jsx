@@ -15,7 +15,7 @@ export default function Carousel() {
       image: "/default/fichiers/visuel-site-03.png",
     },
     {
-      title: "DÉCOUVREZ LES NOUVELLES OPPORTUNITÉS",
+      title: "",
       image: "/default/fichiers/visuel-site-04.png",
     },
     {
@@ -23,7 +23,7 @@ export default function Carousel() {
       image: "/default/fichiers/visuel-site-05.png",
     },
     {
-      title: "PARTICIPEZ À DES COMPÉTITIONS EXCITANTES",
+      title: "",
       image: "/default/fichiers/visuel-site-06.png",
     },
   ];
