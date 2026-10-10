@@ -120,7 +120,7 @@ export default function () {
                       Journée <span>scientifique</span>
                     </h3>
                     <p>
-                      La journée scientifique de cette 9ème édition à pour thème
+                      La journée scientifique de cette 10 ème édition à pour thème
                       :{" "}
                       <strong>
                         <em>

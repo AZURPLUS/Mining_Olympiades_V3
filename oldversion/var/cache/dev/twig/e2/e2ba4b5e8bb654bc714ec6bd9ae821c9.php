@@ -61,7 +61,7 @@ class __TwigTemplate_01fb15e6013e01142ae4924bf4d0ac06 extends Template
         echo "\">
 
 \t\t<meta name=\"keywords\" content=\"Mining, olympiades\">
-\t\t<meta name=\"description\" content=\"La 9ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
+\t\t<meta name=\"description\" content=\"La 10 ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
 \t\t<link rel=\"canonical\" href=\"https://miningolympiades.org\"/>
 \t\t<link rel=\"next\" href=\" https://miningolympiades.org/\"/>
 
@@ -69,7 +69,7 @@ class __TwigTemplate_01fb15e6013e01142ae4924bf4d0ac06 extends Template
 \t\t<meta property=\"og:locale:alternate\" content=\"en_US\"/>
 \t\t<meta property=\"og:type\" content=\"website\"/>
 \t\t<meta property=\"og:title\" content=\"La 8ème édition des Mining Olympiades\"/>
-\t\t<meta property=\"og:description\" content=\"La 9ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
+\t\t<meta property=\"og:description\" content=\"La 10 ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
 \t\t<meta property=\"og:url\" content=\"https://miningolympiades.org/\"/>
 \t\t<meta property=\"og:site_name\" content=\"Mining Olympiades\"/>
 \t\t<meta property=\"article:modified_time\" content=\"2024-09-28T04:08:30+00:00\"/>
@@ -79,7 +79,7 @@ class __TwigTemplate_01fb15e6013e01142ae4924bf4d0ac06 extends Template
         echo "\"/>
 \t\t<meta property=\"og:image:type\" content=\"image/svg+xml\"/>
 \t\t<meta name=\"twitter:card\" content=\"summary_large_image\"/>
-\t\t<meta name=\"twitter:description\" content=\"La 9ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
+\t\t<meta name=\"twitter:description\" content=\"La 10 ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
 \t\t<meta name=\"twitter:title\" content=\"La 8ème édition des Mining Olympiades\"/>
 \t\t<meta name=\"twitter:domain\" content=\"Mining Olympiades\"/>
 \t\t<meta name=\"twitter:image:src\" content=\"";
@@ -847,7 +847,7 @@ class __TwigTemplate_01fb15e6013e01142ae4924bf4d0ac06 extends Template
 \t\t<link rel=\"icon\" href=\"{{ absolute_url(asset('assets/images/Olympiade-logo.png')) }}\">
 
 \t\t<meta name=\"keywords\" content=\"Mining, olympiades\">
-\t\t<meta name=\"description\" content=\"La 9ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
+\t\t<meta name=\"description\" content=\"La 10 ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
 \t\t<link rel=\"canonical\" href=\"https://miningolympiades.org\"/>
 \t\t<link rel=\"next\" href=\" https://miningolympiades.org/\"/>
 
@@ -855,14 +855,14 @@ class __TwigTemplate_01fb15e6013e01142ae4924bf4d0ac06 extends Template
 \t\t<meta property=\"og:locale:alternate\" content=\"en_US\"/>
 \t\t<meta property=\"og:type\" content=\"website\"/>
 \t\t<meta property=\"og:title\" content=\"La 8ème édition des Mining Olympiades\"/>
-\t\t<meta property=\"og:description\" content=\"La 9ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
+\t\t<meta property=\"og:description\" content=\"La 10 ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
 \t\t<meta property=\"og:url\" content=\"https://miningolympiades.org/\"/>
 \t\t<meta property=\"og:site_name\" content=\"Mining Olympiades\"/>
 \t\t<meta property=\"article:modified_time\" content=\"2024-09-28T04:08:30+00:00\"/>
 \t\t<meta property=\"og:image\" content=\"{{ absolute_url(asset('assets/images/Olympiade-logo.png')) }}\"/>
 \t\t<meta property=\"og:image:type\" content=\"image/svg+xml\"/>
 \t\t<meta name=\"twitter:card\" content=\"summary_large_image\"/>
-\t\t<meta name=\"twitter:description\" content=\"La 9ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
+\t\t<meta name=\"twitter:description\" content=\"La 10 ème édition des Mining Olympiades aura lieu les 12, 13 et 14 décembre sur le thème : « Valorisons nos régions » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.\"/>
 \t\t<meta name=\"twitter:title\" content=\"La 8ème édition des Mining Olympiades\"/>
 \t\t<meta name=\"twitter:domain\" content=\"Mining Olympiades\"/>
 \t\t<meta name=\"twitter:image:src\" content=\"{{ absolute_url(asset('assets/images/Olympiade-logo.png')) }}\"/>

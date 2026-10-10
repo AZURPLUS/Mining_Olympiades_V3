@@ -15,6 +15,6 @@ Soirée de récompense
 	Lieu: A confirmer
 
 Page présentation
-Les Mining Olympiades 9e édition : Changer en 9ème édition
- « La 9ème édition aura lieu les 12, 13 et 14 décembre 2025 sur le thème : « A déterminer » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest. » Modifie ce paragraphe par : 
+Les Mining Olympiades 9e édition : Changer en 10 ème édition
+ « La 10 ème édition aura lieu les 12, 13 et 14 décembre 2025 sur le thème : « A déterminer » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest. » Modifie ce paragraphe par : 
 La 10ème  édition aura lieu les 11 et 12 décembre 2026 sur le thème : « A déterminer » et verra la participation de filiales de sociétés minières installées en Afrique de l’ouest.
