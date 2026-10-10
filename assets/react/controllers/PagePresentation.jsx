@@ -42,7 +42,7 @@ export default function () {
               data-aos-duration="1500"
             >
               <h1>
-                {presentation.titre} <span>9e édition</span>
+                {presentation.titre} <span>9ème édition</span>
               </h1>
               <div
                 dangerouslySetInnerHTML={{ __html: presentation.contenu }}

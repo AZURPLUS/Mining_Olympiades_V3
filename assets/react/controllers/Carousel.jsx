@@ -46,6 +46,7 @@ export default function Carousel() {
         id="carousel"
         style={{
           padding: "100px 50px 0 50px",
+          marginTop: "60px",
           height: "650",
           backgroundImage: `url(${carouselItems[currentIndex].image})`,
           transition: "opacity 1s ease-in-out",
@@ -142,6 +143,7 @@ export default function Carousel() {
         id="carousel"
         style={{
           padding: "0 0",
+          marginTop: "90px",
           height: "80vh",
           backgroundImage: `url(${carouselItems[currentIndex].image})`,
           transition: "opacity 1s ease-in-out",

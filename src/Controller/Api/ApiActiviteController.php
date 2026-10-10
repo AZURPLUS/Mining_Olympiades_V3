@@ -18,13 +18,13 @@ class ApiActiviteController extends AbstractController
                 'resume' => '
                 <ul>
                     <li><u>Thème</u>: <strong> A définir </strong></li>
-                    <li><u>Date</u>: 12 décembre 2025 de 14h00 - 17h00</li>
+                    <li><u>Date</u>: 11 décembre 2026 de 14h00 - 17h00</li>
                     <li><u>Lieu</u>: INPHB SUD</li>
                 </ul>
                 ',
                 'icon' => 'icon-scientific-o.png',
                 'media' => 'journeescientifique.jpg',
-                'date' => "vendredi 12 décembre 2025",
+                'date' => "vendredi 11 décembre 2026",
                 'lieu' => 'INPHB SUD',
                 'heure' => "14h00 - 17h00"
             ],
@@ -32,14 +32,14 @@ class ApiActiviteController extends AbstractController
                 'titre' => "Journée <span>sportive</span>",
                 'resume' => '
                 <ul>
-                    <li><u>Discipline</u>: 24 disciplines</li>
-                    <li><u>Date</u>: 13 décembre 2025 de 07h00 - 17h30</li>
+                    <li><u>Discipline</u>: 29 disciplines</li>
+                    <li><u>Date</u>: 12 décembre 2026 de 07h00 - 17h30</li>
                     <li><u>Lieu</u>: INPHB CENTRE & SUD</li>
                 </ul>
                 ',
                 'icon' => 'icon-sport.png',
                 'media' => 'sport.png',
-                'date' => "samedi 13 décembre 2025",
+                'date' => "samedi 12 décembre 2026",
                 'lieu' => 'INPHB CENTRE & SUD',
                 'heure' => "7h00 - 17h30"
             ],
@@ -48,13 +48,13 @@ class ApiActiviteController extends AbstractController
                 'resume' => '
                 <ul>
                     <li><u>Dress code</u>:<strong>A confirmer </strong></li>
-                    <li><u>Date</u>: 13 décembre 2025 de 19h30 - 23h00</li>
+                    <li><u>Date</u>: 12 décembre 2026 de 19h30 - 23h00</li>
                     <li><u>Lieu</u>: A confirmer </li>
                 </ul>
                 ',
                 'icon' => 'icon-gala.png',
                 'media' => 'dine_gala.png',
-                'date' => "samedi 13 décembre 2025",
+                'date' => "samedi 12 décembre 2026",
                 'lieu' => 'HÔTEL HP RESORT ',
                 'heure' => "19h30 - 23h00"
             ]
@@ -72,7 +72,7 @@ class ApiActiviteController extends AbstractController
 Le thème retenu de cette année est: <strong>« l’importance des politiques de santé et sécurité dans les mines ».</strong>",
                 'icon' => 'icon-scientific-o.png',
                 'media' => 'scientifique.png',
-                'date' => "vendredi 12 décembre 2025",
+                'date' => "vendredi 11 décembre 2026",
                 'lieu' => 'INPHB CENTRE',
                 'heure' => "14h00 - 17h00"
             ],
@@ -81,7 +81,7 @@ Le thème retenu de cette année est: <strong>« l’importance des politiques d
                 'resume' => "Moment clé des Mining Olympiades, la journée sportive mettra en confrontation des équipes hommes ou femmes dans une trentaine de disciplines.",
                 'icon' => 'icon-sport.png',
                 'media' => 'sports.png',
-                'date' => "samedi 13 décembre 2025",
+                'date' => "samedi 12 décembre 2026",
                 'lieu' => 'INPHB CENTRE & SUD',
                 'heure' => "7h00 - 17h30"
             ],
@@ -92,7 +92,7 @@ A cette occasion, il seta demandé aux participants d'arborer une tenue traditio
 Un hommage sera rendu à des personnalités du secteur minier qui l’ont impacté",
                 'icon' => 'icon-gala.png',
                 'media' => 'gala.png',
-                'date' => "samedi 13 décembre 2025",
+                'date' => "samedi 12 décembre 2026",
                 'lieu' => 'A confirmer ',
                 'heure' => "19h30 - 23h00"
             ]
