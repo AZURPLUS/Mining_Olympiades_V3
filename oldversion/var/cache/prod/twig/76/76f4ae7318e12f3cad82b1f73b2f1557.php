@@ -64,7 +64,7 @@ class __TwigTemplate_8bbd132f7a2b9be44687c5152f7c546b extends Template
             height: 550px !important;
             background-image: url(";
         // line 19
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/licence_om8.png"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/badge_2026.jpeg"), "html", null, true);
         echo ");
             background-size: contain;
             background-repeat: no-repeat;
