@@ -183,10 +183,12 @@ class AllRepositories
     public function getAbonnementStat()
     {
         $abonnements = $this->abonnementRepository->getAbonnementWithCompagnie();
-        $total = $this->abonnementRepository->getTotalJoueur() ?? 1;
+        $total = (int) $this->abonnementRepository->getTotalJoueur();
         $tableau=[]; $i=0;
         foreach ($abonnements as $abonnement){
-            $pourcentage = round(((int) $abonnement->getTotalJoueur() * 100 / $total), 1);
+            $pourcentage = $total > 0
+                ? round((int) $abonnement->getTotalJoueur() * 100 / $total, 1)
+                : 0.0;
             $tableau[$i++]=[
                 'id' => $abonnement->getId(),
                 'reference' => $abonnement->getReference(),
