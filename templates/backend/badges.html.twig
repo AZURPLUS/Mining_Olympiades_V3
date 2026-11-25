@@ -6,16 +6,38 @@
     <title>{% block title %}BADGE{% endblock %}</title>
     <link rel="icon" href="{{ absolute_url(asset('default/fichiers/logo.png')) }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.18.0/dist/pdf-lib.js"></script>
-    <script>
-        // Définissez la variable joueurs avec les données transmises depuis le contrôleur
-        const joueurs = {{ joueurs|json_encode|raw }};
-    </script>
     <style>
-        /* Votre CSS ici */
+        .feuille {
+            width: 210mm;
+            height: 296mm;
+            display: grid;
+            grid-template-columns: repeat(2, 105mm);
+            grid-template-rows: repeat(2, 148mm);
+            margin: 0 auto 20px;
+            background: white;
+        }
+
+        .badge-slot {
+            width: 105mm;
+            height: 148mm;
+            overflow: hidden;
+        }
+
+        @page { size: A4 portrait; margin: 0; }
+
+        @media print {
+            body > .container { max-width: none; padding: 0; }
+            #exportButtonContainer, .navigation { display: none !important; }
+            .feuille { margin: 0; break-after: page; }
+            .feuille:last-child { break-after: auto; }
+            .badge { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        }
         .badge {
-            width: 390px;
-            height: 550px !important;
+            width: 105mm;
+            height: 148mm !important;
+            border: 0;
+            border-radius: 0;
+            white-space: normal;
             background-image: url({{ asset('assets/images/badge_2026.jpeg') }});
             background-size: contain;
             background-repeat: no-repeat;
@@ -66,12 +88,15 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center mt-3 mb-3" id="exportButtonContainer">
-            <button class="btn btn-primary" onclick="exportToPDF()">Exporter en PDF</button>
+            <button id="exportPdf" class="btn btn-primary" onclick="exportToPDF()" {{ joueurs is empty ? 'disabled' : '' }}>Exporter en PDF A4 (4 licences par page)</button>
+            <div id="exportStatus" class="mt-2" role="status" aria-live="polite"></div>
         </div>
     </div>
-    <div class="row row-cols-2 row-cols-md-2 g-4 feuille">
-        {% for joueur in joueurs %}
-            <div class="col">
+    <div id="licences">
+        {% for groupe in joueurs|batch(4) %}
+        <div class="feuille">
+        {% for joueur in groupe %}
+            <div class="badge-slot">
                 <div class="card badge">
                     <div class="card-body">
                         <div class="row info">
@@ -112,9 +137,11 @@
                 </div>
             </div>
         {% endfor %}
+        </div>
+        {% endfor %}
     </div>
     {% if flag %}
-        <div class="row text-center mt-5">
+        <div class="row text-center mt-5 navigation">
             <div class="col">
                 <form action="">
                     <input type="hidden" name="flag" value="{{ flag }}">
@@ -125,91 +152,52 @@
     {% endif %}
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
     async function exportToPDF() {
-        const badges = document.querySelectorAll('.badge');
+        const sheets = document.querySelectorAll('.feuille');
+        const button = document.getElementById('exportPdf');
+        const status = document.getElementById('exportStatus');
+        if (!sheets.length || button.disabled) return;
 
-        const pdfPromises = [];
-
-        badges.forEach((badge, index) => {
-            const pdfPromise = new Promise((resolve) => {
-                html2pdf(badge, {
-                    margin: 0,
-                    filename: `badge_${index + 1}.pdf`,
-                    image: { type: 'jpeg', quality: 0.98 },
-                    jsPDF: {
-                        unit: 'mm',
-                        format: 'a6',
-                        orientation: 'portrait',
-                    },
-                    html2canvas: { scale: 2 },
-                    pagebreak: { mode: 'avoid-all' },
-                    onComplete: () => {
-                        resolve();
-                    },
+        button.disabled = true;
+        try {
+            await document.fonts.ready;
+            await Promise.all(Array.from(document.querySelectorAll('#licences img')).map(img => {
+                if (img.complete) return Promise.resolve();
+                return new Promise(resolve => {
+                    img.addEventListener('load', resolve, { once: true });
+                    img.addEventListener('error', resolve, { once: true });
                 });
-            });
+            }));
 
-            pdfPromises.push(pdfPromise);
-        });
-
-        await Promise.all(pdfPromises);
-
-        // Attendre l'achèvement du processus de fusion
-        await mergePDFs();
-
-        // Nettoyer : supprimer les fichiers PDF individuels
-        cleanUpPDFs();
-    }
-
-    async function mergePDFs() {
-        const { PDFDocument } = PDFLib;
-
-        const mergedPdfBytes = await PDFDocument.create();
-
-        for (let i = 1; ; i++) {
-            try {
-                const pdfBytes = await fetch(`badge_${i}.pdf`).then(res => res.arrayBuffer());
-                const pdfDoc = await PDFDocument.load(pdfBytes);
-                const copiedPages = await mergedPdfBytes.copyPages(pdfDoc, pdfDoc.getPageIndices());
-                copiedPages.forEach((page) => mergedPdfBytes.addPage(page));
-            } catch (e) {
-                // Break the loop when there are no more files
-                break;
+            let pdf;
+            for (let index = 0; index < sheets.length; index++) {
+                status.textContent = `Préparation de la page ${index + 1} sur ${sheets.length}…`;
+                const worker = html2pdf().set({
+                    margin: 0,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+                    pagebreak: { mode: [] },
+                }).from(sheets[index]).toCanvas();
+                const canvas = await worker.get('canvas');
+                if (!pdf) {
+                    pdf = await worker.toPdf().get('pdf');
+                } else {
+                    pdf.addPage('a4', 'portrait');
+                    pdf.addImage(canvas.toDataURL('image/jpeg', 0.98), 'JPEG', 0, 0, 210, 296);
+                }
+                canvas.width = 0;
+                canvas.height = 0;
             }
-        }
-
-        const mergedPdfFile = Uint8Array.from(await mergedPdfBytes.save());
-
-        // Créer un lien pour télécharger le fichier fusionné
-        const blob = new Blob([mergedPdfFile], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'badges.pdf';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
-
-    function cleanUpPDFs() {
-        for (let i = 1; ; i++) {
-            const fileName = `badge_${i}.pdf`;
-            const fileToRemove = new File([new Blob()], fileName, { type: 'application/pdf' });
-
-            try {
-                URL.revokeObjectURL(URL.createObjectURL(fileToRemove));
-                window.URL.revokeObjectURL(fileToRemove);
-            } catch (e) {
-                console.error('Erreur lors de la révocation de l\'URL d\'objet :', e);
-            }
-
-            try {
-                window.URL.revokeObjectURL(fileName);
-            } catch (e) {
-                console.error('Erreur lors de la révocation de l\'URL d\'objet :', e);
-            }
+            pdf.save('licences-a4.pdf');
+            status.textContent = 'PDF prêt : 4 licences par page A4. Imprimez à taille réelle (100 %).';
+        } catch (error) {
+            console.error('Erreur lors de l’export des licences :', error);
+            status.textContent = 'L’export a échoué. Veuillez réessayer.';
+        } finally {
+            button.disabled = false;
         }
     }
 </script>
